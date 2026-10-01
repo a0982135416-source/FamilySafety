@@ -1,0 +1,66 @@
+# ==============================
+# Android / Gradle
+# ==============================
+
+*.iml
+.gradle/
+.kotlin/
+build/
+**/build/
+
+local.properties
+
+# ==============================
+# Android Studio / IntelliJ IDEA
+# ==============================
+
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/deploymentTargetSelector.xml
+.idea/deviceManager.xml
+
+# ==============================
+# Native Build
+# ==============================
+
+.externalNativeBuild/
+.cxx/
+
+# ==============================
+# Captures
+# ==============================
+
+captures/
+
+# ==============================
+# OS Files
+# ==============================
+
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Environment / Secrets
+# ==============================
+
+.env
+.env.*
+*.jks
+*.keystore
+
+secrets.properties
+signing.properties
+keystore.properties
+
+# ==============================
+# Temporary / Backup Files
+# ==============================
+
+*.tmp
+*.temp
+*.bak
+*~

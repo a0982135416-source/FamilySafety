@@ -1,0 +1,359 @@
+<resources>
+    <!--
+        ========================================================================
+        App
+        應用程式
+        ========================================================================
+    -->
+
+    <string name="app_name">Family Safety Management System</string>
+
+
+    <!--
+        ========================================================================
+        Bottom Navigation
+        底部導覽列
+        ========================================================================
+    -->
+
+    <string name="nav_home">Home</string>
+    <string name="nav_environment">Environment</string>
+    <string name="nav_alert">Alerts</string>
+    <string name="nav_task">Tasks</string>
+    <string name="nav_management">Management</string>
+
+
+    <!--
+        ========================================================================
+        Task Progress
+        任務進度
+        ========================================================================
+    -->
+
+    <string name="task_progress_fraction">%1$d/%2$d</string>
+
+    <string name="task_completed_count">
+    Completed  %1$d
+    </string>
+
+    <string name="task_pending_count">
+    Pending  %1$d
+    </string>
+
+    <string name="task_completion_rate">
+    Completion rate  %1$d%%
+    </string>
+
+
+    <!--
+        ========================================================================
+        Task Status
+        任務狀態
+        ========================================================================
+    -->
+
+    <string name="task_status_pending">Pending</string>
+
+    <string name="task_status_in_progress">
+    In Progress
+    </string>
+
+    <string name="task_status_completed">
+    Completed
+    </string>
+
+    <!--
+    ========================================================================
+    Task Preview
+    任務預覽
+    ========================================================================
+    -->
+
+    <string name="task_name_preview">Task</string>
+    <string name="task_time_preview">09:00</string>
+
+
+    <!--
+    ========================================================================
+    Home / Dashboard
+    首頁 / 儀表板
+    ========================================================================
+    -->
+
+    <!-- Header / 頂部區域 -->
+    <string name="home_greeting">Hello! Da-Wei</string>
+    <string name="home_header_subtitle">Keeping your family safe together</string>
+
+    <!-- Home Status / 家庭目前狀態 -->
+    <string name="home_status_safe">Home Status: Safe</string>
+
+    <!-- Environment Safety / 環境安全 -->
+    <string name="home_environment_safety">Environment Safety</string>
+    <string name="home_location_kitchen">Kitchen 〉</string>
+    <string name="home_status_safe_label">Safe</string>
+    <string name="home_gas">Gas</string>
+    <string name="home_gas_off">Off</string>
+    <string name="home_flame">Flame</string>
+    <string name="home_person">Person</string>
+    <string name="home_status_none">None</string>
+
+    <!-- Environment Monitoring / 環境監測 -->
+    <string name="home_environment_monitoring">Environment Monitoring</string>
+    <string name="home_temperature">Temperature</string>
+    <string name="home_humidity">Humidity</string>
+
+    <!-- Preview values / 預覽數值 -->
+    <string name="home_temperature_preview">26.5°C</string>
+    <string name="home_humidity_preview">62%</string>
+    <string name="home_status_time_preview">2026/09/15  08:41 〉</string>
+
+    <!-- Today Tasks / 今日任務 -->
+    <string name="home_today_tasks">Today\'s Tasks</string>
+    <string name="home_today_task_list">Today\'s Task List</string>
+
+    <!-- Alert Summary / 警報摘要 -->
+    <string name="home_alert_pending_preview">2 alerts pending</string>
+    <string name="home_alert_message_preview">Kitchen gas is on but no flame is detected. Please check immediately.</string>
+
+    <!-- Common UI / 共用畫面文字 -->
+    <string name="home_arrow">〉</string>
+
+    <!--
+    ========================================================================
+    Main Fragment Titles
+    主要 Fragment 標題
+    ========================================================================
+    -->
+
+    <string name="environment_title">Environment Monitoring</string>
+    <string name="alert_title">Alert Center</string>
+    <string name="task_title">Task Center</string>
+    <string name="management_title">Management</string>
+
+    <!--
+    ========================================================================
+    Environment Monitoring
+    環境監控
+    ========================================================================
+    -->
+
+    <string name="environment_header_title">Environment Monitoring</string>
+    <string name="environment_header_subtitle">Home Safety Environment</string>
+
+    <!--
+    ========================================================================
+    Environment - Kitchen Safety Monitoring
+    環境監控 - 廚房安全監控
+    ========================================================================
+    -->
+
+    <string name="environment_kitchen_safety_title">Kitchen Safety Monitoring</string>
+    <string name="environment_monitoring_live">Live Monitoring</string>
+
+    <string name="environment_location_kitchen">Kitchen</string>
+    <string name="environment_status_online">Online</string>
+
+    <string name="environment_camera_preview">Live Camera Preview</string>
+
+    <string name="environment_camera_time_preview">
+    2026-09-16 10:30:24
+</string>
+
+    <!--
+    ========================================================================
+    Environment - Sensor Status
+    環境監控 - 感測器狀態
+    ========================================================================
+    -->
+
+    <string name="environment_gas_status">Gas Status</string>
+    <string name="environment_flame_detection">Flame Detection</string>
+    <string name="environment_person_detection">Person Detection</string>
+
+    <string name="environment_gas">Gas</string>
+    <string name="environment_flame">Flame</string>
+    <string name="environment_person">Person</string>
+
+    <string name="environment_status_off">OFF</string>
+    <string name="environment_status_no">No</string>
+
+    <!--
+    ========================================================================
+    Environment - Safety Countdown
+    環境監控 - 安全倒數
+    ========================================================================
+    -->
+
+    <string name="environment_countdown_title">Safety Countdown</string>
+    <string name="environment_countdown_setting">Set Time</string>
+
+    <string name="environment_countdown_description">
+    Starts the countdown when gas is ON, flame is detected, and no person is present.
+    </string>
+
+    <string name="environment_countdown_default">
+    Default countdown time: 10 minutes
+    </string>
+
+    <!--
+    ========================================================================
+    Environment - Temperature & Humidity
+    環境監控 - 溫度與濕度
+    ========================================================================
+    -->
+
+    <string name="environment_data_title">Environment Data</string>
+    <string name="environment_temperature_humidity">Temperature &amp; Humidity</string>
+
+    <string name="environment_temperature">Temperature</string>
+    <string name="environment_humidity">Humidity</string>
+
+    <string name="environment_location_kitchen_selector">Kitchen ▼</string>
+
+    <string name="environment_temperature_preview">26.8 °C</string>
+    <string name="environment_humidity_preview">58 %</string>
+
+    <!--
+========================================================================
+Environment - Historical Trend
+環境監控 - 歷史趨勢
+========================================================================
+-->
+
+    <string name="environment_history_title">Historical Trend</string>
+    <string name="environment_history_subtitle">Temperature &amp; Humidity History</string>
+
+    <string name="environment_history_day">Day</string>
+    <string name="environment_history_week">Week</string>
+    <string name="environment_history_month">Month</string>
+
+    <string name="environment_history_temperature">Temperature</string>
+    <string name="environment_history_humidity">Humidity</string>
+
+    <string name="environment_history_chart_preview">Historical Data Chart</string>
+
+    <string name="environment_history_time_00">00</string>
+    <string name="environment_history_time_06">06</string>
+    <string name="environment_history_time_12">12</string>
+    <string name="environment_history_time_18">18</string>
+    <string name="environment_history_time_24">24</string>
+
+    <!--
+========================================================================
+Environment - Safety Countdown Dialog
+環境監控 - 安全倒數設定視窗
+========================================================================
+-->
+
+    <string name="countdown_dialog_title">Set Safety Countdown</string>
+    <string name="countdown_dialog_message">Select the countdown time for unattended cooking.</string>
+
+    <string name="countdown_5_minutes">5 minutes</string>
+    <string name="countdown_10_minutes">10 minutes</string>
+    <string name="countdown_15_minutes">15 minutes</string>
+    <string name="countdown_30_minutes">30 minutes</string>
+
+    <string name="countdown_dialog_cancel">Cancel</string>
+    <string name="countdown_dialog_confirm">Confirm</string>
+
+    <string name="countdown_selected_time">Countdown time: %1$d minutes</string>
+
+    <!--
+========================================================================
+Environment - Location Dialog
+環境監控 - 地點選擇視窗
+========================================================================
+-->
+
+    <string name="location_dialog_title">Select Location</string>
+
+    <string name="location_kitchen">Kitchen</string>
+    <string name="location_living_room">Living Room</string>
+    <string name="location_bedroom">Bedroom</string>
+
+    <string name="location_kitchen_selector">Kitchen ▼</string>
+    <string name="location_living_room_selector">Living Room ▼</string>
+    <string name="location_bedroom_selector">Bedroom ▼</string>
+
+    <string name="location_dialog_cancel">Cancel</string>
+
+
+    <!-- ================================================================
+     Safety Countdown / 安全倒數
+     ================================================================ -->
+
+    <string name="countdown_duration_title">Countdown Duration</string>
+    <string name="countdown_duration_hint">Enter minutes</string>
+    <string name="countdown_duration_unit">minutes</string>
+    <string name="countdown_remaining_title">Remaining Time</string>
+
+    <string name="countdown_start_button">Start Timer</string>
+    <string name="countdown_cancel_button">Cancel Timer</string>
+
+    <string name="countdown_status_standby">Standby</string>
+    <string name="countdown_status_running">Running</string>
+    <string name="countdown_status_finished">Finished</string>
+
+    <string name="countdown_duration_display">%1$d minutes</string>
+    <string name="countdown_remaining_display">%1$02d:%2$02d</string>
+
+    <string name="countdown_remaining_preview">10:00</string>
+
+    <string name="countdown_input_invalid">Please enter a whole number between 1 and 180.</string>
+    <string name="countdown_running_message">Please cancel the current timer before changing its duration.</string>
+    <string name="countdown_finished_message">Countdown finished.</string>
+
+
+    <!--
+        ========================================================================
+        Alert Center
+        警報中心
+        ========================================================================
+    -->
+
+    <string name="alert_header_title">Alert Center</string>
+
+    <string name="alert_category_environment">Environmental</string>
+    <string name="alert_category_task">Task</string>
+
+    <string name="alert_filter_all_count">All (%1$d)</string>
+    <string name="alert_filter_pending_count">Pending (%1$d)</string>
+    <string name="alert_filter_resolved_count">Resolved (%1$d)</string>
+    <string name="alert_filter_in_progress_count">In Progress (%1$d)</string>
+    <string name="alert_filter_overdue_count">Overdue (%1$d)</string>
+
+    <string name="alert_empty_environment">No environmental alert records currently.</string>
+    <string name="alert_empty_task">No task alert records currently.</string>
+
+    <!-- STEP 4-2 / Environmental Alert Cards -->
+    <string name="alert_type_gas_leak">Gas Leak Risk</string>
+    <string name="alert_type_unattended">Unattended Cooking</string>
+    <string name="alert_message_gas_leak">Gas is ON, but no flame is detected. Please check the kitchen.</string>
+    <string name="alert_message_unattended">The safety countdown expired while gas and flame were ON and no person was detected.</string>
+    <string name="alert_location_kitchen">Kitchen</string>
+    <string name="alert_status_pending">Pending</string>
+    <string name="alert_status_resolved">Resolved</string>
+    <string name="alert_action_resolve">Resolve</string>
+    <!-- STEP 4-3 / Resolve confirmation (mock data) -->
+    <string name="alert_resolve_dialog_title">Confirm Resolution</string>
+    <string name="alert_resolve_dialog_message">Mark “%1$s” as resolved?\n\nOnly the mock alert record will change. This action does not verify that the gas, flame, or other actual conditions are safe.</string>
+    <string name="alert_resolve_dialog_cancel">Cancel</string>
+    <string name="alert_resolve_dialog_confirm">Confirm</string>
+    <!-- STEP 4-4 / Task Alert cards and localized mock data -->
+    <string name="alert_task_assignee">Assigned to: %1$s</string>
+    <string name="alert_task_due_date">Due: %1$s</string>
+    <string name="alert_task_overdue">Overdue</string>
+    <string name="alert_task_mock_member_alex">Alex</string>
+    <string name="alert_task_mock_member_jamie">Jamie</string>
+    <string name="alert_task_mock_kitchen">Clean the kitchen</string>
+    <string name="alert_task_mock_kitchen_description">Wipe the counters and put away kitchen utensils.</string>
+    <string name="alert_task_mock_trash">Take out the trash</string>
+    <string name="alert_task_mock_trash_description">Sort the recycling and take out the household trash.</string>
+    <string name="alert_task_mock_laundry">Fold the laundry</string>
+    <string name="alert_task_mock_laundry_description">Fold the dry clothes and put them in the wardrobe.</string>
+    <string name="alert_task_mock_plants">Water the plants</string>
+    <string name="alert_task_mock_plants_description">Check the soil and water the balcony plants.</string>
+    <string name="alert_task_mock_dishes">Wash the dishes</string>
+    <string name="alert_task_mock_dishes_description">Wash and dry the dishes after the meal.</string>
+    <string name="alert_filter_scroll_hint">↔ Swipe sideways for more filters</string>
+</resources>

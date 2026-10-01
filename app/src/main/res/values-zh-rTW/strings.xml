@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--
+        ====================================================================
+        應用程式
+        App
+        ====================================================================
+    -->
+
+    <string name="app_name">家庭安全管理系統</string>
+
+
+    <!--
+        ====================================================================
+        底部導覽列
+        Bottom Navigation
+        ====================================================================
+    -->
+
+    <string name="nav_home">首頁</string>
+    <string name="nav_environment">環境監控</string>
+    <string name="nav_alert">警報</string>
+    <string name="nav_task">任務</string>
+    <string name="nav_management">管理</string>
+
+
+    <!--
+        ====================================================================
+        任務進度
+        Task Progress
+        ====================================================================
+    -->
+
+    <string name="task_progress_fraction">%1$d/%2$d</string>
+    <string name="task_completed_count">已完成  %1$d</string>
+    <string name="task_pending_count">待處理  %1$d</string>
+    <string name="task_completion_rate">完成率  %1$d%%</string>
+
+
+    <!--
+        ====================================================================
+        任務狀態
+        Task Status
+        ====================================================================
+    -->
+
+    <string name="task_status_pending">待處理</string>
+    <string name="task_status_in_progress">進行中</string>
+    <string name="task_status_completed">已完成</string>
+
+<!--
+        ========================================================================
+        Task Preview
+        任務預覽
+        ========================================================================
+-->
+    <string name="task_name_preview">Task</string>
+    <string name="task_time_preview">09:00</string>
+
+    <!-- ================================================================ -->
+    <!-- Home / Dashboard -->
+    <!-- 首頁 / 儀表板 -->
+    <!-- ================================================================ -->
+
+    <!-- Header / 頂部區域 -->
+    <string name="home_greeting">您好！大偉</string>
+    <string name="home_header_subtitle">家庭安全・讓我們一起守護</string>
+
+    <!-- Home Status / 家庭目前狀態 -->
+    <string name="home_status_safe">家庭目前狀態：安全</string>
+
+    <!-- Environment Safety / 環境安全 -->
+    <string name="home_environment_safety">環境安全</string>
+    <string name="home_location_kitchen">廚房 〉</string>
+    <string name="home_status_safe_label">安全</string>
+    <string name="home_gas">瓦斯</string>
+    <string name="home_gas_off">關閉</string>
+    <string name="home_flame">火焰</string>
+    <string name="home_person">人員</string>
+    <string name="home_status_none">無</string>
+
+    <!-- Environment Monitoring / 環境監測 -->
+    <string name="home_environment_monitoring">環境監測</string>
+    <string name="home_temperature">溫度</string>
+    <string name="home_humidity">濕度</string>
+
+    <!-- Preview values / 預覽數值 -->
+    <string name="home_temperature_preview">26.5°C</string>
+    <string name="home_humidity_preview">62%</string>
+    <string name="home_status_time_preview">2026/09/15  08:41 〉</string>
+
+    <!-- Today Tasks / 今日任務 -->
+    <string name="home_today_tasks">今日任務</string>
+    <string name="home_today_task_list">今日任務列表</string>
+
+    <!-- Alert Summary / 警報摘要 -->
+    <string name="home_alert_pending_preview">2 筆警報待處理</string>
+    <string name="home_alert_message_preview">廚房瓦斯開啟但未偵測到火焰，請注意安全！</string>
+
+    <!-- Common UI / 共用畫面文字 -->
+    <string name="home_arrow">〉</string>
+
+    <!--
+    ========================================================================
+    Main Fragment Titles
+    主要 Fragment 標題
+    ========================================================================
+    -->
+
+    <string name="environment_title">環境監控</string>
+    <string name="alert_title">警報中心</string>
+    <string name="task_title">任務中心</string>
+    <string name="management_title">管理中心</string>
+
+    <!--
+    ========================================================================
+    Environment Monitoring
+    環境監控
+    ========================================================================
+    -->
+
+    <string name="environment_header_title">環境監控</string>
+    <string name="environment_header_subtitle">家庭安全環境監控</string>
+
+    <!--
+    ========================================================================
+    Environment - Kitchen Safety Monitoring
+    環境監控 - 廚房安全監控
+    ========================================================================
+    -->
+
+    <string name="environment_kitchen_safety_title">廚房安全監控</string>
+    <string name="environment_monitoring_live">即時監控中</string>
+
+    <string name="environment_location_kitchen">廚房</string>
+    <string name="environment_status_online">線上</string>
+
+    <string name="environment_camera_preview">即時影像預覽</string>
+
+    <string name="environment_camera_time_preview">
+    2026-09-16 10:30:24
+</string>
+
+    <!--
+    ========================================================================
+    Environment - Sensor Status
+    環境監控 - 感測器狀態
+    ========================================================================
+    -->
+
+    <string name="environment_gas_status">瓦斯狀態</string>
+    <string name="environment_flame_detection">火焰偵測</string>
+    <string name="environment_person_detection">人員偵測</string>
+
+    <string name="environment_gas">瓦斯</string>
+    <string name="environment_flame">火焰</string>
+    <string name="environment_person">人員</string>
+
+    <string name="environment_status_off">關閉</string>
+    <string name="environment_status_no">無</string>
+
+    <!--
+    ========================================================================
+    Environment - Safety Countdown
+    環境監控 - 安全倒數
+    ========================================================================
+    -->
+
+    <string name="environment_countdown_title">設定離開安全倒數時間</string>
+    <string name="environment_countdown_setting">設定時間</string>
+
+    <string name="environment_countdown_description">
+    當「瓦斯開 + 有火 + 無人」時啟動倒數計時
+    </string>
+
+    <string name="environment_countdown_default">
+    ※ 未設定時，將使用系統預設時間 10 分鐘
+    </string>
+
+    <!--
+========================================================================
+Environment - Temperature & Humidity
+環境監控 - 溫度與濕度
+========================================================================
+-->
+
+    <string name="environment_data_title">環境數據</string>
+    <string name="environment_temperature_humidity">環境溫濕度</string>
+
+    <string name="environment_temperature">溫度</string>
+    <string name="environment_humidity">濕度</string>
+
+    <string name="environment_location_kitchen_selector">廚房 ▼</string>
+
+    <string name="environment_temperature_preview">26.8 °C</string>
+    <string name="environment_humidity_preview">58 %</string>
+
+    <!--
+========================================================================
+Environment - Historical Trend
+環境監控 - 歷史趨勢
+========================================================================
+-->
+
+    <string name="environment_history_title">歷史趨勢</string>
+    <string name="environment_history_subtitle">溫度與濕度歷史資料</string>
+
+    <string name="environment_history_day">日</string>
+    <string name="environment_history_week">週</string>
+    <string name="environment_history_month">月</string>
+
+    <string name="environment_history_temperature">溫度</string>
+    <string name="environment_history_humidity">濕度</string>
+
+    <string name="environment_history_chart_preview">歷史資料曲線圖</string>
+
+    <string name="environment_history_time_00">00</string>
+    <string name="environment_history_time_06">06</string>
+    <string name="environment_history_time_12">12</string>
+    <string name="environment_history_time_18">18</string>
+    <string name="environment_history_time_24">24</string>
+
+    <!--
+========================================================================
+Environment - Safety Countdown Dialog
+環境監控 - 安全倒數設定視窗
+========================================================================
+-->
+
+    <string name="countdown_dialog_title">設定安全倒數時間</string>
+    <string name="countdown_dialog_message">請選擇無人看管烹煮時的安全倒數時間。</string>
+
+    <string name="countdown_5_minutes">5 分鐘</string>
+    <string name="countdown_10_minutes">10 分鐘</string>
+    <string name="countdown_15_minutes">15 分鐘</string>
+    <string name="countdown_30_minutes">30 分鐘</string>
+
+    <string name="countdown_dialog_cancel">取消</string>
+
+    <string name="countdown_selected_time">安全倒數時間：%1$d 分鐘</string>
+
+    <!--
+========================================================================
+Environment - Location Dialog
+環境監控 - 地點選擇視窗
+========================================================================
+-->
+
+    <string name="location_dialog_title">選擇監控地點</string>
+
+    <string name="location_kitchen">廚房</string>
+    <string name="location_living_room">客廳</string>
+    <string name="location_bedroom">臥室</string>
+
+    <string name="location_kitchen_selector">廚房 ▼</string>
+    <string name="location_living_room_selector">客廳 ▼</string>
+    <string name="location_bedroom_selector">臥室 ▼</string>
+
+    <string name="location_dialog_cancel">取消</string>
+
+    <!-- ================================================================
+     Safety Countdown / 安全倒數
+     ================================================================ -->
+
+    <string name="countdown_duration_title">倒數時間設定</string>
+    <string name="countdown_duration_hint">請輸入分鐘數</string>
+    <string name="countdown_duration_unit">分鐘</string>
+    <string name="countdown_remaining_title">剩餘時間</string>
+
+    <string name="countdown_start_button">開始倒數</string>
+    <string name="countdown_cancel_button">取消倒數</string>
+
+    <string name="countdown_status_standby">待命中</string>
+    <string name="countdown_status_running">倒數中</string>
+    <string name="countdown_status_finished">倒數結束</string>
+
+    <string name="countdown_duration_display">%1$d 分鐘</string>
+    <string name="countdown_remaining_display">%1$02d:%2$02d</string>
+
+    <string name="countdown_remaining_preview">10:00</string>
+
+    <string name="countdown_input_invalid">請輸入 1～180 之間的整數分鐘。</string>
+    <string name="countdown_running_message">請先取消目前的倒數，再修改分鐘數。</string>
+    <string name="countdown_finished_message">倒數時間已結束。</string>
+
+
+    <!--
+        ====================================================================
+        警報中心
+        Alert Center
+        ====================================================================
+    -->
+
+    <string name="alert_header_title">警報中心</string>
+
+    <string name="alert_category_environment">環境警報</string>
+    <string name="alert_category_task">任務警報</string>
+
+    <string name="alert_filter_all_count">全部 (%1$d)</string>
+    <string name="alert_filter_pending_count">待處理 (%1$d)</string>
+    <string name="alert_filter_resolved_count">已解除 (%1$d)</string>
+    <string name="alert_filter_in_progress_count">進行中 (%1$d)</string>
+    <string name="alert_filter_overdue_count">逾期 (%1$d)</string>
+
+    <string name="alert_empty_environment">目前沒有環境警報紀錄。</string>
+    <string name="alert_empty_task">目前沒有任務警報紀錄。</string>
+
+    <!-- STEP 4-2 / 環境警報卡片 -->
+    <string name="alert_type_gas_leak">瓦斯外洩風險</string>
+    <string name="alert_type_unattended">無人看管烹煮</string>
+    <string name="alert_message_gas_leak">瓦斯開啟，但未偵測到火焰，請確認廚房安全。</string>
+    <string name="alert_message_unattended">瓦斯及火焰持續開啟、未偵測到人員，且安全倒數已結束。</string>
+    <string name="alert_location_kitchen">廚房</string>
+    <string name="alert_status_pending">待處理</string>
+    <string name="alert_status_resolved">已解除</string>
+    <string name="alert_action_resolve">確認解除</string>
+    <!-- STEP 4-3 / 警報解除確認（測試資料） -->
+    <string name="alert_resolve_dialog_title">確認解除警報</string>
+    <string name="alert_resolve_dialog_message">確定要將「%1$s」標記為已解除嗎？\n\n此操作只會變更 Mock Data 警報紀錄，不代表已確認現場瓦斯、火焰或其他實際環境狀態安全。</string>
+    <string name="alert_resolve_dialog_cancel">取消</string>
+    <string name="alert_resolve_dialog_confirm">確認</string>
+    <!-- STEP 4-4 / 任務警報卡片與多語系測試資料 -->
+    <string name="alert_task_assignee">指派成員：%1$s</string>
+    <string name="alert_task_due_date">截止時間：%1$s</string>
+    <string name="alert_task_overdue">逾期</string>
+    <string name="alert_task_mock_member_alex">小安</string>
+    <string name="alert_task_mock_member_jamie">小佳</string>
+    <string name="alert_task_mock_kitchen">清潔廚房</string>
+    <string name="alert_task_mock_kitchen_description">擦拭廚房檯面，並收好廚房用具。</string>
+    <string name="alert_task_mock_trash">倒垃圾</string>
+    <string name="alert_task_mock_trash_description">整理資源回收，並將家庭垃圾拿去丟棄。</string>
+    <string name="alert_task_mock_laundry">摺衣服</string>
+    <string name="alert_task_mock_laundry_description">將晾乾的衣物摺好，放回衣櫃。</string>
+    <string name="alert_task_mock_plants">澆花</string>
+    <string name="alert_task_mock_plants_description">檢查土壤，並為陽台植物澆水。</string>
+    <string name="alert_task_mock_dishes">洗碗</string>
+    <string name="alert_task_mock_dishes_description">清洗並擦乾用餐後的餐具。</string>
+    <string name="alert_filter_scroll_hint">↔ 左右滑動可查看更多篩選</string>
+</resources>

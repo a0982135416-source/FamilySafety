@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    ========================================================================
+    今日任務列表－單筆任務
+    Today's Task List - Task Item
+    ========================================================================
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:minHeight="30dp"
+
+    android:paddingStart="2dp"
+    android:paddingTop="3dp"
+    android:paddingEnd="2dp"
+    android:paddingBottom="3dp">
+
+
+    <!--
+        ================================================================
+        01. 任務名稱
+        Task Name
+        ================================================================
+    -->
+
+    <TextView
+        android:id="@+id/TextView_taskName"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:ellipsize="end"
+        android:maxLines="1"
+
+        android:text="@string/task_name_preview"
+
+        android:textColor="#607D9D"
+        android:textSize="11sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/TextView_taskStatusBadge"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <!--
+        ================================================================
+        02. 任務狀態
+        Task Status
+        ================================================================
+    -->
+
+    <TextView
+        android:id="@+id/TextView_taskStatusBadge"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="6dp"
+
+        android:paddingStart="5dp"
+        android:paddingTop="1dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="1dp"
+
+        android:text="@string/task_status_in_progress"
+
+        android:textColor="#1687E8"
+        android:textSize="9sp"
+
+        app:layout_constraintStart_toEndOf="@id/TextView_taskName"
+        app:layout_constraintEnd_toStartOf="@id/TextView_taskTime"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <!--
+        ================================================================
+        03. 任務時間
+        Task Time
+        ================================================================
+    -->
+
+    <TextView
+        android:id="@+id/TextView_taskTime"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/task_time_preview"
+
+        android:textColor="#8CA5BD"
+        android:textSize="10sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

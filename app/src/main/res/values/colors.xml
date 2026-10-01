@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- APP 主要背景 -->
+    <color name="app_background">#F2FAFF</color>
+
+    <!-- APP 主要藍色 -->
+    <color name="primary_blue">#1687E8</color>
+
+    <!-- 深藍標題 -->
+    <color name="title_blue">#0B3D75</color>
+
+    <!-- 次要文字 -->
+    <color name="secondary_text">#607D9D</color>
+
+    <!-- 淺藍背景 -->
+    <color name="light_blue">#E8F5FF</color>
+
+    <!-- 警報主題色 -->
+    <color name="alert_task_purple">#6C35D5</color>
+    <color name="safe_green">#19B394</color>
+    <color name="warning_red">#F0525C</color>
+
+</resources>

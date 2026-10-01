@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    ========================================================================
+    底部導覽選單
+    Bottom Navigation Menu
+    ========================================================================
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/home"
+        android:title="@string/nav_home" />
+
+    <item
+        android:id="@+id/navEnvironment"
+        android:icon="@drawable/environment"
+        android:title="@string/nav_environment" />
+
+    <item
+        android:id="@+id/navAlert"
+        android:icon="@drawable/alert_b"
+        android:title="@string/nav_alert" />
+
+    <item
+        android:id="@+id/navTask"
+        android:icon="@drawable/task"
+        android:title="@string/nav_task" />
+
+    <item
+        android:id="@+id/navManagement"
+        android:icon="@drawable/management"
+        android:title="@string/nav_management" />
+
+</menu>

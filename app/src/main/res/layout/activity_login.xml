@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FCFF">
+
+    <!-- 頂部裝飾背景 -->
+    <ImageView
+        android:id="@+id/ImageView_backgroundTop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 底部裝飾背景 -->
+    <ImageView
+        android:id="@+id/ImageView_backgroundBottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_botton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/ImageView_logo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="102dp"
+                android:src="@drawable/family_safety"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 標題 -->
+            <TextView
+                android:id="@+id/TextView_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="家庭安全管理系統"
+                android:textColor="#1A4375"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ImageView_logo" />
+
+            <TextView
+                android:id="@+id/TextView_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="守護家人・安心每一天"
+                android:textColor="#5A7D9A"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_title" />
+
+            <!-- 登入卡片區域 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/CardView_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_subtitle">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp">
+
+                    <!-- 帳號欄位 -->
+                    <ImageView
+                        android:id="@+id/ImageView_accountIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/user"
+                        app:layout_constraintBottom_toBottomOf="@id/TextView_accountLabel"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/TextView_accountLabel" />
+
+                    <TextView
+                        android:id="@+id/TextView_accountLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="帳號"
+                        android:textColor="#1A4375"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/ImageView_accountIcon"
+                        app:layout_constraintStart_toEndOf="@id/ImageView_accountIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TextInputLayout_account"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="#E0E0E0"
+                        app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/TextView_accountLabel">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/TextInputEditText_account"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="family-safe2024"
+                            android:inputType="text"
+                            android:textColor="#1A4375"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 密碼欄位 -->
+                    <ImageView
+                        android:id="@+id/ImageView_passwordIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/lock"
+                        app:layout_constraintBottom_toBottomOf="@id/TextView_passwordLabel"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/TextView_passwordLabel" />
+
+                    <TextView
+                        android:id="@+id/TextView_passwordLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
+                        android:text="密碼"
+                        android:textColor="#1A4375"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/ImageView_passwordIcon"
+                        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_account" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TextInputLayout_password"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="#E0E0E0"
+                        app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/TextView_passwordLabel"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="#5A7D9A">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/TextInputEditText_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textColor="#1A4375"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/TextView_passwordHint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="登入密碼為 6-12 位"
+                        android:textColor="#5A7D9A"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_password" />
+
+                    <!-- 記住登入 -->
+                    <CheckBox
+                        android:id="@+id/CheckBox_rememberMe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:buttonTint="#1E88E5"
+                        android:text="記住登入資訊"
+                        android:textColor="#1A4375"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toTopOf="@id/MaterialButton_login"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/TextView_passwordHint" />
+
+                    <!-- 登入按鈕 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/MaterialButton_login"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="24dp"
+                        android:backgroundTint="#1E88E5"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="登入"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="28dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/CheckBox_rememberMe" />
+
+                    <!-- 忘記密碼 -->
+                    <TextView
+                        android:id="@+id/TextView_forgotPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="忘記密碼？"
+                        android:textColor="#1A4375"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/MaterialButton_login" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

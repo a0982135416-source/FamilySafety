@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_blue">
+
+    <!-- ========================================================= -->
+    <!-- 01. 頂部 Header                                           -->
+    <!-- 功能：返回上一頁 + 顯示「驗證電子信箱」                    -->
+    <!-- ========================================================= -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_header"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/primary_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 返回箭頭 -->
+        <TextView
+            android:id="@+id/TextView_backArrow"
+            android:layout_width="44dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="←"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Header 標題 -->
+        <TextView
+            android:id="@+id/TextView_headerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="驗證電子信箱"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/TextView_backArrow"
+            app:layout_constraintStart_toEndOf="@id/TextView_backArrow"
+            app:layout_constraintTop_toTopOf="@id/TextView_backArrow" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- ========================================================= -->
+    <!-- 02. 主要內容 ScrollView                                   -->
+    <!-- 背景統一使用 APP 的 #F2FAFF                               -->
+    <!-- ========================================================= -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/app_background"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_background">
+
+            <!-- Email 驗證主圖 -->
+            <ImageView
+                android:id="@+id/ImageView_verifyIllustration"
+                android:layout_width="240dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/verify_code"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 輸入驗證碼 -->
+            <TextView
+                android:id="@+id/TextView_verifyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="輸入驗證碼"
+                android:textColor="#1A4375"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ImageView_verifyIllustration" />
+
+            <!-- 說明文字 -->
+            <TextView
+                android:id="@+id/TextView_verifyDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="我們已將 6 位數驗證碼寄送至"
+                android:textColor="#5A7D9A"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_verifyTitle" />
+
+            <!-- 遮罩 Email -->
+            <TextView
+                android:id="@+id/TextView_maskedEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#E3F2FD"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="l***@gmail.com"
+                android:textColor="#1E88E5"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_verifyDesc" />
+
+            <!-- 驗證碼輸入區 (6個 EditText) -->
+            <LinearLayout
+                android:id="@+id/LinearLayout_otp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_maskedEmail">
+
+                <EditText
+                    android:id="@+id/EditText_otp1"
+                    android:layout_width="45dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="4dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditText_otp2"
+                    android:layout_width="45dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="4dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditText_otp3"
+                    android:layout_width="45dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="4dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditText_otp4"
+                    android:layout_width="45dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="4dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditText_otp5"
+                    android:layout_width="45dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="4dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditText_otp6"
+                    android:layout_width="45dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="4dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 驗證碼將於 10 分鐘後失效 -->
+            <TextView
+                android:id="@+id/TextView_expiryHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="驗證碼將於 10 分鐘後失效"
+                android:textColor="#5A7D9A"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/LinearLayout_otp" />
+
+            <!-- 倒數計時 -->
+            <LinearLayout
+                android:id="@+id/LinearLayout_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_expiryHint">
+
+                <TextView
+                    android:id="@+id/TextView_timerIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⏱"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/TextView_timerValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="09 : 42"
+                    android:textColor="#1E88E5"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 驗證按鈕 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/MaterialButton_verify"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#1E88E5"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="驗證"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/LinearLayout_timer" />
+
+            <!-- 沒收到驗證碼？ -->
+            <TextView
+                android:id="@+id/TextView_noCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="沒收到驗證碼？"
+                android:textColor="#5A7D9A"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/MaterialButton_verify" />
+
+            <!-- 重新傳送驗證碼 -->
+            <TextView
+                android:id="@+id/TextView_resendCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="重新傳送驗證碼 (52s)"
+                android:textColor="#1E88E5"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_noCode" />
+
+            <!-- ========================================================= -->
+            <!-- 10. 底部透明裝飾圖                                        -->
+            <!-- 使用真正透明 PNG，讓圖片自然融入 #F2FAFF 背景                                  -->
+            <!-- ========================================================= -->
+
+            <ImageView
+                android:id="@+id/imgBottomDecor"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/verify_code_botton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextView_resendCode" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

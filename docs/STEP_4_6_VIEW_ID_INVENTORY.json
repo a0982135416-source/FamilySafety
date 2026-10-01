@@ -1,0 +1,5231 @@
+{
+  "rows": [
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 7,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "forgot",
+      "old": "main",
+      "new": "constraintLayout_forgot_root",
+      "category": "C",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "main",
+      "new_field": "constraintLayoutForgotRoot",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 20,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "btnBack",
+      "new": "textView_forgot_back",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "btnBack",
+      "new_field": "textViewForgotBack",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 44,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 45,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 46,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 64,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 35,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textHeaderTitle",
+      "new": "textView_forgot_header_title",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textHeaderTitle",
+      "new_field": "textViewForgotHeaderTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 56,
+      "type": "androidx.core.widget.NestedScrollView",
+      "page": "forgot",
+      "old": "scrollContent",
+      "new": "nestedScrollView_forgot_content",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "scrollContent",
+      "new_field": "nestedScrollViewForgotContent",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 79,
+      "type": "ImageView",
+      "page": "forgot",
+      "old": "imgForgotPassword",
+      "new": "imageView_forgot_password",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "imgForgotPassword",
+      "new_field": "imageViewForgotPassword",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 110,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 98,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textResetTitle",
+      "new": "textView_forgot_reset_title",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textResetTitle",
+      "new_field": "textViewForgotResetTitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 131,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 118,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textResetDesc",
+      "new": "textView_forgot_reset_desc",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textResetDesc",
+      "new_field": "textViewForgotResetDesc",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 153,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 140,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "forgot",
+      "old": "cardEmail",
+      "new": "cardView_forgot_email",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "cardEmail",
+      "new_field": "cardViewForgotEmail",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 278,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 168,
+      "type": "ImageView",
+      "page": "forgot",
+      "old": "imgEmail",
+      "new": "imageView_forgot_email",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "imgEmail",
+      "new_field": "imageViewForgotEmail",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 192,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 184,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textEmailLabel",
+      "new": "textView_forgot_email_label",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textEmailLabel",
+      "new_field": "textViewForgotEmailLabel",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 174,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 176,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 215,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 201,
+      "type": "com.google.android.material.textfield.TextInputLayout",
+      "page": "forgot",
+      "old": "inputEmail",
+      "new": "textInputLayout_forgot_email",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "inputEmail",
+      "new_field": "textInputLayoutForgotEmail",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 247,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 219,
+      "type": "com.google.android.material.textfield.TextInputEditText",
+      "page": "forgot",
+      "old": "editEmail",
+      "new": "editText_forgot_email",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "editEmail",
+      "new_field": "editTextForgotEmail",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 238,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textEmailExample",
+      "new": "textView_forgot_email_example",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textEmailExample",
+      "new_field": "textViewForgotEmailExample",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 261,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "forgot",
+      "old": "btnSendCode",
+      "new": "button_forgot_send_code",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "btnSendCode",
+      "new_field": "buttonForgotSendCode",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 299,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 288,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "forgot",
+      "old": "cardInfo",
+      "new": "cardView_forgot_info",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "cardInfo",
+      "new_field": "cardViewForgotInfo",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 376,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 314,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textInfoIcon",
+      "new": "textView_forgot_info_icon",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textInfoIcon",
+      "new_field": "textViewForgotInfoIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 343,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 345,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 346,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 333,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textInfo",
+      "new": "textView_forgot_info",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textInfo",
+      "new_field": "textViewForgotInfo",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 360,
+      "type": "TextView",
+      "page": "forgot",
+      "old": "textBackLogin",
+      "new": "textView_forgot_back_login",
+      "category": "B",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "textBackLogin",
+      "new_field": "textViewForgotBackLogin",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_forgot_password.xml",
+          "line": 396,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_forgot_password.xml",
+      "line": 386,
+      "type": "ImageView",
+      "page": "forgot",
+      "old": "imgBottomDecor",
+      "new": "imageView_forgot_bottom_decor",
+      "category": "C",
+      "binding_class": "ActivityForgotPasswordBinding",
+      "old_field": "imgBottomDecor",
+      "new_field": "imageViewForgotBottomDecor",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 5,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "login",
+      "old": "main",
+      "new": "constraintLayout_login_root",
+      "category": "C",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "main",
+      "new_field": "constraintLayoutLoginRoot",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 12,
+      "type": "ImageView",
+      "page": "login",
+      "old": "ImageView_backgroundTop",
+      "new": "imageView_login_background_top",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "ImageViewBackgroundTop",
+      "new_field": "imageViewLoginBackgroundTop",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 24,
+      "type": "ImageView",
+      "page": "login",
+      "old": "ImageView_backgroundBottom",
+      "new": "imageView_login_background_bottom",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "ImageViewBackgroundBottom",
+      "new_field": "imageViewLoginBackgroundBottom",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 50,
+      "type": "ImageView",
+      "page": "login",
+      "old": "ImageView_logo",
+      "new": "imageView_login_logo",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "ImageViewLogo",
+      "new_field": "imageViewLoginLogo",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 71,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 61,
+      "type": "TextView",
+      "page": "login",
+      "old": "TextView_title",
+      "new": "textView_login_title",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextViewTitle",
+      "new_field": "textViewLoginTitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 83,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 74,
+      "type": "TextView",
+      "page": "login",
+      "old": "TextView_subtitle",
+      "new": "textView_login_subtitle",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextViewSubtitle",
+      "new_field": "textViewLoginSubtitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 97,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 87,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "login",
+      "old": "CardView_login",
+      "new": "cardView_login_form",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "CardViewLogin",
+      "new_field": "cardViewLoginForm",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 106,
+      "type": "ImageView",
+      "page": "login",
+      "old": "ImageView_accountIcon",
+      "new": "imageView_login_account_icon",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "ImageViewAccountIcon",
+      "new_field": "imageViewLoginAccountIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 123,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 124,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 115,
+      "type": "TextView",
+      "page": "login",
+      "old": "TextView_accountLabel",
+      "new": "textView_login_account_label",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextViewAccountLabel",
+      "new_field": "textViewLoginAccountLabel",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 110,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 112,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 141,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 128,
+      "type": "com.google.android.material.textfield.TextInputLayout",
+      "page": "login",
+      "old": "TextInputLayout_account",
+      "new": "textInputLayout_login_account",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextInputLayoutAccount",
+      "new_field": "textInputLayoutLoginAccount",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 174,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 144,
+      "type": "com.google.android.material.textfield.TextInputEditText",
+      "page": "login",
+      "old": "TextInputEditText_account",
+      "new": "editText_login_account",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextInputEditTextAccount",
+      "new_field": "editTextLoginAccount",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 155,
+      "type": "ImageView",
+      "page": "login",
+      "old": "ImageView_passwordIcon",
+      "new": "imageView_login_password_icon",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "ImageViewPasswordIcon",
+      "new_field": "imageViewLoginPasswordIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 173,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 164,
+      "type": "TextView",
+      "page": "login",
+      "old": "TextView_passwordLabel",
+      "new": "textView_login_password_label",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextViewPasswordLabel",
+      "new_field": "textViewLoginPasswordLabel",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 159,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 161,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 190,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 177,
+      "type": "com.google.android.material.textfield.TextInputLayout",
+      "page": "login",
+      "old": "TextInputLayout_password",
+      "new": "textInputLayout_login_password",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextInputLayoutPassword",
+      "new_field": "textInputLayoutLoginPassword",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 213,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 195,
+      "type": "com.google.android.material.textfield.TextInputEditText",
+      "page": "login",
+      "old": "TextInputEditText_password",
+      "new": "editText_login_password",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextInputEditTextPassword",
+      "new_field": "editTextLoginPassword",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 204,
+      "type": "TextView",
+      "page": "login",
+      "old": "TextView_passwordHint",
+      "new": "textView_login_password_hint",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextViewPasswordHint",
+      "new_field": "textViewLoginPasswordHint",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 227,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 217,
+      "type": "CheckBox",
+      "page": "login",
+      "old": "CheckBox_rememberMe",
+      "new": "checkBox_login_remember_me",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "CheckBoxRememberMe",
+      "new_field": "checkBoxLoginRememberMe",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 244,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 231,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "login",
+      "old": "MaterialButton_login",
+      "new": "button_login_sign_in",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "MaterialButtonLogin",
+      "new_field": "buttonLoginSignIn",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 225,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_login.xml",
+          "line": 258,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_login.xml",
+      "line": 248,
+      "type": "TextView",
+      "page": "login",
+      "old": "TextView_forgotPassword",
+      "new": "textView_login_forgot_password",
+      "category": "B",
+      "binding_class": "ActivityLoginBinding",
+      "old_field": "TextViewForgotPassword",
+      "new_field": "textViewLoginForgotPassword",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_main.xml",
+      "line": 24,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "main",
+      "old": "main",
+      "new": "constraintLayout_main_root",
+      "category": "C",
+      "binding_class": "ActivityMainBinding",
+      "old_field": "main",
+      "new_field": "constraintLayoutMainRoot",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 18,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 24,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_main.xml",
+      "line": 41,
+      "type": "androidx.fragment.app.FragmentContainerView",
+      "page": "main",
+      "old": "fragmentContainer",
+      "new": "fragmentContainerView_main_content",
+      "category": "B",
+      "binding_class": "ActivityMainBinding",
+      "old_field": "fragmentContainer",
+      "new_field": "fragmentContainerViewMainContent",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 163,
+          "kind": "R.id/Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_main.xml",
+      "line": 67,
+      "type": "com.google.android.material.bottomnavigation.BottomNavigationView",
+      "page": "main",
+      "old": "bottomNavigation",
+      "new": "bottomNavigationView_main_navigation",
+      "category": "B",
+      "binding_class": "ActivityMainBinding",
+      "old_field": "bottomNavigation",
+      "new_field": "bottomNavigationViewMainNavigation",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 225,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 61,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 83,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_main.xml",
+          "line": 47,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 14,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "reset",
+      "old": "layout_header",
+      "new": "constraintLayout_reset_header",
+      "category": "C",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "layoutHeader",
+      "new_field": "constraintLayoutResetHeader",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 65,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 67,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 24,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_backArrow",
+      "new": "textView_reset_back_arrow",
+      "category": "C",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewBackArrow",
+      "new_field": "textViewResetBackArrow",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 47,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 48,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 49,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 48,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 49,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 50,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 39,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_headerTitle",
+      "new": "textView_reset_header_title",
+      "category": "C",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewHeaderTitle",
+      "new_field": "textViewResetHeaderTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 58,
+      "type": "androidx.core.widget.NestedScrollView",
+      "page": "reset",
+      "old": "NestedScrollView_content",
+      "new": "nestedScrollView_reset_content",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "NestedScrollViewContent",
+      "new_field": "nestedScrollViewResetContent",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 74,
+      "type": "ImageView",
+      "page": "reset",
+      "old": "ImageView_lockIllustration",
+      "new": "imageView_reset_lock_illustration",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "ImageViewLockIllustration",
+      "new_field": "imageViewResetLockIllustration",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 99,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 87,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_resetTitle",
+      "new": "textView_reset_title",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewResetTitle",
+      "new_field": "textViewResetTitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 114,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 103,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_resetDesc",
+      "new": "textView_reset_desc",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewResetDesc",
+      "new_field": "textViewResetDesc",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 132,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 120,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "reset",
+      "old": "CardView_newPassword",
+      "new": "cardView_reset_new_password",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "CardViewNewPassword",
+      "new_field": "cardViewResetNewPassword",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 212,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 143,
+      "type": "ImageView",
+      "page": "reset",
+      "old": "ImageView_newPasswordIcon",
+      "new": "imageView_reset_new_password_icon",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "ImageViewNewPasswordIcon",
+      "new_field": "imageViewResetNewPasswordIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 160,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 161,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 162,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 179,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 152,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_newPasswordLabel",
+      "new": "textView_reset_new_password_label",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewNewPasswordLabel",
+      "new_field": "textViewResetNewPasswordLabel",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 166,
+      "type": "com.google.android.material.textfield.TextInputLayout",
+      "page": "reset",
+      "old": "TextInputLayout_newPassword",
+      "new": "textInputLayout_reset_new_password",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextInputLayoutNewPassword",
+      "new_field": "textInputLayoutResetNewPassword",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 184,
+      "type": "com.google.android.material.textfield.TextInputEditText",
+      "page": "reset",
+      "old": "TextInputEditText_newPassword",
+      "new": "editText_reset_new_password",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextInputEditTextNewPassword",
+      "new_field": "editTextResetNewPassword",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 200,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "reset",
+      "old": "CardView_confirmPassword",
+      "new": "cardView_reset_confirm_password",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "CardViewConfirmPassword",
+      "new_field": "cardViewResetConfirmPassword",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 292,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 223,
+      "type": "ImageView",
+      "page": "reset",
+      "old": "ImageView_confirmPasswordIcon",
+      "new": "imageView_reset_confirm_password_icon",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "ImageViewConfirmPasswordIcon",
+      "new_field": "imageViewResetConfirmPasswordIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 240,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 241,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 242,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 259,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 232,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_confirmPasswordLabel",
+      "new": "textView_reset_confirm_password_label",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewConfirmPasswordLabel",
+      "new_field": "textViewResetConfirmPasswordLabel",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 246,
+      "type": "com.google.android.material.textfield.TextInputLayout",
+      "page": "reset",
+      "old": "TextInputLayout_confirmPassword",
+      "new": "textInputLayout_reset_confirm_password",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextInputLayoutConfirmPassword",
+      "new_field": "textInputLayoutResetConfirmPassword",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 264,
+      "type": "com.google.android.material.textfield.TextInputEditText",
+      "page": "reset",
+      "old": "TextInputEditText_confirmPassword",
+      "new": "editText_reset_confirm_password",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextInputEditTextConfirmPassword",
+      "new_field": "editTextResetConfirmPassword",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 280,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "reset",
+      "old": "CardView_passwordRules",
+      "new": "cardView_reset_password_rules",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "CardViewPasswordRules",
+      "new_field": "cardViewResetPasswordRules",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 348,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 301,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_ruleIcon",
+      "new": "textView_reset_rule_icon",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewRuleIcon",
+      "new_field": "textViewResetRuleIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 322,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 313,
+      "type": "TextView",
+      "page": "reset",
+      "old": "TextView_ruleText",
+      "new": "textView_reset_rule_text",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "TextViewRuleText",
+      "new_field": "textViewResetRuleText",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 332,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "reset",
+      "old": "MaterialButton_reset",
+      "new": "button_reset_submit",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "MaterialButtonReset",
+      "new_field": "buttonResetSubmit",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 363,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_reset_password.xml",
+      "line": 354,
+      "type": "ImageView",
+      "page": "reset",
+      "old": "ImageView_bottomDecor",
+      "new": "imageView_reset_bottom_decor",
+      "category": "B",
+      "binding_class": "ActivityResetPasswordBinding",
+      "old_field": "ImageViewBottomDecor",
+      "new_field": "imageViewResetBottomDecor",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 15,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "verify",
+      "old": "layout_header",
+      "new": "constraintLayout_verify_header",
+      "category": "C",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "layoutHeader",
+      "new_field": "constraintLayoutVerifyHeader",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 65,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 67,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 25,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_backArrow",
+      "new": "textView_verify_back_arrow",
+      "category": "C",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewBackArrow",
+      "new_field": "textViewVerifyBackArrow",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 47,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 48,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_reset_password.xml",
+          "line": 49,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 48,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 49,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 50,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 40,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_headerTitle",
+      "new": "textView_verify_header_title",
+      "category": "C",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewHeaderTitle",
+      "new_field": "textViewVerifyHeaderTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 76,
+      "type": "ImageView",
+      "page": "verify",
+      "old": "ImageView_verifyIllustration",
+      "new": "imageView_verify_illustration",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "ImageViewVerifyIllustration",
+      "new_field": "imageViewVerifyIllustration",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 99,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 89,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_verifyTitle",
+      "new": "textView_verify_title",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewVerifyTitle",
+      "new_field": "textViewVerifyTitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 112,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 103,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_verifyDesc",
+      "new": "textView_verify_desc",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewVerifyDesc",
+      "new_field": "textViewVerifyDesc",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 128,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 116,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_maskedEmail",
+      "new": "textView_verify_masked_email",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewMaskedEmail",
+      "new_field": "textViewVerifyMaskedEmail",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 141,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 132,
+      "type": "LinearLayout",
+      "page": "verify",
+      "old": "LinearLayout_otp",
+      "new": "linearLayout_verify_otp",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "LinearLayoutOtp",
+      "new_field": "linearLayoutVerifyOtp",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 227,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 144,
+      "type": "EditText",
+      "page": "verify",
+      "old": "EditText_otp1",
+      "new": "editText_verify_otp1",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "EditTextOtp1",
+      "new_field": "editTextVerifyOtp1",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 156,
+      "type": "EditText",
+      "page": "verify",
+      "old": "EditText_otp2",
+      "new": "editText_verify_otp2",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "EditTextOtp2",
+      "new_field": "editTextVerifyOtp2",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 168,
+      "type": "EditText",
+      "page": "verify",
+      "old": "EditText_otp3",
+      "new": "editText_verify_otp3",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "EditTextOtp3",
+      "new_field": "editTextVerifyOtp3",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 180,
+      "type": "EditText",
+      "page": "verify",
+      "old": "EditText_otp4",
+      "new": "editText_verify_otp4",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "EditTextOtp4",
+      "new_field": "editTextVerifyOtp4",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 192,
+      "type": "EditText",
+      "page": "verify",
+      "old": "EditText_otp5",
+      "new": "editText_verify_otp5",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "EditTextOtp5",
+      "new_field": "editTextVerifyOtp5",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 204,
+      "type": "EditText",
+      "page": "verify",
+      "old": "EditText_otp6",
+      "new": "editText_verify_otp6",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "EditTextOtp6",
+      "new_field": "editTextVerifyOtp6",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 218,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_expiryHint",
+      "new": "textView_verify_expiry_hint",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewExpiryHint",
+      "new_field": "textViewVerifyExpiryHint",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 239,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 231,
+      "type": "LinearLayout",
+      "page": "verify",
+      "old": "LinearLayout_timer",
+      "new": "linearLayout_verify_timer",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "LinearLayoutTimer",
+      "new_field": "linearLayoutVerifyTimer",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 275,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 242,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_timerIcon",
+      "new": "textView_verify_timer_icon",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewTimerIcon",
+      "new_field": "textViewVerifyTimerIcon",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 249,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_timerValue",
+      "new": "textView_verify_timer_value",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewTimerValue",
+      "new_field": "textViewVerifyTimerValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 261,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "verify",
+      "old": "MaterialButton_verify",
+      "new": "button_verify_submit",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "MaterialButtonVerify",
+      "new_field": "buttonVerifySubmit",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 288,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 279,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_noCode",
+      "new": "textView_verify_no_code",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewNoCode",
+      "new_field": "textViewVerifyNoCode",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 302,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 292,
+      "type": "TextView",
+      "page": "verify",
+      "old": "TextView_resendCode",
+      "new": "textView_verify_resend_code",
+      "category": "B",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "TextViewResendCode",
+      "new_field": "textViewVerifyResendCode",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/activity_verify_code.xml",
+          "line": 320,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/activity_verify_code.xml",
+      "line": 310,
+      "type": "ImageView",
+      "page": "verify",
+      "old": "imgBottomDecor",
+      "new": "imageView_verify_bottom_decor",
+      "category": "C",
+      "binding_class": "ActivityVerifyCodeBinding",
+      "old_field": "imgBottomDecor",
+      "new_field": "imageViewVerifyBottomDecor",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 14,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "alert",
+      "old": "constraintLayout_alert_root",
+      "new": "constraintLayout_alert_root",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "constraintLayoutAlertRoot",
+      "new_field": "constraintLayoutAlertRoot",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 26,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "alert",
+      "old": "constraintLayout_alert_header",
+      "new": "constraintLayout_alert_header",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "constraintLayoutAlertHeader",
+      "new_field": "constraintLayoutAlertHeader",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 191,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 146,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_alert.xml",
+          "line": 79,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 37,
+      "type": "ImageView",
+      "page": "alert",
+      "old": "imageView_alert_header_icon",
+      "new": "imageView_alert_header_icon",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "imageViewAlertHeaderIcon",
+      "new_field": "imageViewAlertHeaderIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_alert.xml",
+          "line": 58,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 48,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_title",
+      "new": "textView_alert_title",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "textViewAlertTitle",
+      "new_field": "textViewAlertTitle",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 192,
+          "kind": "R.id"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 70,
+      "type": "LinearLayout",
+      "page": "alert",
+      "old": "linearLayout_alert_categories",
+      "new": "linearLayout_alert_categories",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "linearLayoutAlertCategories",
+      "new_field": "linearLayoutAlertCategories",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_alert.xml",
+          "line": 136,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 82,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_environment",
+      "new": "button_alert_environment",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "buttonAlertEnvironment",
+      "new_field": "buttonAlertEnvironment",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 174,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 212,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 246,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 224,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 367,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 368,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 374,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 375,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 98,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_task",
+      "new": "button_alert_task",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "buttonAlertTask",
+      "new_field": "buttonAlertTask",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 113,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 180,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 201,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 233,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 370,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 371,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 377,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 378,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 122,
+      "type": "HorizontalScrollView",
+      "page": "alert",
+      "old": "scrollView_alert_filters",
+      "new": "horizontalScrollView_alert_filters",
+      "category": "B",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "scrollViewAlertFilters",
+      "new_field": "horizontalScrollViewAlertFilters",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 119,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 138,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 162,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 173,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 209,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 229,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 238,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 293,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 318,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 323,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_alert.xml",
+          "line": 245,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 139,
+      "type": "LinearLayout",
+      "page": "alert",
+      "old": "linearLayout_alert_filters",
+      "new": "linearLayout_alert_filters",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "linearLayoutAlertFilters",
+      "new_field": "linearLayoutAlertFilters",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 296,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 319,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 324,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 145,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_all",
+      "new": "button_alert_all",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "buttonAlertAll",
+      "new_field": "buttonAlertAll",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 86,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 157,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 171,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 176,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 244,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 251,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 388,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 396,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 427,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 431,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 162,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_pending",
+      "new": "button_alert_pending",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "buttonAlertPending",
+      "new_field": "buttonAlertPending",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 87,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 158,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 177,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 229,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 249,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 297,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 254,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 261,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 389,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 397,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 428,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 432,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 179,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_resolved",
+      "new": "button_alert_resolved",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "buttonAlertResolved",
+      "new_field": "buttonAlertResolved",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 91,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 178,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 208,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 286,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 264,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 269,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 384,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 390,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 392,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 429,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 196,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_in_progress",
+      "new": "button_alert_in_progress",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "buttonAlertInProgress",
+      "new_field": "buttonAlertInProgress",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 89,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 159,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 235,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 272,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 277,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 385,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 393,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 398,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 433,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 214,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_overdue",
+      "new": "button_alert_overdue",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "buttonAlertOverdue",
+      "new_field": "buttonAlertOverdue",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 90,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 168,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 182,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 237,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 243,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 280,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 285,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 386,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 394,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 399,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 434,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 234,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_filter_hint",
+      "new": "textView_alert_filter_hint",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "textViewAlertFilterHint",
+      "new_field": "textViewAlertFilterHint",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 165,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 321,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_alert.xml",
+          "line": 266,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_alert.xml",
+          "line": 285,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 253,
+      "type": "androidx.recyclerview.widget.RecyclerView",
+      "page": "alert",
+      "old": "recyclerView_alert_list",
+      "new": "recyclerView_alert_list",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "recyclerViewAlertList",
+      "new_field": "recyclerViewAlertList",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 69,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 189,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 205,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 217,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 220,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 232,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 240,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 254,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 282,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 289,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 300,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 133,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 177,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 179,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 440,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 441,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 445,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 451,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 452,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 466,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 276,
+      "type": "LinearLayout",
+      "page": "alert",
+      "old": "linearLayout_alert_empty",
+      "new": "linearLayout_alert_empty",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "linearLayoutAlertEmpty",
+      "new_field": "linearLayoutAlertEmpty",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 280,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 446,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 468,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 288,
+      "type": "ImageView",
+      "page": "alert",
+      "old": "imageView_alert_empty_icon",
+      "new": "imageView_alert_empty_icon",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "imageViewAlertEmptyIcon",
+      "new_field": "imageViewAlertEmptyIcon",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_alert.xml",
+      "line": 296,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_empty_message",
+      "new": "textView_alert_empty_message",
+      "category": "A",
+      "binding_class": "FragmentAlertBinding",
+      "old_field": "textViewAlertEmptyMessage",
+      "new_field": "textViewAlertEmptyMessage",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 283,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 447,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/AlertFragment.kt",
+          "line": 470,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 34,
+      "type": "androidx.core.widget.NestedScrollView",
+      "page": "environment",
+      "old": "scrollEnvironment",
+      "new": "nestedScrollView_environment_content",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "scrollEnvironment",
+      "new_field": "nestedScrollViewEnvironmentContent",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 45,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "environment",
+      "old": "layoutEnvironmentContent",
+      "new": "constraintLayout_environment_content",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutEnvironmentContent",
+      "new_field": "constraintLayoutEnvironmentContent",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 56,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "environment",
+      "old": "layoutEnvironmentHeader",
+      "new": "constraintLayout_environment_header",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutEnvironmentHeader",
+      "new_field": "constraintLayoutEnvironmentHeader",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 134,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 70,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivEnvironmentHeaderIcon",
+      "new": "imageView_environment_header_icon",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivEnvironmentHeaderIcon",
+      "new_field": "imageViewEnvironmentHeaderIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 98,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 99,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 88,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvEnvironmentHeaderTitle",
+      "new": "textView_environment_header_title",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvEnvironmentHeaderTitle",
+      "new_field": "textViewEnvironmentHeaderTitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 115,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 116,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 117,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 108,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvEnvironmentHeaderSubtitle",
+      "new": "textView_environment_header_subtitle",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvEnvironmentHeaderSubtitle",
+      "new_field": "textViewEnvironmentHeaderSubtitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 126,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "environment",
+      "old": "layoutKitchenMonitoring",
+      "new": "constraintLayout_environment_kitchen_monitoring",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutKitchenMonitoring",
+      "new_field": "constraintLayoutEnvironmentKitchenMonitoring",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 142,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivKitchenCameraIcon",
+      "new": "imageView_environment_kitchen_camera_icon",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivKitchenCameraIcon",
+      "new_field": "imageViewEnvironmentKitchenCameraIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 162,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 163,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 178,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 212,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 152,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvKitchenSafetyTitle",
+      "new": "textView_environment_kitchen_safety_title",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvKitchenSafetyTitle",
+      "new_field": "textViewEnvironmentKitchenSafetyTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 172,
+      "type": "LinearLayout",
+      "page": "environment",
+      "old": "layoutLiveStatus",
+      "new": "linearLayout_environment_live_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutLiveStatus",
+      "new_field": "linearLayoutEnvironmentLiveStatus",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 161,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 186,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvLiveMonitoring",
+      "new": "textView_environment_live_monitoring",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvLiveMonitoring",
+      "new_field": "textViewEnvironmentLiveMonitoring",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 204,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardLiveCamera",
+      "new": "cardView_environment_live_camera",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardLiveCamera",
+      "new_field": "cardViewEnvironmentLiveCamera",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 349,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 226,
+      "type": "FrameLayout",
+      "page": "environment",
+      "old": "layoutCameraPreview",
+      "new": "frameLayout_environment_camera_preview",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutCameraPreview",
+      "new_field": "frameLayoutEnvironmentCameraPreview",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 263,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvCameraTimestamp",
+      "new": "textView_environment_camera_timestamp",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvCameraTimestamp",
+      "new_field": "textViewEnvironmentCameraTimestamp",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 284,
+      "type": "LinearLayout",
+      "page": "environment",
+      "old": "layoutCameraInfo",
+      "new": "linearLayout_environment_camera_info",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutCameraInfo",
+      "new_field": "linearLayoutEnvironmentCameraInfo",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 232,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 296,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvCameraLocation",
+      "new": "textView_environment_camera_location",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvCameraLocation",
+      "new_field": "textViewEnvironmentCameraLocation",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 318,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvCameraOnlineStatus",
+      "new": "textView_environment_camera_online_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvCameraOnlineStatus",
+      "new_field": "textViewEnvironmentCameraOnlineStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 340,
+      "type": "LinearLayout",
+      "page": "environment",
+      "old": "layoutSensorStatus",
+      "new": "linearLayout_environment_sensor_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutSensorStatus",
+      "new_field": "linearLayoutEnvironmentSensorStatus",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 608,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 358,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardGasStatus",
+      "new": "cardView_environment_gas_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardGasStatus",
+      "new_field": "cardViewEnvironmentGasStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 388,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivGasStatus",
+      "new": "imageView_environment_gas_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivGasStatus",
+      "new_field": "imageViewEnvironmentGasStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 396,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvGasStatusTitle",
+      "new": "textView_environment_gas_status_title",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvGasStatusTitle",
+      "new_field": "textViewEnvironmentGasStatusTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 414,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvGasValue",
+      "new": "textView_environment_gas_value",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvGasValue",
+      "new_field": "textViewEnvironmentGasValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 438,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardFlameStatus",
+      "new": "cardView_environment_flame_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardFlameStatus",
+      "new_field": "cardViewEnvironmentFlameStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 469,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivFlameStatus",
+      "new": "imageView_environment_flame_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivFlameStatus",
+      "new_field": "imageViewEnvironmentFlameStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 477,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvFlameStatusTitle",
+      "new": "textView_environment_flame_status_title",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvFlameStatusTitle",
+      "new_field": "textViewEnvironmentFlameStatusTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 495,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvFlameValue",
+      "new": "textView_environment_flame_value",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvFlameValue",
+      "new_field": "textViewEnvironmentFlameValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 519,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardPersonStatus",
+      "new": "cardView_environment_person_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardPersonStatus",
+      "new_field": "cardViewEnvironmentPersonStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 549,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivPersonStatus",
+      "new": "imageView_environment_person_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivPersonStatus",
+      "new_field": "imageViewEnvironmentPersonStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 557,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvPersonStatusTitle",
+      "new": "textView_environment_person_status_title",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvPersonStatusTitle",
+      "new_field": "textViewEnvironmentPersonStatusTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 575,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvPersonValue",
+      "new": "textView_environment_person_value",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvPersonValue",
+      "new_field": "textViewEnvironmentPersonValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 599,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardSafetyCountdown",
+      "new": "cardView_environment_safety_countdown",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardSafetyCountdown",
+      "new_field": "cardViewEnvironmentSafetyCountdown",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 751,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 627,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivSafetyCountdown",
+      "new": "imageView_environment_safety_countdown",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivSafetyCountdown",
+      "new_field": "imageViewEnvironmentSafetyCountdown",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 679,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 680,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 643,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "environment",
+      "old": "btnCountdownSetting",
+      "new": "button_environment_countdown_setting",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "btnCountdownSetting",
+      "new_field": "buttonEnvironmentCountdownSetting",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 179,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 678,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 670,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvCountdownDefault",
+      "new": "textView_environment_countdown_default",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvCountdownDefault",
+      "new_field": "textViewEnvironmentCountdownDefault",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 308,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 699,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 689,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvCountdownStatus",
+      "new": "textView_environment_countdown_status",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvCountdownStatus",
+      "new_field": "textViewEnvironmentCountdownStatus",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 173,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 603,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 639,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 677,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 715,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 704,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvCountdownRemaining",
+      "new": "textView_environment_countdown_remaining",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvCountdownRemaining",
+      "new_field": "textViewEnvironmentCountdownRemaining",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 709,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 732,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 720,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "environment",
+      "old": "btnCountdownStart",
+      "new": "button_environment_countdown_start",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "btnCountdownStart",
+      "new_field": "buttonEnvironmentCountdownStart",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 197,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 607,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 643,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 681,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 744,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "environment",
+      "old": "layoutEnvironmentData",
+      "new": "constraintLayout_environment_data",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutEnvironmentData",
+      "new_field": "constraintLayoutEnvironmentData",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 1014,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 760,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivEnvironmentDataIcon",
+      "new": "imageView_environment_data_icon",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivEnvironmentDataIcon",
+      "new_field": "imageViewEnvironmentDataIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 786,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 787,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 806,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 854,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 776,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvEnvironmentDataTitle",
+      "new": "textView_environment_data_title",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvEnvironmentDataTitle",
+      "new_field": "textViewEnvironmentDataTitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 807,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 796,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvEnvironmentDataSubtitle",
+      "new": "textView_environment_data_subtitle",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvEnvironmentDataSubtitle",
+      "new_field": "textViewEnvironmentDataSubtitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 816,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "environment",
+      "old": "btnEnvironmentLocation",
+      "new": "button_environment_location",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "btnEnvironmentLocation",
+      "new_field": "buttonEnvironmentLocation",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 341,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 437,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 441,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 448,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 452,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 459,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 463,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 785,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 805,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 845,
+      "type": "LinearLayout",
+      "page": "environment",
+      "old": "layoutTemperatureHumidity",
+      "new": "linearLayout_environment_temperature_humidity",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutTemperatureHumidity",
+      "new_field": "linearLayoutEnvironmentTemperatureHumidity",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 863,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardTemperature",
+      "new": "cardView_environment_temperature",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardTemperature",
+      "new_field": "cardViewEnvironmentTemperature",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 886,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivTemperature",
+      "new": "imageView_environment_temperature",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivTemperature",
+      "new_field": "imageViewEnvironmentTemperature",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 904,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvTemperatureLabel",
+      "new": "textView_environment_temperature_label",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvTemperatureLabel",
+      "new_field": "textViewEnvironmentTemperatureLabel",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 912,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvTemperatureValue",
+      "new": "textView_environment_temperature_value",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvTemperatureValue",
+      "new_field": "textViewEnvironmentTemperatureValue",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 484,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 934,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardHumidity",
+      "new": "cardView_environment_humidity",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardHumidity",
+      "new_field": "cardViewEnvironmentHumidity",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 957,
+      "type": "ImageView",
+      "page": "environment",
+      "old": "ivHumidity",
+      "new": "imageView_environment_humidity",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "ivHumidity",
+      "new_field": "imageViewEnvironmentHumidity",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 975,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvHumidityLabel",
+      "new": "textView_environment_humidity_label",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvHumidityLabel",
+      "new_field": "textViewEnvironmentHumidityLabel",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 983,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvHumidityValue",
+      "new": "textView_environment_humidity_value",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvHumidityValue",
+      "new_field": "textViewEnvironmentHumidityValue",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 489,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1008,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "environment",
+      "old": "layoutHistoricalTrend",
+      "new": "constraintLayout_environment_historical_trend",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "layoutHistoricalTrend",
+      "new_field": "constraintLayoutEnvironmentHistoricalTrend",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1018,
+      "type": "TextView",
+      "page": "environment",
+      "old": "tvHistoricalTrendTitle",
+      "new": "textView_environment_historical_trend_title",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "tvHistoricalTrendTitle",
+      "new_field": "textViewEnvironmentHistoricalTrendTitle",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 1037,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1030,
+      "type": "com.google.android.material.button.MaterialButtonToggleGroup",
+      "page": "environment",
+      "old": "toggleHistoryPeriod",
+      "new": "materialButtonToggleGroup_environment_history_period",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "toggleHistoryPeriod",
+      "new_field": "materialButtonToggleGroupEnvironmentHistoryPeriod",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 514,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 520,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 1078,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1042,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "environment",
+      "old": "btnHistoryDay",
+      "new": "button_environment_history_day",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "btnHistoryDay",
+      "new_field": "buttonEnvironmentHistoryDay",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 515,
+          "kind": "R.id/Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 533,
+          "kind": "R.id/Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_environment.xml",
+          "line": 1034,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1050,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "environment",
+      "old": "btnHistoryWeek",
+      "new": "button_environment_history_week",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "btnHistoryWeek",
+      "new_field": "buttonEnvironmentHistoryWeek",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 542,
+          "kind": "R.id/Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1058,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "environment",
+      "old": "btnHistoryMonth",
+      "new": "button_environment_history_month",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "btnHistoryMonth",
+      "new_field": "buttonEnvironmentHistoryMonth",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 551,
+          "kind": "R.id/Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1069,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "environment",
+      "old": "cardHistoricalChart",
+      "new": "cardView_environment_historical_chart",
+      "category": "B",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "cardHistoricalChart",
+      "new_field": "cardViewEnvironmentHistoricalChart",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_environment.xml",
+      "line": 1086,
+      "type": "com.example.familysafety.environment.ui.HistoryChartView",
+      "page": "environment",
+      "old": "historyChartView",
+      "new": "historyChartView_environment_history",
+      "category": "C",
+      "binding_class": "FragmentEnvironmentBinding",
+      "old_field": "historyChartView",
+      "new_field": "historyChartViewEnvironmentHistory",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentFragment.kt",
+          "line": 576,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 16,
+      "type": "androidx.core.widget.NestedScrollView",
+      "page": "home",
+      "old": "NestedScrollView_homeContent",
+      "new": "nestedScrollView_home_content",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "NestedScrollViewHomeContent",
+      "new_field": "nestedScrollViewHomeContent",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 32,
+      "type": "androidx.constraintlayout.widget.ConstraintLayout",
+      "page": "home",
+      "old": "layoutHeader",
+      "new": "constraintLayout_home_header",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "layoutHeader",
+      "new_field": "constraintLayoutHomeHeader",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 124,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 42,
+      "type": "ImageView",
+      "page": "home",
+      "old": "ImageView_headerBg",
+      "new": "imageView_home_header_background",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "ImageViewHeaderBg",
+      "new_field": "imageViewHomeHeaderBackground",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 53,
+      "type": "ImageButton",
+      "page": "home",
+      "old": "ImageButton_menu",
+      "new": "imageButton_home_menu",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "ImageButtonMenu",
+      "new_field": "imageButtonHomeMenu",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 68,
+      "type": "FrameLayout",
+      "page": "home",
+      "old": "FrameLayout_profile",
+      "new": "frameLayout_home_profile",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "FrameLayoutProfile",
+      "new_field": "frameLayoutHomeProfile",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 87,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_greeting",
+      "new": "textView_home_greeting",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewGreeting",
+      "new_field": "textViewHomeGreeting",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 107,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 108,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 100,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_headerSubtitle",
+      "new": "textView_home_header_subtitle",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewHeaderSubtitle",
+      "new_field": "textViewHomeHeaderSubtitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 114,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "home",
+      "old": "MaterialCardView_homeStatus",
+      "new": "cardView_home_status",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "MaterialCardViewHomeStatus",
+      "new_field": "cardViewHomeStatus",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 179,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 134,
+      "type": "ImageView",
+      "page": "home",
+      "old": "ImageView_statusIcon",
+      "new": "imageView_home_status_icon",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "ImageViewStatusIcon",
+      "new_field": "imageViewHomeStatusIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 153,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 144,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_homeStatus",
+      "new": "textView_home_status",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewHomeStatus",
+      "new_field": "textViewHomeStatus",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 157,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_statusTime",
+      "new": "textView_home_status_time",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewStatusTime",
+      "new_field": "textViewHomeStatusTime",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 173,
+      "type": "LinearLayout",
+      "page": "home",
+      "old": "LinearLayout_row1",
+      "new": "linearLayout_home_row1",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "LinearLayoutRow1",
+      "new_field": "linearLayoutHomeRow1",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 512,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 183,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "home",
+      "old": "MaterialCardView_safety",
+      "new": "cardView_home_safety",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "MaterialCardViewSafety",
+      "new_field": "cardViewHomeSafety",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 200,
+      "type": "FrameLayout",
+      "page": "home",
+      "old": "FrameLayout_safetyIconBg",
+      "new": "frameLayout_home_safety_icon_background",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "FrameLayoutSafetyIconBg",
+      "new_field": "frameLayoutHomeSafetyIconBackground",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 224,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 225,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 226,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 249,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 216,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_safetyTitle",
+      "new": "textView_home_safety_title",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewSafetyTitle",
+      "new_field": "textViewHomeSafetyTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 238,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_safetyLocation",
+      "new": "textView_home_safety_location",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewSafetyLocation",
+      "new_field": "textViewHomeSafetyLocation",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 261,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 263,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 271,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 252,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_safetyStatusLabel",
+      "new": "textView_home_safety_status_label",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewSafetyStatusLabel",
+      "new_field": "textViewHomeSafetyStatusLabel",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 293,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_gasStatusValue",
+      "new": "textView_home_gas_status_value",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewGasStatusValue",
+      "new_field": "textViewHomeGasStatusValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 321,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_fireStatusValue",
+      "new": "textView_home_fire_status_value",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewFireStatusValue",
+      "new_field": "textViewHomeFireStatusValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 349,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_personStatusValue",
+      "new": "textView_home_person_status_value",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewPersonStatusValue",
+      "new_field": "textViewHomePersonStatusValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 363,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "home",
+      "old": "MaterialCardView_environment",
+      "new": "cardView_home_environment",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "MaterialCardViewEnvironment",
+      "new_field": "cardViewHomeEnvironment",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 380,
+      "type": "FrameLayout",
+      "page": "home",
+      "old": "FrameLayout_envIconBg",
+      "new": "frameLayout_home_environment_icon_background",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "FrameLayoutEnvIconBg",
+      "new_field": "frameLayoutHomeEnvironmentIconBackground",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 404,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 405,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 406,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 430,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 396,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_envTitle",
+      "new": "textView_home_environment_title",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewEnvTitle",
+      "new_field": "textViewHomeEnvironmentTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 410,
+      "type": "ImageView",
+      "page": "home",
+      "old": "ImageView_envTrend",
+      "new": "imageView_home_environment_trend",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "ImageViewEnvTrend",
+      "new_field": "imageViewHomeEnvironmentTrend",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 419,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_envLocation",
+      "new": "textView_home_environment_location",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewEnvLocation",
+      "new_field": "textViewHomeEnvironmentLocation",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 438,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 459,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_temperatureValue",
+      "new": "textView_home_temperature_value",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewTemperatureValue",
+      "new_field": "textViewHomeTemperatureValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 489,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_humidityValue",
+      "new": "textView_home_humidity_value",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewHumidityValue",
+      "new_field": "textViewHomeHumidityValue",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 506,
+      "type": "LinearLayout",
+      "page": "home",
+      "old": "LinearLayout_row2",
+      "new": "linearLayout_home_row2",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "LinearLayoutRow2",
+      "new_field": "linearLayoutHomeRow2",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 728,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 516,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "home",
+      "old": "MaterialCardView_todayTask",
+      "new": "cardView_home_today_task",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "MaterialCardViewTodayTask",
+      "new_field": "cardViewHomeTodayTask",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 533,
+      "type": "FrameLayout",
+      "page": "home",
+      "old": "FrameLayout_taskIconBg",
+      "new": "frameLayout_home_task_icon_background",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "FrameLayoutTaskIconBg",
+      "new_field": "frameLayoutHomeTaskIconBackground",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 557,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 558,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 559,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 577,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 549,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_taskTitle",
+      "new": "textView_home_task_title",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewTaskTitle",
+      "new_field": "textViewHomeTaskTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 572,
+      "type": "FrameLayout",
+      "page": "home",
+      "old": "FrameLayout_progressContainer",
+      "new": "frameLayout_home_progress_container",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "FrameLayoutProgressContainer",
+      "new_field": "frameLayoutHomeProgressContainer",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 607,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 609,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 610,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 580,
+      "type": "com.google.android.material.progressindicator.CircularProgressIndicator",
+      "page": "home",
+      "old": "CircularProgressIndicator_task",
+      "new": "circularProgressIndicator_home_task",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "CircularProgressIndicatorTask",
+      "new_field": "circularProgressIndicatorHomeTask",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 88,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 89,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 591,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_progressCenterText",
+      "new": "textView_home_progress_center_text",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewProgressCenterText",
+      "new_field": "textViewHomeProgressCenterText",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 91,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 613,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_taskDone",
+      "new": "textView_home_task_done",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewTaskDone",
+      "new_field": "textViewHomeTaskDone",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 98,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 621,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_taskPending",
+      "new": "textView_home_task_pending",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewTaskPending",
+      "new_field": "textViewHomeTaskPending",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 104,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 629,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_taskRate",
+      "new": "textView_home_task_rate",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewTaskRate",
+      "new_field": "textViewHomeTaskRate",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 110,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 644,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "home",
+      "old": "MaterialCardView_taskList",
+      "new": "cardView_home_task_list",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "MaterialCardViewTaskList",
+      "new_field": "cardViewHomeTaskList",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 661,
+      "type": "FrameLayout",
+      "page": "home",
+      "old": "FrameLayout_listIconBg",
+      "new": "frameLayout_home_list_icon_background",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "FrameLayoutListIconBg",
+      "new_field": "frameLayoutHomeListIconBackground",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 685,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 686,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 687,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 709,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 677,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_listTitle",
+      "new": "textView_home_list_title",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewListTitle",
+      "new_field": "textViewHomeListTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 700,
+      "type": "androidx.recyclerview.widget.RecyclerView",
+      "page": "home",
+      "old": "RecyclerView_tasks",
+      "new": "recyclerView_home_tasks",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "RecyclerViewTasks",
+      "new_field": "recyclerViewHomeTasks",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 156,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/HomeFragment.kt",
+          "line": 159,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 718,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "home",
+      "old": "MaterialCardView_alert",
+      "new": "cardView_home_alert",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "MaterialCardViewAlert",
+      "new_field": "cardViewHomeAlert",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 736,
+      "type": "ImageView",
+      "page": "home",
+      "old": "ImageView_alertIcon",
+      "new": "imageView_home_alert_icon",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "ImageViewAlertIcon",
+      "new_field": "imageViewHomeAlertIcon",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 754,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 755,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 746,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_alertCount",
+      "new": "textView_home_alert_count",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewAlertCount",
+      "new_field": "textViewHomeAlertCount",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 767,
+          "kind": "XML"
+        },
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 768,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 758,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_alertMsg",
+      "new": "textView_home_alert_msg",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewAlertMsg",
+      "new_field": "textViewHomeAlertMsg",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_home.xml",
+      "line": 771,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_alertArrow",
+      "new": "textView_home_alert_arrow",
+      "category": "B",
+      "binding_class": "FragmentHomeBinding",
+      "old_field": "TextViewAlertArrow",
+      "new_field": "textViewHomeAlertArrow",
+      "references": [
+        {
+          "file": "app/src/main/res/layout/fragment_home.xml",
+          "line": 766,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_management.xml",
+      "line": 23,
+      "type": "TextView",
+      "page": "management",
+      "old": "tvManagementTitle",
+      "new": "textView_management_title",
+      "category": "B",
+      "binding_class": "FragmentManagementBinding",
+      "old_field": "tvManagementTitle",
+      "new_field": "textViewManagementTitle",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/fragment_task.xml",
+      "line": 23,
+      "type": "TextView",
+      "page": "task",
+      "old": "tvTaskTitle",
+      "new": "textView_task_title",
+      "category": "B",
+      "binding_class": "FragmentTaskBinding",
+      "old_field": "tvTaskTitle",
+      "new_field": "textViewTaskTitle",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 307,
+          "kind": "R.id"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 5,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "alert",
+      "old": "cardView_alert_environment_item",
+      "new": "cardView_alert_environment_item",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "cardViewAlertEnvironmentItem",
+      "new_field": "cardViewAlertEnvironmentItem",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 26,
+      "type": "ImageView",
+      "page": "alert",
+      "old": "imageView_alert_item_icon",
+      "new": "imageView_alert_item_icon",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "imageViewAlertItemIcon",
+      "new_field": "imageViewAlertItemIcon",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 46,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 33,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_item_title",
+      "new": "textView_alert_item_title",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "textViewAlertItemTitle",
+      "new_field": "textViewAlertItemTitle",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 49,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 44,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_item_status",
+      "new": "textView_alert_item_status",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "textViewAlertItemStatus",
+      "new_field": "textViewAlertItemStatus",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 63,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 66,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 58,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_item_message",
+      "new": "textView_alert_item_message",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "textViewAlertItemMessage",
+      "new_field": "textViewAlertItemMessage",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 52,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 67,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_item_location",
+      "new": "textView_alert_item_location",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "textViewAlertItemLocation",
+      "new_field": "textViewAlertItemLocation",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 55,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 83,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_item_time",
+      "new": "textView_alert_item_time",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "textViewAlertItemTime",
+      "new_field": "textViewAlertItemTime",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 56,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_environment_alert.xml",
+      "line": 91,
+      "type": "com.google.android.material.button.MaterialButton",
+      "page": "alert",
+      "old": "button_alert_item_resolve",
+      "new": "button_alert_item_resolve",
+      "category": "A",
+      "binding_class": "ItemEnvironmentAlertBinding",
+      "old_field": "buttonAlertItemResolve",
+      "new_field": "buttonAlertItemResolve",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 256,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 292,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 301,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 70,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/EnvironmentAlertAdapter.kt",
+          "line": 71,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 6,
+      "type": "com.google.android.material.card.MaterialCardView",
+      "page": "alert",
+      "old": "cardView_alert_task_item",
+      "new": "cardView_alert_task_item",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "cardViewAlertTaskItem",
+      "new_field": "cardViewAlertTaskItem",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 27,
+      "type": "ImageView",
+      "page": "alert",
+      "old": "imageView_alert_task_icon",
+      "new": "imageView_alert_task_icon",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "imageViewAlertTaskIcon",
+      "new_field": "imageViewAlertTaskIcon",
+      "references": [],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 35,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_task_title",
+      "new": "textView_alert_task_title",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "textViewAlertTaskTitle",
+      "new_field": "textViewAlertTaskTitle",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 45,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 46,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_task_description",
+      "new": "textView_alert_task_description",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "textViewAlertTaskDescription",
+      "new_field": "textViewAlertTaskDescription",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 46,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 54,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_task_assignee",
+      "new": "textView_alert_task_assignee",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "textViewAlertTaskAssignee",
+      "new_field": "textViewAlertTaskAssignee",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 47,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 62,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_task_due_date",
+      "new": "textView_alert_task_due_date",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "textViewAlertTaskDueDate",
+      "new_field": "textViewAlertTaskDueDate",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 51,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 76,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_task_status",
+      "new": "textView_alert_task_status",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "textViewAlertTaskStatus",
+      "new_field": "textViewAlertTaskStatus",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 59,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 60,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 61,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_task_alert.xml",
+      "line": 88,
+      "type": "TextView",
+      "page": "alert",
+      "old": "textView_alert_task_overdue",
+      "new": "textView_alert_task_overdue",
+      "category": "A",
+      "binding_class": "ItemTaskAlertBinding",
+      "old_field": "textViewAlertTaskOverdue",
+      "new_field": "textViewAlertTaskOverdue",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TaskAlertAdapter.kt",
+          "line": 63,
+          "kind": "Binding"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_today_task.xml",
+      "line": 33,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_taskName",
+      "new": "textView_home_task_item_name",
+      "category": "B",
+      "binding_class": "ItemTodayTaskBinding",
+      "old_field": "TextViewTaskName",
+      "new_field": "textViewHomeTaskItemName",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 77,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/item_today_task.xml",
+          "line": 78,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_today_task.xml",
+      "line": 60,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_taskStatusBadge",
+      "new": "textView_home_task_item_status_badge",
+      "category": "B",
+      "binding_class": "ItemTodayTaskBinding",
+      "old_field": "TextViewTaskStatusBadge",
+      "new_field": "textViewHomeTaskItemStatusBadge",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 87,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 92,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 96,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 104,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 109,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 113,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 121,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 126,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 130,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/item_today_task.xml",
+          "line": 47,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/layout/item_today_task.xml",
+      "line": 92,
+      "type": "TextView",
+      "page": "home",
+      "old": "TextView_taskTime",
+      "new": "textView_home_task_item_time",
+      "category": "B",
+      "binding_class": "ItemTodayTaskBinding",
+      "old_field": "TextViewTaskTime",
+      "new_field": "textViewHomeTaskItemTime",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/TodayTaskAdapter.kt",
+          "line": 78,
+          "kind": "Binding"
+        },
+        {
+          "file": "app/src/main/res/layout/item_today_task.xml",
+          "line": 79,
+          "kind": "XML"
+        }
+      ],
+      "binding_field_verified": true
+    },
+    {
+      "xml": "app/src/main/res/menu/bottom_navigation_menu.xml",
+      "line": 13,
+      "type": "item",
+      "page": "main",
+      "old": "navHome",
+      "new": "navHome",
+      "category": "C",
+      "binding_class": "",
+      "old_field": "",
+      "new_field": "",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 62,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 89,
+          "kind": "R.id"
+        }
+      ]
+    },
+    {
+      "xml": "app/src/main/res/menu/bottom_navigation_menu.xml",
+      "line": 18,
+      "type": "item",
+      "page": "main",
+      "old": "navEnvironment",
+      "new": "navEnvironment",
+      "category": "C",
+      "binding_class": "",
+      "old_field": "",
+      "new_field": "",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 101,
+          "kind": "R.id"
+        }
+      ]
+    },
+    {
+      "xml": "app/src/main/res/menu/bottom_navigation_menu.xml",
+      "line": 23,
+      "type": "item",
+      "page": "main",
+      "old": "navAlert",
+      "new": "navAlert",
+      "category": "C",
+      "binding_class": "",
+      "old_field": "",
+      "new_field": "",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 52,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 308,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 113,
+          "kind": "R.id"
+        }
+      ]
+    },
+    {
+      "xml": "app/src/main/res/menu/bottom_navigation_menu.xml",
+      "line": 28,
+      "type": "item",
+      "page": "main",
+      "old": "navTask",
+      "new": "navTask",
+      "category": "C",
+      "binding_class": "",
+      "old_field": "",
+      "new_field": "",
+      "references": [
+        {
+          "file": "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt",
+          "line": 305,
+          "kind": "R.id"
+        },
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 125,
+          "kind": "R.id"
+        }
+      ]
+    },
+    {
+      "xml": "app/src/main/res/menu/bottom_navigation_menu.xml",
+      "line": 33,
+      "type": "item",
+      "page": "main",
+      "old": "navManagement",
+      "new": "navManagement",
+      "category": "C",
+      "binding_class": "",
+      "old_field": "",
+      "new_field": "",
+      "references": [
+        {
+          "file": "app/src/main/java/com/example/familysafety/MainActivity.kt",
+          "line": 137,
+          "kind": "R.id"
+        }
+      ]
+    }
+  ],
+  "framework_references": {
+    "button1": [
+      "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt:258",
+      "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt:273",
+      "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt:277",
+      "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt:303"
+    ],
+    "message": [
+      "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt:259"
+    ],
+    "button2": [
+      "app/src/androidTest/java/com/example/familysafety/AlertCenterIntegrationTest.kt:269"
+    ]
+  },
+  "statistics": {
+    "forgot": {
+      "C": 2,
+      "B": 17
+    },
+    "login": {
+      "C": 1,
+      "B": 18
+    },
+    "main": {
+      "C": 6,
+      "B": 2
+    },
+    "reset": {
+      "C": 3,
+      "B": 19
+    },
+    "verify": {
+      "C": 4,
+      "B": 18
+    },
+    "alert": {
+      "A": 34,
+      "B": 1
+    },
+    "environment": {
+      "B": 58,
+      "C": 1
+    },
+    "home": {
+      "B": 49
+    },
+    "management": {
+      "B": 1
+    },
+    "task": {
+      "B": 1
+    }
+  }
+}

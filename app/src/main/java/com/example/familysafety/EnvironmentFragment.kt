@@ -1,0 +1,734 @@
+package com.example.familysafety
+
+import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.SystemClock
+import android.text.InputType
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.familysafety.databinding.FragmentEnvironmentBinding
+import com.example.familysafety.environment.data.MockHistoryDataSource
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.Locale
+
+/**
+ * ============================================================================
+ * 環境監控頁面
+ * Environment Monitoring Fragment
+ * ============================================================================
+ *
+ * 此 Fragment 負責顯示家庭環境監控資訊。
+ * This Fragment displays home environment monitoring information.
+ *
+ * 目前已完成：
+ * Currently implemented:
+ *
+ * 1. 安全倒數時間設定 / Safety countdown setting
+ * 2. 環境地點選擇 / Environment location selection
+ * 3. 地點溫濕度模擬資料 / Location temperature and humidity mock data
+ */
+class EnvironmentFragment : Fragment() {
+
+    // =========================================================================
+    // 01. ViewBinding
+    // ViewBinding
+    // =========================================================================
+
+    private var _binding: FragmentEnvironmentBinding? = null
+    private val binding get() = _binding!!
+
+
+    // =========================================================================
+    // 02. 安全倒數設定
+    // Safety Countdown Setting
+    // =========================================================================
+
+    // 安全倒數時間，預設為 10 分鐘
+    // Safety countdown time, default is 10 minutes
+    private var selectedCountdownMinutes = 10
+    // =========================================================================
+    // Safety Countdown State / 安全倒數狀態
+    // =========================================================================
+
+    // 本機倒數計時器 / Local countdown timer
+    private var safetyCountDownTimer: CountDownTimer? = null
+
+    // 是否正在倒數 / Whether the timer is running
+    private var isCountdownRunning = false
+
+    // 預計結束時間（本機單調時鐘）
+// Expected end time using a monotonic clock
+    private var countdownEndElapsedTime = 0L
+
+
+    // =========================================================================
+    // 03. 環境監控地點
+    // Environment Monitoring Location
+    // =========================================================================
+
+    // 預設監控地點為廚房
+    // Default monitoring location is Kitchen
+    private var selectedLocation = "KITCHEN"
+
+
+    // =========================================================================
+    // 04. 環境模擬資料格式
+    // Environment Mock Data Model
+    // =========================================================================
+
+    private data class EnvironmentMockData(
+        val temperature: Double,
+        val humidity: Int,
+    )
+
+
+    // =========================================================================
+    // 05. 各地點環境模擬資料
+    // Environment Mock Data for Each Location
+    // =========================================================================
+
+    private val locationMockData = mapOf(
+
+        "KITCHEN" to EnvironmentMockData(
+            temperature = 26.8,
+            humidity = 58,
+        ),
+
+        "LIVING_ROOM" to EnvironmentMockData(
+            temperature = 25.4,
+            humidity = 61,
+        ),
+
+        "BEDROOM" to EnvironmentMockData(
+            temperature = 24.9,
+            humidity = 55,
+        ),
+    )
+
+
+    // =========================================================================
+    // 06. 建立 Fragment View
+    // Create Fragment View
+    // =========================================================================
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+
+        _binding = FragmentEnvironmentBinding.inflate(
+            inflater,
+            container,
+            false,
+        )
+
+        return binding.root
+    }
+
+
+    // =========================================================================
+    // 07. View 建立完成
+    // View Created
+    // =========================================================================
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 01. 初始化安全倒數
+        // Initialize safety countdown
+        setupSafetyCountdown()
+
+        // 02. 初始化地點選擇
+        // Initialize location selector
+        setupLocationSelector()
+
+        // 03. 初始化歷史趨勢圖
+        // Initialize historical trend chart
+        setupHistoricalTrend()
+    }
+
+
+// =========================================================================
+// 01. 初始化安全倒數
+// Initialize Safety Countdown
+// =========================================================================
+
+    private fun setupSafetyCountdown() {
+
+        // 初始化倒數顯示
+        // Initialize countdown display
+        updateCountdownDisplay()
+
+        // 預設狀態：待命
+        // Default status: Standby
+        binding.tvCountdownStatus.setText(
+            R.string.countdown_status_standby
+        )
+
+        // 設定倒數分鐘數
+        // Open duration setting dialog
+        binding.btnCountdownSetting.setOnClickListener {
+
+            if (isCountdownRunning) {
+
+                Toast.makeText(
+                    requireContext(),
+                    R.string.countdown_running_message,
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+
+                showCountdownDialog()
+            }
+        }
+
+        // 手動開始或取消倒數
+        // Manually start or cancel countdown
+        binding.btnCountdownStart.setOnClickListener {
+
+            if (isCountdownRunning) {
+
+                cancelSafetyCountdown()
+
+            } else {
+
+                startSafetyCountdown()
+            }
+        }
+    }
+
+    // =========================================================================
+// 02. 自由設定倒數分鐘數
+// Set Custom Countdown Duration
+// =========================================================================
+
+    private fun showCountdownDialog() {
+
+        // 建立數字輸入欄位
+        // Create numeric input field
+        val input = EditText(requireContext()).apply {
+
+            // 只能輸入正整數
+            // Allow positive integer input only
+            inputType = InputType.TYPE_CLASS_NUMBER
+
+            // 顯示目前設定值
+            // Display the currently selected duration
+            setText(selectedCountdownMinutes.toString())
+
+            // 游標移至文字最後
+            // Move cursor to the end
+            setSelection(text.length)
+
+            // 文字置中
+            // Center the input text
+            gravity = Gravity.CENTER
+
+            // 輸入提示
+            // Input hint
+            setHint(R.string.countdown_duration_hint)
+
+            // 限制輸入長度
+            // Limit input length
+            filters = arrayOf(
+                android.text.InputFilter.LengthFilter(3)
+            )
+        }
+
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.countdown_duration_title)
+            .setView(input)
+            .setNegativeButton(R.string.countdown_dialog_cancel, null)
+            .setPositiveButton(R.string.countdown_dialog_confirm, null)
+            .create()
+
+        dialog.setOnShowListener {
+
+            dialog.getButton(
+                android.content.DialogInterface.BUTTON_POSITIVE
+            ).setOnClickListener {
+
+                // 取得使用者輸入的分鐘數
+                // Read the entered duration
+                val minutes = input.text
+                    .toString()
+                    .toIntOrNull()
+
+                // 驗證分鐘數：1～180
+                // Validate duration: 1 to 180 minutes
+                if (minutes == null || (minutes !in 1..180)) {
+
+                    input.error = getString(
+                        R.string.countdown_input_invalid
+                    )
+
+                    return@setOnClickListener
+                }
+
+                // 儲存使用者設定
+                // Save selected duration
+                selectedCountdownMinutes = minutes
+
+                // 更新畫面
+                // Refresh countdown display
+                updateCountdownDisplay()
+
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
+    }
+
+
+    // =========================================================================
+    // 10. 更新安全倒數時間顯示
+    // Update Safety Countdown Display
+    // =========================================================================
+
+    // =========================================================================
+    // 03. 更新倒數設定顯示
+    // Update Countdown Duration Display
+    // =========================================================================
+
+    private fun updateCountdownDisplay() {
+
+        // 顯示目前設定的分鐘數
+        // Display selected duration
+        binding.tvCountdownDefault.text = getString(
+            R.string.countdown_duration_display,
+            selectedCountdownMinutes
+        )
+
+        // 尚未開始倒數時，顯示完整設定時間
+        // Show full duration when the timer is not running
+        if (!isCountdownRunning) {
+
+            updateRemainingTime(
+                selectedCountdownMinutes * 60_000L
+            )
+        }
+    }
+
+
+    // =========================================================================
+    // 11. 設定環境地點選擇功能
+    // Setup Environment Location Selector
+    // =========================================================================
+
+    private fun setupLocationSelector() {
+
+        // 顯示目前選擇的地點
+        // Display the currently selected location
+        updateLocationDisplay()
+
+        // 顯示目前地點的溫度與濕度
+        // Display temperature and humidity for the current location
+        updateEnvironmentData()
+
+        // 點擊地點按鈕時開啟選擇 Dialog
+        // Open the location dialog when the location button is clicked
+        binding.btnEnvironmentLocation.setOnClickListener {
+            showLocationDialog()
+        }
+    }
+
+
+    // =========================================================================
+    // 12. 顯示環境地點選擇 Dialog
+    // Show Environment Location Selection Dialog
+    // =========================================================================
+
+    private fun showLocationDialog() {
+
+        // Dialog 中顯示的地點名稱
+        // Location names displayed in the dialog
+        val locationLabels = arrayOf(
+            getString(R.string.location_kitchen),
+            getString(R.string.location_living_room),
+            getString(R.string.location_bedroom)
+        )
+
+        // 根據目前地點決定預設勾選位置
+        // Determine the currently selected location index
+        val selectedIndex = when (selectedLocation) {
+
+            "KITCHEN" -> 0
+
+            "LIVING_ROOM" -> 1
+
+            "BEDROOM" -> 2
+
+            else -> 0
+        }
+
+        // 建立地點選擇 Dialog
+        // Create location selection dialog
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.location_dialog_title)
+
+            // 單選地點
+            // Single-choice location selection
+            .setSingleChoiceItems(
+                locationLabels,
+                selectedIndex
+            ) { dialog, which ->
+
+                // 儲存選擇的地點
+                // Save the selected location
+                selectedLocation = when (which) {
+
+                    0 -> "KITCHEN"
+
+                    1 -> "LIVING_ROOM"
+
+                    2 -> "BEDROOM"
+
+                    else -> "KITCHEN"
+                }
+
+                // 更新地點文字與 Icon
+                // Update location text and icon
+                updateLocationDisplay()
+
+                // 更新該地點的溫度與濕度
+                // Update temperature and humidity
+                updateEnvironmentData()
+
+                // 選擇完成後關閉 Dialog
+                // Close the dialog after selection
+                dialog.dismiss()
+            }
+
+            // 取消按鈕
+            // Cancel button
+            .setNegativeButton(
+                R.string.location_dialog_cancel
+            ) { dialog, _ ->
+
+                dialog.dismiss()
+            }
+
+            .show()
+    }
+
+
+    // =========================================================================
+    // 13. 更新環境地點顯示
+    // Update Environment Location Display
+    // =========================================================================
+
+    private fun updateLocationDisplay() {
+
+        when (selectedLocation) {
+
+            "KITCHEN" -> {
+
+                binding.btnEnvironmentLocation.setText(
+                    R.string.location_kitchen_selector
+                )
+
+                binding.btnEnvironmentLocation.setIconResource(
+                    R.drawable.ic_location_kitchen
+                )
+            }
+
+            "LIVING_ROOM" -> {
+
+                binding.btnEnvironmentLocation.setText(
+                    R.string.location_living_room_selector
+                )
+
+                binding.btnEnvironmentLocation.setIconResource(
+                    R.drawable.ic_location_livingroom
+                )
+            }
+
+            "BEDROOM" -> {
+
+                binding.btnEnvironmentLocation.setText(
+                    R.string.location_bedroom_selector
+                )
+
+                binding.btnEnvironmentLocation.setIconResource(
+                    R.drawable.ic_location_bedroom
+                )
+            }
+        }
+    }
+
+
+    // =========================================================================
+    // 14. 更新目前地點的環境資料
+    // Update Environment Data for the Selected Location
+    // =========================================================================
+
+    private fun updateEnvironmentData() {
+
+        // 根據 selectedLocation 取得對應的 Mock Data
+        // Get mock data for the currently selected location
+        val data = locationMockData[selectedLocation] ?: return
+
+        // 更新溫度
+        // Update temperature
+        binding.tvTemperatureValue.text =
+            String.format(Locale.getDefault(), "%.1f °C", data.temperature)
+
+        // 更新濕度
+        // Update humidity
+        binding.tvHumidityValue.text =
+            String.format(Locale.getDefault(), "%d %%", data.humidity)
+    }
+
+
+    // =========================================================================
+    // 15. 銷毀 Fragment View
+    // Destroy Fragment View
+    // =========================================================================
+
+    // =========================================================================
+// 01. 初始化歷史趨勢圖
+// Initialize Historical Trend Chart
+// =========================================================================
+
+    private fun setupHistoricalTrend() {
+
+        // 預設顯示每日歷史資料
+        // Display daily historical data by default
+        updateHistoricalChart(
+            MockHistoryDataSource.Period.DAY
+        )
+
+        // 設定 Day 為預設選取項目
+        // Set Day as the default selected period
+        binding.toggleHistoryPeriod.check(
+            R.id.btnHistoryDay
+        )
+
+        // 監聽 Day / Week / Month 按鈕
+        // Listen for Day / Week / Month selection
+        binding.toggleHistoryPeriod.addOnButtonCheckedListener {
+                _, checkedId, isChecked ->
+
+            // 只處理選取事件，忽略取消選取事件
+            // Handle checked events only
+            if (!isChecked) {
+                return@addOnButtonCheckedListener
+            }
+
+            when (checkedId) {
+
+                // Day：每日資料
+                // Daily data
+                R.id.btnHistoryDay -> {
+
+                    updateHistoricalChart(
+                        MockHistoryDataSource.Period.DAY
+                    )
+                }
+
+                // Week：每週資料
+                // Weekly data
+                R.id.btnHistoryWeek -> {
+
+                    updateHistoricalChart(
+                        MockHistoryDataSource.Period.WEEK
+                    )
+                }
+
+                // Month：每月資料
+                // Monthly data
+                R.id.btnHistoryMonth -> {
+
+                    updateHistoricalChart(
+                        MockHistoryDataSource.Period.MONTH
+                    )
+                }
+            }
+        }
+    }
+
+    // =========================================================================
+// 02. 更新歷史趨勢圖
+// Update Historical Trend Chart
+// =========================================================================
+
+    private fun updateHistoricalChart(
+        period: MockHistoryDataSource.Period
+    ) {
+
+        // 從獨立 Mock DataSource 取得歷史資料
+        // Get historical data from the independent Mock DataSource
+        val historyData = MockHistoryDataSource.getHistory(period)
+
+        // 將資料傳送給 HistoryChartView
+        // Pass historical data to HistoryChartView
+        binding.historyChartView.setHistoryData(historyData)
+    }
+
+    // =========================================================================
+// 04. 啟動安全倒數
+// Start Safety Countdown
+// =========================================================================
+
+    private fun startSafetyCountdown() {
+
+        // 避免重複啟動
+        // Prevent duplicate timers
+        if (isCountdownRunning) {
+            return
+        }
+
+        val durationMillis = selectedCountdownMinutes * 60_000L
+
+        isCountdownRunning = true
+
+        // 使用單調時鐘記錄預計結束時間，避免系統時間調整影響倒數
+        // Use a monotonic clock to calculate the countdown deadline
+        countdownEndElapsedTime =
+            SystemClock.elapsedRealtime() + durationMillis
+
+        // 更新畫面狀態
+        // Update UI state
+        binding.tvCountdownStatus.setText(
+            R.string.countdown_status_running
+        )
+
+        binding.btnCountdownStart.setText(
+            R.string.countdown_cancel_button
+        )
+
+        updateRemainingTime(durationMillis)
+
+        // 建立本機倒數計時器
+        // Create a local countdown timer
+        safetyCountDownTimer = object : CountDownTimer(
+            durationMillis,
+            250L
+        ) {
+
+            override fun onTick(millisUntilFinished: Long) {
+
+                // 依照實際截止時間計算剩餘時間
+                // Calculate remaining time from the deadline
+                val remainingMillis = (
+                        countdownEndElapsedTime -
+                                SystemClock.elapsedRealtime()
+                        ).coerceAtLeast(0L)
+
+                updateRemainingTime(remainingMillis)
+            }
+
+            override fun onFinish() {
+
+                safetyCountDownTimer = null
+                isCountdownRunning = false
+
+                updateRemainingTime(0L)
+
+                binding.tvCountdownStatus.setText(
+                    R.string.countdown_status_finished
+                )
+
+                binding.btnCountdownStart.setText(
+                    R.string.countdown_start_button
+                )
+
+                // 目前僅提示倒數完成，不直接建立正式安全警報
+                // Show completion only; do not create a server alert yet
+                Toast.makeText(
+                    requireContext(),
+                    R.string.countdown_finished_message,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        }.start()
+    }
+
+
+// =========================================================================
+// 05. 取消並重置安全倒數
+// Cancel and Reset Safety Countdown
+// =========================================================================
+
+    private fun cancelSafetyCountdown() {
+
+        // 停止原本的計時器
+        // Stop the existing timer
+        safetyCountDownTimer?.cancel()
+
+        safetyCountDownTimer = null
+        isCountdownRunning = false
+        countdownEndElapsedTime = 0L
+
+        // 恢復待命狀態
+        // Restore standby state
+        binding.tvCountdownStatus.setText(
+            R.string.countdown_status_standby
+        )
+
+        binding.btnCountdownStart.setText(
+            R.string.countdown_start_button
+        )
+
+        // 重置為使用者設定的完整分鐘數
+        // Reset to the selected duration
+        updateCountdownDisplay()
+    }
+
+
+// =========================================================================
+// 06. 更新剩餘時間
+// Update Remaining Time
+// =========================================================================
+
+    private fun updateRemainingTime(remainingMillis: Long) {
+
+        // 向上取整秒數，避免開始後立即顯示少一秒
+        // Round up seconds to avoid immediately losing one second
+        val totalSeconds = (
+                remainingMillis.coerceAtLeast(0L) + 999L
+                ) / 1000L
+
+        val minutes = totalSeconds / 60L
+        val seconds = totalSeconds % 60L
+
+        // 顯示 MM:SS，例如 18:00、17:59
+        // Display MM:SS format
+        binding.tvCountdownRemaining.text = getString(
+            R.string.countdown_remaining_display,
+            minutes,
+            seconds
+        )
+    }
+
+    // =========================================================================
+    // 07. 清理 Fragment View
+    // Clean Up Fragment View
+    // =========================================================================
+
+    override fun onDestroyView() {
+
+        // 目前本機測試版本：View 銷毀時停止計時器
+        // Local test version: stop the timer when the View is destroyed
+        safetyCountDownTimer?.cancel()
+        safetyCountDownTimer = null
+
+        isCountdownRunning = false
+        countdownEndElapsedTime = 0L
+
+        super.onDestroyView()
+        _binding = null
+    }
+}

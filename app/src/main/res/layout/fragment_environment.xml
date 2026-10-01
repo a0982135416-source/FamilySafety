@@ -1,0 +1,1115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    ========================================================================
+    家庭安全管理系統－環境監控頁面
+    Family Safety Management System - Environment Monitoring
+    ========================================================================
+
+    STEP 3-1：
+    建立 Environment 頁面基本結構與 Header。
+    Build the basic Environment screen structure and Header.
+
+    注意：
+    BottomNavigationView 由 activity_main.xml 統一管理，
+    不放在這個 Fragment 裡。
+    BottomNavigationView is managed by activity_main.xml
+    and is not included in this Fragment.
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background">
+
+    <!-- ================================================================
+         01. 主要滾動區域
+         Main Scroll Area
+         ================================================================ -->
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollEnvironment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutEnvironmentContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+
+            <!-- ========================================================
+                 02. Header
+                 頂部標題區
+                 ======================================================== -->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutEnvironmentHeader"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="@color/primary_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!--
+                    Environment Header Icon
+                    環境監控 Header Icon
+                -->
+
+                <ImageView
+                    android:id="@+id/ivEnvironmentHeaderIcon"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="38dp"
+                    android:contentDescription="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_environment_header"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!--
+                    Main Title
+                    主標題
+                -->
+
+                <TextView
+                    android:id="@+id/tvEnvironmentHeaderTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/environment_header_title"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivEnvironmentHeaderIcon"
+                    app:layout_constraintTop_toTopOf="@id/ivEnvironmentHeaderIcon" />
+
+
+                <!--
+                    Subtitle
+                    副標題
+                -->
+
+                <TextView
+                    android:id="@+id/tvEnvironmentHeaderSubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/environment_header_subtitle"
+                    android:textColor="#DDEEFF"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="@id/tvEnvironmentHeaderTitle"
+                    app:layout_constraintStart_toStartOf="@id/tvEnvironmentHeaderTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvEnvironmentHeaderTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- ================================================================
+             03. 廚房安全監控
+             Kitchen Safety Monitoring
+             ================================================================ -->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutKitchenMonitoring"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutEnvironmentHeader">
+
+                <!-- ============================================================
+                 03-1. 區塊標題
+                 Section Header
+                 ============================================================ -->
+
+                <ImageView
+                    android:id="@+id/ivKitchenCameraIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_camera"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvKitchenSafetyTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/environment_kitchen_safety_title"
+                    android:textColor="@color/title_blue"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/layoutLiveStatus"
+                    app:layout_constraintStart_toEndOf="@id/ivKitchenCameraIcon"
+                    app:layout_constraintTop_toTopOf="@id/ivKitchenCameraIcon" />
+
+
+                <!-- ============================================================
+                 03-2. 即時監控狀態
+                 Live Monitoring Status
+                 ============================================================ -->
+
+                <LinearLayout
+                    android:id="@+id/layoutLiveStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ivKitchenCameraIcon">
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@drawable/bg_status_online" />
+
+                    <TextView
+                        android:id="@+id/tvLiveMonitoring"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="@string/environment_monitoring_live"
+                        android:textColor="#19B394"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <!-- ============================================================
+                 03-3. 即時影像 Card
+                 Live Camera Card
+                 ============================================================ -->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardLiveCamera"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivKitchenCameraIcon"
+                    app:strokeColor="#D8E3F0"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp">
+
+                        <!--
+                        未串接 Camera Stream 前的影像預覽區。
+                        Camera preview placeholder before live stream integration.
+                    -->
+
+                        <FrameLayout
+                            android:id="@+id/layoutCameraPreview"
+                            android:layout_width="253dp"
+                            android:layout_height="105dp"
+                            android:layout_margin="8dp"
+                            android:background="#E8F5FF"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/layoutCameraInfo"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_camera" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="@string/environment_camera_preview"
+                                    android:textColor="@color/secondary_text"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                            <!-- 時間戳記 / Timestamp -->
+
+                            <TextView
+                                android:id="@+id/tvCameraTimestamp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start|top"
+                                android:layout_margin="8dp"
+                                android:background="#99000000"
+                                android:paddingHorizontal="7dp"
+                                android:paddingVertical="4dp"
+                                android:text="@string/environment_camera_time_preview"
+                                android:textColor="@color/white"
+                                android:textSize="11sp" />
+
+                        </FrameLayout>
+
+
+                        <!-- ====================================================
+                         03-4. Camera 資訊
+                         Camera Information
+                         ==================================================== -->
+
+                        <LinearLayout
+                            android:id="@+id/layoutCameraInfo"
+                            android:layout_width="118dp"
+                            android:layout_height="0dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tvCameraLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/environment_location_kitchen"
+                                android:textColor="@color/title_blue"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <View
+                                    android:layout_width="9dp"
+                                    android:layout_height="9dp"
+                                    android:background="@drawable/bg_status_online" />
+
+                                <TextView
+                                    android:id="@+id/tvCameraOnlineStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:text="@string/environment_status_online"
+                                    android:textColor="#19B394"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ================================================================
+     03-5. 感測器狀態
+     Sensor Status
+     ================================================================ -->
+
+                <LinearLayout
+                    android:id="@+id/layoutSensorStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardLiveCamera">
+
+
+                    <!-- ============================================================
+                     Gas Status Card
+                     瓦斯狀態 Card
+                     ============================================================ -->
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardGasStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="#D8E3F0"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingStart="6dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="6dp">
+
+                            <!-- Icon + Title -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/ivGasStatus"
+                                    android:layout_width="34dp"
+                                    android:layout_height="34dp"
+                                    android:contentDescription="@null"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_gas" />
+
+                                <TextView
+                                    android:id="@+id/tvGasStatusTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:text="@string/environment_gas_status"
+                                    android:textColor="@color/title_blue"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <!-- English / Secondary Label -->
+
+
+                            <!-- Current Status -->
+
+                            <TextView
+                                android:id="@+id/tvGasValue"
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/bg_sensor_safe"
+                                android:gravity="center"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="6dp"
+                                android:text="@string/environment_status_off"
+                                android:textColor="#19B394"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- ============================================================
+                     Flame Detection Card
+                     火焰偵測 Card
+                     ============================================================ -->
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardFlameStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="#D8E3F0"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingStart="6dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="10dp">
+
+                            <!-- Icon + Title -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/ivFlameStatus"
+                                    android:layout_width="34dp"
+                                    android:layout_height="34dp"
+                                    android:contentDescription="@null"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_flame" />
+
+                                <TextView
+                                    android:id="@+id/tvFlameStatusTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:text="@string/environment_flame_detection"
+                                    android:textColor="@color/title_blue"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <!-- English / Secondary Label -->
+
+
+                            <!-- Current Status -->
+
+                            <TextView
+                                android:id="@+id/tvFlameValue"
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/bg_sensor_neutral"
+                                android:gravity="center"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="6dp"
+                                android:text="@string/environment_status_no"
+                                android:textColor="@color/title_blue"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- ============================================================
+                     Person Detection Card
+                     人員偵測 Card
+                     ============================================================ -->
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardPersonStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="#D8E3F0"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingStart="6dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="10dp">
+
+                            <!-- Icon + Title -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/ivPersonStatus"
+                                    android:layout_width="34dp"
+                                    android:layout_height="34dp"
+                                    android:contentDescription="@null"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_person" />
+
+                                <TextView
+                                    android:id="@+id/tvPersonStatusTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:text="@string/environment_person_detection"
+                                    android:textColor="@color/title_blue"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <!-- English / Secondary Label -->
+
+
+                            <!-- Current Status -->
+
+                            <TextView
+                                android:id="@+id/tvPersonValue"
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/bg_sensor_neutral"
+                                android:gravity="center"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="6dp"
+                                android:text="@string/environment_status_no"
+                                android:textColor="@color/title_blue"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+                <!-- ================================================================
+             03-6. 安全倒數設定
+             Safety Countdown
+             ================================================================ -->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardSafetyCountdown"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layoutSensorStatus"
+                    app:strokeColor="#B9DFFF"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="118dp"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp">
+
+
+                        <!-- ========================================================
+                         03-6-1. Countdown Icon
+                         安全倒數 Icon
+                         ======================================================== -->
+
+                        <ImageView
+                            android:id="@+id/ivSafetyCountdown"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_time_date"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <!-- ========================================================
+                         03-6-3. Setting Button
+                         設定時間按鈕
+                         ======================================================== -->
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCountdownSetting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:minWidth="0dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="12dp"
+                            android:text="@string/environment_countdown_setting"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            app:backgroundTint="@color/primary_blue"
+                            app:cornerRadius="10dp"
+                            app:icon="@drawable/ic_setting"
+                            app:iconGravity="textStart"
+                            app:iconPadding="5dp"
+                            app:iconSize="20dp"
+                            app:iconTint="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <!-- ========================================================
+                         03-6-4. English / Secondary Title
+                         英文 / 次標題
+                         ======================================================== -->
+
+                        <TextView
+                            android:id="@+id/tvCountdownDefault"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/environment_countdown_default"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="10sp"
+                            app:layout_constraintEnd_toStartOf="@id/btnCountdownSetting"
+                            app:layout_constraintStart_toEndOf="@id/ivSafetyCountdown"
+                            app:layout_constraintTop_toTopOf="@id/ivSafetyCountdown" />
+
+                        <!-- ================================================================
+                     Safety Countdown - Timer Display
+                     安全倒數 - 計時器顯示
+                     ================================================================ -->
+
+                        <!-- 01. 倒數狀態 / Countdown Status -->
+                        <TextView
+                            android:id="@+id/tvCountdownStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/countdown_status_standby"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvCountdownDefault" />
+
+
+                        <!-- 02. 剩餘時間 / Remaining Time -->
+                        <TextView
+                            android:id="@+id/tvCountdownRemaining"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFeatureSettings="tnum"
+                            android:text="@string/countdown_remaining_preview"
+                            android:textColor="@color/title_blue"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvCountdownStatus" />
+
+
+                        <!-- 03. 手動開始／取消按鈕 / Start or Cancel Timer -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCountdownStart"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/countdown_start_button"
+                            android:textAllCaps="false"
+                            app:cornerRadius="12dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvCountdownRemaining" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ================================================================
+             03-7. 環境溫濕度
+             Temperature & Humidity
+             ================================================================ -->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutEnvironmentData"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:paddingBottom="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardSafetyCountdown">
+
+
+                    <!-- ============================================================
+                     03-7-1. 區塊 Icon
+                     Section Icon
+                     ============================================================ -->
+
+                    <ImageView
+                        android:id="@+id/ivEnvironmentDataIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="@null"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_temperature"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <!-- ============================================================
+                     03-7-2. 標題
+                     Title
+                     ============================================================ -->
+
+                    <TextView
+                        android:id="@+id/tvEnvironmentDataTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/environment_data_title"
+                        android:textColor="@color/title_blue"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/btnEnvironmentLocation"
+                        app:layout_constraintStart_toEndOf="@id/ivEnvironmentDataIcon"
+                        app:layout_constraintTop_toTopOf="@id/ivEnvironmentDataIcon" />
+
+
+                    <!-- ============================================================
+                     03-7-3. 副標題
+                     Subtitle
+                     ============================================================ -->
+
+                    <TextView
+                        android:id="@+id/tvEnvironmentDataSubtitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/environment_temperature_humidity"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@id/btnEnvironmentLocation"
+                        app:layout_constraintStart_toEndOf="@id/ivEnvironmentDataIcon"
+                        app:layout_constraintTop_toBottomOf="@id/tvEnvironmentDataTitle" />
+
+
+                    <!-- ============================================================
+                     03-7-4. 地點選擇按鈕
+                     Location Selector
+                     ============================================================ -->
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEnvironmentLocation"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:minWidth="100dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/environment_location_kitchen_selector"
+                        android:textAllCaps="false"
+                        android:textColor="@color/title_blue"
+                        android:textSize="12sp"
+                        app:cornerRadius="10dp"
+                        app:icon="@drawable/ic_location_kitchen"
+                        app:iconGravity="textStart"
+                        app:iconPadding="5dp"
+                        app:iconSize="20dp"
+                        app:iconTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="#B9D4EB"
+                        app:strokeWidth="1dp" />
+
+
+                    <!-- ============================================================
+                     03-7-5. 溫度與濕度 Card 容器
+                     Temperature & Humidity Card Container
+                     ============================================================ -->
+
+                    <LinearLayout
+                        android:id="@+id/layoutTemperatureHumidity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivEnvironmentDataIcon">
+
+
+                        <!-- ========================================================
+                         Temperature Card
+                         溫度 Card
+                         ======================================================== -->
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardTemperature"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#F4FAFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#E1EFFA"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="12dp"
+                                android:paddingEnd="10dp">
+
+
+                                <!-- Temperature Icon / 溫度 Icon -->
+
+                                <ImageView
+                                    android:id="@+id/ivTemperature"
+                                    android:layout_width="42dp"
+                                    android:layout_height="42dp"
+                                    android:contentDescription="@null"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_temperature" />
+
+
+                                <!-- Temperature Information / 溫度資訊 -->
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvTemperatureLabel"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/environment_temperature"
+                                        android:textColor="@color/secondary_text"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvTemperatureValue"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="@string/environment_temperature_preview"
+                                        android:textColor="@color/title_blue"
+                                        android:textSize="22sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <!-- ========================================================
+                         Humidity Card
+                         濕度 Card
+                         ======================================================== -->
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHumidity"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#F4FAFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#E1EFFA"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="12dp"
+                                android:paddingEnd="10dp">
+
+
+                                <!-- Humidity Icon / 濕度 Icon -->
+
+                                <ImageView
+                                    android:id="@+id/ivHumidity"
+                                    android:layout_width="42dp"
+                                    android:layout_height="42dp"
+                                    android:contentDescription="@null"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_humidity" />
+
+
+                                <!-- Humidity Information / 濕度資訊 -->
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvHumidityLabel"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/environment_humidity"
+                                        android:textColor="@color/secondary_text"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvHumidityValue"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="@string/environment_humidity_preview"
+                                        android:textColor="@color/title_blue"
+                                        android:textSize="22sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- ================================================================
+         3.6 Historical Trend / 歷史趨勢
+         ================================================================ -->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutHistoricalTrend"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layoutEnvironmentData">
+
+                    <!-- 歷史趨勢標題 / Historical Trend Title -->
+                    <TextView
+                        android:id="@+id/tvHistoricalTrendTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/environment_history_title"
+                        android:textColor="@color/title_blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- 日 / 週 / 月切換 / Day Week Month Selector -->
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/toggleHistoryPeriod"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        app:checkedButton="@id/btnHistoryDay"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvHistoricalTrendTitle"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHistoryDay"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="@string/environment_history_day" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHistoryWeek"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="@string/environment_history_week" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHistoryMonth"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="@string/environment_history_month" />
+
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    <!-- 歷史資料圖表卡片 / Historical Chart Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardHistoricalChart"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="4dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/toggleHistoryPeriod">
+
+                        <!-- ================================================================
+             雙 Y 軸歷史曲線圖
+             Dual Y-Axis Historical Line Chart
+             ================================================================ -->
+
+                        <com.example.familysafety.environment.ui.HistoryChartView
+                            android:id="@+id/historyChartView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="4dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="4dp"
+                            android:paddingBottom="4dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!-- ↑↑↑ STEP 3-6 到這裡結束 ↑↑↑ -->
+
+
+                <!-- 這個才是更外層 layoutKitchenMonitoring 的結束 -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- ================================================================
+                 關閉 Environment 主要內容
+                 Close Environment Main Content
+                 ================================================================ -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
