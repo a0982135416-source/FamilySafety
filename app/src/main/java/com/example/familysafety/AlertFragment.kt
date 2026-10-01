@@ -226,7 +226,7 @@ class AlertFragment : Fragment() {
                 currentCategory = AlertCategory.ENVIRONMENT
                 currentEnvFilter = EnvironmentFilter.ALL
                 updateUI()
-                binding.scrollViewAlertFilters.scrollTo(0, 0)
+                binding.horizontalScrollViewAlertFilters.scrollTo(0, 0)
             }
         }
 
@@ -235,7 +235,7 @@ class AlertFragment : Fragment() {
                 currentCategory = AlertCategory.TASK
                 currentTaskAlertFilter = TaskAlertFilter.ALL
                 updateUI()
-                binding.scrollViewAlertFilters.scrollTo(0, 0)
+                binding.horizontalScrollViewAlertFilters.scrollTo(0, 0)
             }
         }
     }
@@ -290,7 +290,7 @@ class AlertFragment : Fragment() {
     // 只在點選時捲動；每秒逾期刷新不會搶走使用者的手動捲動位置。
     private fun revealFilter(button: View) {
         val currentBinding = _binding ?: return
-        val scroll = currentBinding.scrollViewAlertFilters
+        val scroll = currentBinding.horizontalScrollViewAlertFilters
         scroll.doOnLayout {
             if (_binding !== currentBinding || button.visibility != View.VISIBLE) return@doOnLayout
             val container = currentBinding.linearLayoutAlertFilters
@@ -315,12 +315,12 @@ class AlertFragment : Fragment() {
         val currentBinding = binding
         fun updateHint() {
             if (_binding !== currentBinding) return
-            val scroll = currentBinding.scrollViewAlertFilters
+            val scroll = currentBinding.horizontalScrollViewAlertFilters
             val overflows = currentBinding.linearLayoutAlertFilters.width >
                 scroll.width - scroll.paddingLeft - scroll.paddingRight
             currentBinding.textViewAlertFilterHint.visibility = if (overflows) View.VISIBLE else View.GONE
         }
-        currentBinding.scrollViewAlertFilters.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateHint() }
+        currentBinding.horizontalScrollViewAlertFilters.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateHint() }
         currentBinding.linearLayoutAlertFilters.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateHint() }
     }
 

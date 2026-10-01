@@ -116,7 +116,7 @@ class AlertCenterIntegrationTest {
             val visible = android.graphics.Rect()
             scenario.onActivity { activity ->
                 assertTrue(activity.findViewById<View>(id).getGlobalVisibleRect(visible))
-                val scroll = activity.findViewById<HorizontalScrollView>(R.id.scrollView_alert_filters)
+                val scroll = activity.findViewById<HorizontalScrollView>(R.id.horizontalScrollView_alert_filters)
                 val position = IntArray(2)
                 scroll.getLocationOnScreen(position)
                 assertTrue(visible.intersect(position[0] + scroll.paddingLeft, position[1],
@@ -135,7 +135,7 @@ class AlertCenterIntegrationTest {
             do {
                 instrumentation.waitForIdleSync()
                 scenario.onActivity { activity ->
-                    val scroll = activity.findViewById<HorizontalScrollView>(R.id.scrollView_alert_filters)
+                    val scroll = activity.findViewById<HorizontalScrollView>(R.id.horizontalScrollView_alert_filters)
                     val button = activity.findViewById<TextView>(id)
                     val buttonPosition = IntArray(2)
                     val scrollPosition = IntArray(2)
@@ -159,7 +159,7 @@ class AlertCenterIntegrationTest {
         selectAndCheck(R.id.button_alert_in_progress)
         // 重現原問題：回到最左側後直接選取 Overdue，不讓測試先替它捲動。
         scenario.onActivity { activity ->
-            val scroll = activity.findViewById<HorizontalScrollView>(R.id.scrollView_alert_filters)
+            val scroll = activity.findViewById<HorizontalScrollView>(R.id.horizontalScrollView_alert_filters)
             scroll.scrollTo(0, 0)
             if (scroll.getChildAt(0).width > scroll.width - scroll.paddingLeft - scroll.paddingRight) {
                 assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.textView_alert_filter_hint).visibility)
@@ -170,7 +170,7 @@ class AlertCenterIntegrationTest {
         screenshot("${tag}_overdue_auto_scroll")
         selectAndCheck(R.id.button_alert_all)
         waitForRows(scenario, 4)
-        scenario.onActivity { assertEquals(0, it.findViewById<HorizontalScrollView>(R.id.scrollView_alert_filters).scrollX) }
+        scenario.onActivity { assertEquals(0, it.findViewById<HorizontalScrollView>(R.id.horizontalScrollView_alert_filters).scrollX) }
         onView(withId(R.id.button_alert_environment)).perform(click())
         waitForRows(scenario, 3)
         selectAndCheck(R.id.button_alert_all)
@@ -206,7 +206,7 @@ class AlertCenterIntegrationTest {
                 assertSame(originalRecycler, recycler)
                 assertTrue(recycler.adapter is TaskAlertAdapter)
                 assertEquals(View.GONE, activity.findViewById<View>(R.id.button_alert_resolved).visibility)
-                assertEquals(0, activity.findViewById<HorizontalScrollView>(R.id.scrollView_alert_filters).scrollX)
+                assertEquals(0, activity.findViewById<HorizontalScrollView>(R.id.horizontalScrollView_alert_filters).scrollX)
             }
             if (it == 0) {
                 onView(withId(R.id.button_alert_environment)).perform(click())
