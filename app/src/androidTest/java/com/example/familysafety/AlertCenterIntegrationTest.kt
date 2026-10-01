@@ -304,7 +304,7 @@ class AlertCenterIntegrationTest {
         // 模擬 View 在 Dialog 顯示期間被導覽銷毀；點擊背景導覽以程式方式觸發。
         scenario.onActivity { it.findViewById<View>(R.id.navTask).performClick() }
         instrumentation.waitForIdleSync()
-        onView(withId(R.id.tvTaskTitle)).check(matches(isDisplayed()))
+        onView(withId(R.id.textView_task_title)).check(matches(isDisplayed()))
         onView(withId(R.id.navAlert)).perform(click())
         waitForRows(scenario, 3)
         counts(scenario, false, 3, 2, 1)
