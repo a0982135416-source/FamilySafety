@@ -74,8 +74,8 @@ class TodayTaskAdapter(
 
         with(holder.binding) {
 
-            TextViewTaskName.text = task.name
-            TextViewTaskTime.text = task.time
+            textViewHomeTaskItemName.text = task.name
+            textViewHomeTaskItemTime.text = task.time
 
 
             // 將程式狀態轉換成使用者語言
@@ -84,16 +84,16 @@ class TodayTaskAdapter(
 
                 "IN_PROGRESS" -> {
 
-                    TextViewTaskStatusBadge.text =
+                    textViewHomeTaskItemStatusBadge.text =
                         root.context.getString(
                             R.string.task_status_in_progress
                         )
 
-                    TextViewTaskStatusBadge.setBackgroundResource(
+                    textViewHomeTaskItemStatusBadge.setBackgroundResource(
                         R.drawable.bg_badge_running
                     )
 
-                    TextViewTaskStatusBadge.setTextColor(
+                    textViewHomeTaskItemStatusBadge.setTextColor(
                         Color.parseColor("#1687E8")
                     )
                 }
@@ -101,16 +101,16 @@ class TodayTaskAdapter(
 
                 "PENDING" -> {
 
-                    TextViewTaskStatusBadge.text =
+                    textViewHomeTaskItemStatusBadge.text =
                         root.context.getString(
                             R.string.task_status_pending
                         )
 
-                    TextViewTaskStatusBadge.setBackgroundResource(
+                    textViewHomeTaskItemStatusBadge.setBackgroundResource(
                         R.drawable.bg_badge_pending
                     )
 
-                    TextViewTaskStatusBadge.setTextColor(
+                    textViewHomeTaskItemStatusBadge.setTextColor(
                         Color.parseColor("#F0525C")
                     )
                 }
@@ -118,16 +118,16 @@ class TodayTaskAdapter(
 
                 "COMPLETED" -> {
 
-                    TextViewTaskStatusBadge.text =
+                    textViewHomeTaskItemStatusBadge.text =
                         root.context.getString(
                             R.string.task_status_completed
                         )
 
-                    TextViewTaskStatusBadge.setBackgroundResource(
+                    textViewHomeTaskItemStatusBadge.setBackgroundResource(
                         R.drawable.bg_badge_completed
                     )
 
-                    TextViewTaskStatusBadge.setTextColor(
+                    textViewHomeTaskItemStatusBadge.setTextColor(
                         Color.parseColor("#19B394")
                     )
                 }

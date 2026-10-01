@@ -13,7 +13,7 @@
 
     <!-- 主要滾動內容區 -->
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/NestedScrollView_homeContent"
+        android:id="@+id/nestedScrollView_home_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -29,7 +29,7 @@
 
             <!-- ＝＝＝＝＝＝＝＝＝＝＝＝＝＝ A. Header 頂部區塊 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝ -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutHeader"
+                android:id="@+id/constraintLayout_home_header"
                 android:layout_width="0dp"
                 android:layout_height="170dp"
                 android:background="#1687E8"
@@ -39,7 +39,7 @@
 
                 <!-- 背景裝飾圖 -->
                 <ImageView
-                    android:id="@+id/ImageView_headerBg"
+                    android:id="@+id/imageView_home_header_background"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.1"
@@ -50,7 +50,7 @@
 
                 <!-- 選單按鈕 -->
                 <ImageButton
-                    android:id="@+id/ImageButton_menu"
+                    android:id="@+id/imageButton_home_menu"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_marginStart="16dp"
@@ -65,7 +65,7 @@
 
                 <!-- 使用者頭像 -->
                 <FrameLayout
-                    android:id="@+id/FrameLayout_profile"
+                    android:id="@+id/frameLayout_home_profile"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="44dp"
@@ -84,7 +84,7 @@
 
                 <!-- 歡迎文字標題 -->
                 <TextView
-                    android:id="@+id/TextView_greeting"
+                    android:id="@+id/textView_home_greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -97,21 +97,21 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/TextView_headerSubtitle"
+                    android:id="@+id/textView_home_header_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="@string/home_header_subtitle"
                     android:textColor="#DDEEFF"
                     android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="@id/TextView_greeting"
-                    app:layout_constraintTop_toBottomOf="@id/TextView_greeting" />
+                    app:layout_constraintStart_toStartOf="@id/textView_home_greeting"
+                    app:layout_constraintTop_toBottomOf="@id/textView_home_greeting" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- ＝＝＝＝＝＝＝＝＝＝＝＝＝＝ B. Family Status Card 家庭目前狀態 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝ -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/MaterialCardView_homeStatus"
+                android:id="@+id/cardView_home_status"
                 android:layout_width="0dp"
                 android:layout_height="72dp"
                 android:layout_marginHorizontal="16dp"
@@ -121,7 +121,7 @@
                 app:cardElevation="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layoutHeader"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout_home_header"
                 app:strokeColor="#C8D8CF"
                 app:strokeWidth="1dp">
 
@@ -131,7 +131,7 @@
                     android:paddingHorizontal="14dp">
 
                     <ImageView
-                        android:id="@+id/ImageView_statusIcon"
+                        android:id="@+id/imageView_home_status_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@null"
@@ -141,7 +141,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/TextView_homeStatus"
+                        android:id="@+id/textView_home_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -150,11 +150,11 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ImageView_statusIcon"
+                        app:layout_constraintStart_toEndOf="@id/imageView_home_status_icon"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/TextView_statusTime"
+                        android:id="@+id/textView_home_status_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/home_status_time_preview"
@@ -170,17 +170,17 @@
 
             <!-- 第一排：環境安全 與 環境監測 -->
             <LinearLayout
-                android:id="@+id/LinearLayout_row1"
+                android:id="@+id/linearLayout_home_row1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="12dp"
-                app:layout_constraintTop_toBottomOf="@id/MaterialCardView_homeStatus">
+                app:layout_constraintTop_toBottomOf="@id/cardView_home_status">
 
                 <!-- D. Environment Safety Card 環境安全 -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/MaterialCardView_safety"
+                    android:id="@+id/cardView_home_safety"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_margin="4dp"
@@ -197,7 +197,7 @@
                         android:padding="10dp">
 
                         <FrameLayout
-                            android:id="@+id/FrameLayout_safetyIconBg"
+                            android:id="@+id/frameLayout_home_safety_icon_background"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:background="@drawable/bg_circle_red"
@@ -213,7 +213,7 @@
                         </FrameLayout>
 
                         <TextView
-                            android:id="@+id/TextView_safetyTitle"
+                            android:id="@+id/textView_home_safety_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
@@ -221,9 +221,9 @@
                             android:textColor="#0B3D75"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@id/FrameLayout_safetyIconBg"
-                            app:layout_constraintStart_toEndOf="@id/FrameLayout_safetyIconBg"
-                            app:layout_constraintTop_toTopOf="@id/FrameLayout_safetyIconBg" />
+                            app:layout_constraintBottom_toBottomOf="@id/frameLayout_home_safety_icon_background"
+                            app:layout_constraintStart_toEndOf="@id/frameLayout_home_safety_icon_background"
+                            app:layout_constraintTop_toTopOf="@id/frameLayout_home_safety_icon_background" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -235,7 +235,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/TextView_safetyLocation"
+                            android:id="@+id/textView_home_safety_location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -246,10 +246,10 @@
                             android:textColor="#F0525C"
                             android:textSize="11sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/FrameLayout_safetyIconBg" />
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout_home_safety_icon_background" />
 
                         <TextView
-                            android:id="@+id/TextView_safetyStatusLabel"
+                            android:id="@+id/textView_home_safety_status_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#E8F5E9"
@@ -258,9 +258,9 @@
                             android:text="@string/home_status_safe_label"
                             android:textColor="#19B394"
                             android:textSize="11sp"
-                            app:layout_constraintBottom_toBottomOf="@id/TextView_safetyLocation"
+                            app:layout_constraintBottom_toBottomOf="@id/textView_home_safety_location"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/TextView_safetyLocation" />
+                            app:layout_constraintTop_toTopOf="@id/textView_home_safety_location" />
 
                         <!-- 狀態詳細列表 -->
                         <LinearLayout
@@ -268,7 +268,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:orientation="vertical"
-                            app:layout_constraintTop_toBottomOf="@id/TextView_safetyLocation">
+                            app:layout_constraintTop_toBottomOf="@id/textView_home_safety_location">
 
                             <!-- 瓦斯 -->
                             <LinearLayout
@@ -290,7 +290,7 @@
                                     android:textColor="#8CA5BD"
                                     android:textSize="12sp" />
                                 <TextView
-                                    android:id="@+id/TextView_gasStatusValue"
+                                    android:id="@+id/textView_home_gas_status_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/home_gas_off"
@@ -318,7 +318,7 @@
                                     android:textColor="#8CA5BD"
                                     android:textSize="12sp" />
                                 <TextView
-                                    android:id="@+id/TextView_fireStatusValue"
+                                    android:id="@+id/textView_home_fire_status_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/home_status_none"
@@ -346,7 +346,7 @@
                                     android:textColor="#8CA5BD"
                                     android:textSize="12sp" />
                                 <TextView
-                                    android:id="@+id/TextView_personStatusValue"
+                                    android:id="@+id/textView_home_person_status_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/home_status_none"
@@ -360,7 +360,7 @@
 
                 <!-- E. Environment Monitoring Card 環境監測 -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/MaterialCardView_environment"
+                    android:id="@+id/cardView_home_environment"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_margin="4dp"
@@ -377,7 +377,7 @@
                         android:padding="10dp">
 
                         <FrameLayout
-                            android:id="@+id/FrameLayout_envIconBg"
+                            android:id="@+id/frameLayout_home_environment_icon_background"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:background="@drawable/bg_circle_sky"
@@ -393,7 +393,7 @@
                         </FrameLayout>
 
                         <TextView
-                            android:id="@+id/TextView_envTitle"
+                            android:id="@+id/textView_home_environment_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
@@ -401,13 +401,13 @@
                             android:textColor="#0B3D75"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@id/FrameLayout_envIconBg"
-                            app:layout_constraintStart_toEndOf="@id/FrameLayout_envIconBg"
-                            app:layout_constraintTop_toTopOf="@id/FrameLayout_envIconBg" />
+                            app:layout_constraintBottom_toBottomOf="@id/frameLayout_home_environment_icon_background"
+                            app:layout_constraintStart_toEndOf="@id/frameLayout_home_environment_icon_background"
+                            app:layout_constraintTop_toTopOf="@id/frameLayout_home_environment_icon_background" />
 
                         <!-- 小型趨勢/圖表 Icon -->
                         <ImageView
-                            android:id="@+id/ImageView_envTrend"
+                            android:id="@+id/imageView_home_environment_trend"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:contentDescription="@null"
@@ -416,7 +416,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/TextView_envLocation"
+                            android:id="@+id/textView_home_environment_location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -427,7 +427,7 @@
                             android:textColor="#1687E8"
                             android:textSize="11sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/FrameLayout_envIconBg" />
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout_home_environment_icon_background" />
 
                         <!-- 溫濕度數據 -->
                         <LinearLayout
@@ -435,7 +435,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:orientation="vertical"
-                            app:layout_constraintTop_toBottomOf="@id/TextView_envLocation">
+                            app:layout_constraintTop_toBottomOf="@id/textView_home_environment_location">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -456,7 +456,7 @@
                                     android:textColor="#8CA5BD"
                                     android:textSize="12sp" />
                                 <TextView
-                                    android:id="@+id/TextView_temperatureValue"
+                                    android:id="@+id/textView_home_temperature_value"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -486,7 +486,7 @@
                                     android:textColor="#8CA5BD"
                                     android:textSize="12sp" />
                                 <TextView
-                                    android:id="@+id/TextView_humidityValue"
+                                    android:id="@+id/textView_home_humidity_value"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -503,17 +503,17 @@
 
             <!-- 第二排：今日任務 與 今日任務列表 -->
             <LinearLayout
-                android:id="@+id/LinearLayout_row2"
+                android:id="@+id/linearLayout_home_row2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="12dp"
-                app:layout_constraintTop_toBottomOf="@id/LinearLayout_row1">
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_home_row1">
 
                 <!-- F. Today Task Card 今日任務 (含環形進度條) -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/MaterialCardView_todayTask"
+                    android:id="@+id/cardView_home_today_task"
                     android:layout_width="0dp"
                     android:layout_height="190dp"
                     android:layout_margin="4dp"
@@ -530,7 +530,7 @@
                         android:padding="10dp">
 
                         <FrameLayout
-                            android:id="@+id/FrameLayout_taskIconBg"
+                            android:id="@+id/frameLayout_home_task_icon_background"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:background="@drawable/bg_circle_green"
@@ -546,7 +546,7 @@
                         </FrameLayout>
 
                         <TextView
-                            android:id="@+id/TextView_taskTitle"
+                            android:id="@+id/textView_home_task_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
@@ -554,9 +554,9 @@
                             android:textColor="#0B3D75"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@id/FrameLayout_taskIconBg"
-                            app:layout_constraintStart_toEndOf="@id/FrameLayout_taskIconBg"
-                            app:layout_constraintTop_toTopOf="@id/FrameLayout_taskIconBg" />
+                            app:layout_constraintBottom_toBottomOf="@id/frameLayout_home_task_icon_background"
+                            app:layout_constraintStart_toEndOf="@id/frameLayout_home_task_icon_background"
+                            app:layout_constraintTop_toTopOf="@id/frameLayout_home_task_icon_background" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -569,15 +569,15 @@
 
                         <!-- 環形進度條區塊 -->
                         <FrameLayout
-                            android:id="@+id/FrameLayout_progressContainer"
+                            android:id="@+id/frameLayout_home_progress_container"
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:layout_marginTop="16dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/FrameLayout_taskIconBg">
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout_home_task_icon_background">
 
                             <com.google.android.material.progressindicator.CircularProgressIndicator
-                                android:id="@+id/CircularProgressIndicator_task"
+                                android:id="@+id/circularProgressIndicator_home_task"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:max="5"
@@ -588,7 +588,7 @@
                                 app:trackThickness="4dp" />
 
                             <TextView
-                                android:id="@+id/TextView_progressCenterText"
+                                android:id="@+id/textView_home_progress_center_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -604,13 +604,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="@id/FrameLayout_progressContainer"
+                            app:layout_constraintBottom_toBottomOf="@id/frameLayout_home_progress_container"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/FrameLayout_progressContainer"
-                            app:layout_constraintTop_toTopOf="@id/FrameLayout_progressContainer">
+                            app:layout_constraintStart_toEndOf="@id/frameLayout_home_progress_container"
+                            app:layout_constraintTop_toTopOf="@id/frameLayout_home_progress_container">
 
                             <TextView
-                                android:id="@+id/TextView_taskDone"
+                                android:id="@+id/textView_home_task_done"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="已完成  3"
@@ -618,7 +618,7 @@
                                 android:textSize="11sp" />
 
                             <TextView
-                                android:id="@+id/TextView_taskPending"
+                                android:id="@+id/textView_home_task_pending"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="待處理  2"
@@ -626,7 +626,7 @@
                                 android:textSize="11sp" />
 
                             <TextView
-                                android:id="@+id/TextView_taskRate"
+                                android:id="@+id/textView_home_task_rate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
@@ -641,7 +641,7 @@
 
                 <!-- G. Today Task List 今日任務列表 (支援 ScrollBar 的動態清單) -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/MaterialCardView_taskList"
+                    android:id="@+id/cardView_home_task_list"
                     android:layout_width="0dp"
                     android:layout_height="190dp"
                     android:layout_margin="4dp"
@@ -658,7 +658,7 @@
                         android:padding="10dp">
 
                         <FrameLayout
-                            android:id="@+id/FrameLayout_listIconBg"
+                            android:id="@+id/frameLayout_home_list_icon_background"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:background="@drawable/bg_circle_purple"
@@ -674,7 +674,7 @@
                         </FrameLayout>
 
                         <TextView
-                            android:id="@+id/TextView_listTitle"
+                            android:id="@+id/textView_home_list_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
@@ -682,9 +682,9 @@
                             android:textColor="#0B3D75"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@id/FrameLayout_listIconBg"
-                            app:layout_constraintStart_toEndOf="@id/FrameLayout_listIconBg"
-                            app:layout_constraintTop_toTopOf="@id/FrameLayout_listIconBg" />
+                            app:layout_constraintBottom_toBottomOf="@id/frameLayout_home_list_icon_background"
+                            app:layout_constraintStart_toEndOf="@id/frameLayout_home_list_icon_background"
+                            app:layout_constraintTop_toTopOf="@id/frameLayout_home_list_icon_background" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -697,7 +697,7 @@
 
                         <!-- 動態任務滾動清單 -->
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/RecyclerView_tasks"
+                            android:id="@+id/recyclerView_home_tasks"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
@@ -706,7 +706,7 @@
                             android:scrollbarSize="3dp"
                             android:scrollbarThumbVertical="@android:color/darker_gray"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/FrameLayout_listIconBg"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout_home_list_icon_background"
                             tools:listitem="@layout/item_today_task" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -715,7 +715,7 @@
 
             <!-- ＝＝＝＝＝＝＝＝＝＝＝＝＝＝ H. Alert Summary 警報摘要 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝ -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/MaterialCardView_alert"
+                android:id="@+id/cardView_home_alert"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:layout_marginHorizontal="16dp"
@@ -725,7 +725,7 @@
                 app:cardElevation="2dp"
                 app:strokeColor="#F6DADD"
                 app:strokeWidth="1dp"
-                app:layout_constraintTop_toBottomOf="@id/LinearLayout_row2">
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_home_row2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -733,7 +733,7 @@
                     android:padding="12dp">
 
                     <ImageView
-                        android:id="@+id/ImageView_alertIcon"
+                        android:id="@+id/imageView_home_alert_icon"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:contentDescription="@null"
@@ -743,7 +743,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/TextView_alertCount"
+                        android:id="@+id/textView_home_alert_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -751,11 +751,11 @@
                         android:textColor="#F0525C"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@id/ImageView_alertIcon"
-                        app:layout_constraintTop_toTopOf="@id/ImageView_alertIcon" />
+                        app:layout_constraintStart_toEndOf="@id/imageView_home_alert_icon"
+                        app:layout_constraintTop_toTopOf="@id/imageView_home_alert_icon" />
 
                     <TextView
-                        android:id="@+id/TextView_alertMsg"
+                        android:id="@+id/textView_home_alert_msg"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
@@ -763,12 +763,12 @@
                         android:text="@string/home_alert_message_preview"
                         android:textColor="#8CA5BD"
                         android:textSize="11sp"
-                        app:layout_constraintEnd_toStartOf="@id/TextView_alertArrow"
-                        app:layout_constraintStart_toStartOf="@id/TextView_alertCount"
-                        app:layout_constraintTop_toBottomOf="@id/TextView_alertCount" />
+                        app:layout_constraintEnd_toStartOf="@id/textView_home_alert_arrow"
+                        app:layout_constraintStart_toStartOf="@id/textView_home_alert_count"
+                        app:layout_constraintTop_toBottomOf="@id/textView_home_alert_count" />
 
                     <TextView
-                        android:id="@+id/TextView_alertArrow"
+                        android:id="@+id/textView_home_alert_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/home_arrow"

@@ -85,29 +85,29 @@ class HomeFragment : Fragment() {
 
         val completionRate = (completedTasks * 100) / totalTasks
 
-        binding.CircularProgressIndicatorTask.max = totalTasks
-        binding.CircularProgressIndicatorTask.progress = completedTasks
+        binding.circularProgressIndicatorHomeTask.max = totalTasks
+        binding.circularProgressIndicatorHomeTask.progress = completedTasks
 
-        binding.TextViewProgressCenterText.text =
+        binding.textViewHomeProgressCenterText.text =
             getString(
                 R.string.task_progress_fraction,
                 completedTasks,
                 totalTasks,
             )
 
-        binding.TextViewTaskDone.text =
+        binding.textViewHomeTaskDone.text =
             getString(
                 R.string.task_completed_count,
                 completedTasks,
             )
 
-        binding.TextViewTaskPending.text =
+        binding.textViewHomeTaskPending.text =
             getString(
                 R.string.task_pending_count,
                 pendingTasks,
             )
 
-        binding.TextViewTaskRate.text =
+        binding.textViewHomeTaskRate.text =
             getString(
                 R.string.task_completion_rate,
                 completionRate,
@@ -153,10 +153,10 @@ class HomeFragment : Fragment() {
             ),
         )
 
-        binding.RecyclerViewTasks.layoutManager =
+        binding.recyclerViewHomeTasks.layoutManager =
             LinearLayoutManager(requireContext())
 
-        binding.RecyclerViewTasks.adapter =
+        binding.recyclerViewHomeTasks.adapter =
             TodayTaskAdapter(tasks)
     }
 
