@@ -170,13 +170,13 @@ class EnvironmentFragment : Fragment() {
 
         // 預設狀態：待命
         // Default status: Standby
-        binding.tvCountdownStatus.setText(
+        binding.textViewEnvironmentCountdownStatus.setText(
             R.string.countdown_status_standby
         )
 
         // 設定倒數分鐘數
         // Open duration setting dialog
-        binding.btnCountdownSetting.setOnClickListener {
+        binding.buttonEnvironmentCountdownSetting.setOnClickListener {
 
             if (isCountdownRunning) {
 
@@ -194,7 +194,7 @@ class EnvironmentFragment : Fragment() {
 
         // 手動開始或取消倒數
         // Manually start or cancel countdown
-        binding.btnCountdownStart.setOnClickListener {
+        binding.buttonEnvironmentCountdownStart.setOnClickListener {
 
             if (isCountdownRunning) {
 
@@ -305,7 +305,7 @@ class EnvironmentFragment : Fragment() {
 
         // 顯示目前設定的分鐘數
         // Display selected duration
-        binding.tvCountdownDefault.text = getString(
+        binding.textViewEnvironmentCountdownDefault.text = getString(
             R.string.countdown_duration_display,
             selectedCountdownMinutes
         )
@@ -338,7 +338,7 @@ class EnvironmentFragment : Fragment() {
 
         // 點擊地點按鈕時開啟選擇 Dialog
         // Open the location dialog when the location button is clicked
-        binding.btnEnvironmentLocation.setOnClickListener {
+        binding.buttonEnvironmentLocation.setOnClickListener {
             showLocationDialog()
         }
     }
@@ -434,33 +434,33 @@ class EnvironmentFragment : Fragment() {
 
             "KITCHEN" -> {
 
-                binding.btnEnvironmentLocation.setText(
+                binding.buttonEnvironmentLocation.setText(
                     R.string.location_kitchen_selector
                 )
 
-                binding.btnEnvironmentLocation.setIconResource(
+                binding.buttonEnvironmentLocation.setIconResource(
                     R.drawable.ic_location_kitchen
                 )
             }
 
             "LIVING_ROOM" -> {
 
-                binding.btnEnvironmentLocation.setText(
+                binding.buttonEnvironmentLocation.setText(
                     R.string.location_living_room_selector
                 )
 
-                binding.btnEnvironmentLocation.setIconResource(
+                binding.buttonEnvironmentLocation.setIconResource(
                     R.drawable.ic_location_livingroom
                 )
             }
 
             "BEDROOM" -> {
 
-                binding.btnEnvironmentLocation.setText(
+                binding.buttonEnvironmentLocation.setText(
                     R.string.location_bedroom_selector
                 )
 
-                binding.btnEnvironmentLocation.setIconResource(
+                binding.buttonEnvironmentLocation.setIconResource(
                     R.drawable.ic_location_bedroom
                 )
             }
@@ -481,12 +481,12 @@ class EnvironmentFragment : Fragment() {
 
         // 更新溫度
         // Update temperature
-        binding.tvTemperatureValue.text =
+        binding.textViewEnvironmentTemperatureValue.text =
             String.format(Locale.getDefault(), "%.1f °C", data.temperature)
 
         // 更新濕度
         // Update humidity
-        binding.tvHumidityValue.text =
+        binding.textViewEnvironmentHumidityValue.text =
             String.format(Locale.getDefault(), "%d %%", data.humidity)
     }
 
@@ -511,13 +511,13 @@ class EnvironmentFragment : Fragment() {
 
         // 設定 Day 為預設選取項目
         // Set Day as the default selected period
-        binding.toggleHistoryPeriod.check(
-            R.id.btnHistoryDay
+        binding.materialButtonToggleGroupEnvironmentHistoryPeriod.check(
+            R.id.button_environment_history_day
         )
 
         // 監聽 Day / Week / Month 按鈕
         // Listen for Day / Week / Month selection
-        binding.toggleHistoryPeriod.addOnButtonCheckedListener {
+        binding.materialButtonToggleGroupEnvironmentHistoryPeriod.addOnButtonCheckedListener {
                 _, checkedId, isChecked ->
 
             // 只處理選取事件，忽略取消選取事件
@@ -530,7 +530,7 @@ class EnvironmentFragment : Fragment() {
 
                 // Day：每日資料
                 // Daily data
-                R.id.btnHistoryDay -> {
+                R.id.button_environment_history_day -> {
 
                     updateHistoricalChart(
                         MockHistoryDataSource.Period.DAY
@@ -539,7 +539,7 @@ class EnvironmentFragment : Fragment() {
 
                 // Week：每週資料
                 // Weekly data
-                R.id.btnHistoryWeek -> {
+                R.id.button_environment_history_week -> {
 
                     updateHistoricalChart(
                         MockHistoryDataSource.Period.WEEK
@@ -548,7 +548,7 @@ class EnvironmentFragment : Fragment() {
 
                 // Month：每月資料
                 // Monthly data
-                R.id.btnHistoryMonth -> {
+                R.id.button_environment_history_month -> {
 
                     updateHistoricalChart(
                         MockHistoryDataSource.Period.MONTH
@@ -573,7 +573,7 @@ class EnvironmentFragment : Fragment() {
 
         // 將資料傳送給 HistoryChartView
         // Pass historical data to HistoryChartView
-        binding.historyChartView.setHistoryData(historyData)
+        binding.historyChartViewEnvironmentHistory.setHistoryData(historyData)
     }
 
     // =========================================================================
@@ -600,11 +600,11 @@ class EnvironmentFragment : Fragment() {
 
         // 更新畫面狀態
         // Update UI state
-        binding.tvCountdownStatus.setText(
+        binding.textViewEnvironmentCountdownStatus.setText(
             R.string.countdown_status_running
         )
 
-        binding.btnCountdownStart.setText(
+        binding.buttonEnvironmentCountdownStart.setText(
             R.string.countdown_cancel_button
         )
 
@@ -636,11 +636,11 @@ class EnvironmentFragment : Fragment() {
 
                 updateRemainingTime(0L)
 
-                binding.tvCountdownStatus.setText(
+                binding.textViewEnvironmentCountdownStatus.setText(
                     R.string.countdown_status_finished
                 )
 
-                binding.btnCountdownStart.setText(
+                binding.buttonEnvironmentCountdownStart.setText(
                     R.string.countdown_start_button
                 )
 
@@ -674,11 +674,11 @@ class EnvironmentFragment : Fragment() {
 
         // 恢復待命狀態
         // Restore standby state
-        binding.tvCountdownStatus.setText(
+        binding.textViewEnvironmentCountdownStatus.setText(
             R.string.countdown_status_standby
         )
 
-        binding.btnCountdownStart.setText(
+        binding.buttonEnvironmentCountdownStart.setText(
             R.string.countdown_start_button
         )
 
@@ -706,7 +706,7 @@ class EnvironmentFragment : Fragment() {
 
         // 顯示 MM:SS，例如 18:00、17:59
         // Display MM:SS format
-        binding.tvCountdownRemaining.text = getString(
+        binding.textViewEnvironmentCountdownRemaining.text = getString(
             R.string.countdown_remaining_display,
             minutes,
             seconds

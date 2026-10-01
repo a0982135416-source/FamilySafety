@@ -31,7 +31,7 @@
          ================================================================ -->
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollEnvironment"
+        android:id="@+id/nestedScrollView_environment_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutEnvironmentContent"
+            android:id="@+id/constraintLayout_environment_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp">
@@ -53,7 +53,7 @@
                  ======================================================== -->
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutEnvironmentHeader"
+                android:id="@+id/constraintLayout_environment_header"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:background="@color/primary_blue"
@@ -67,7 +67,7 @@
                 -->
 
                 <ImageView
-                    android:id="@+id/ivEnvironmentHeaderIcon"
+                    android:id="@+id/imageView_environment_header_icon"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_marginStart="22dp"
@@ -85,7 +85,7 @@
                 -->
 
                 <TextView
-                    android:id="@+id/tvEnvironmentHeaderTitle"
+                    android:id="@+id/textView_environment_header_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -95,8 +95,8 @@
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ivEnvironmentHeaderIcon"
-                    app:layout_constraintTop_toTopOf="@id/ivEnvironmentHeaderIcon" />
+                    app:layout_constraintStart_toEndOf="@id/imageView_environment_header_icon"
+                    app:layout_constraintTop_toTopOf="@id/imageView_environment_header_icon" />
 
 
                 <!--
@@ -105,16 +105,16 @@
                 -->
 
                 <TextView
-                    android:id="@+id/tvEnvironmentHeaderSubtitle"
+                    android:id="@+id/textView_environment_header_subtitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="@string/environment_header_subtitle"
                     android:textColor="#DDEEFF"
                     android:textSize="13sp"
-                    app:layout_constraintEnd_toEndOf="@id/tvEnvironmentHeaderTitle"
-                    app:layout_constraintStart_toStartOf="@id/tvEnvironmentHeaderTitle"
-                    app:layout_constraintTop_toBottomOf="@id/tvEnvironmentHeaderTitle" />
+                    app:layout_constraintEnd_toEndOf="@id/textView_environment_header_title"
+                    app:layout_constraintStart_toStartOf="@id/textView_environment_header_title"
+                    app:layout_constraintTop_toBottomOf="@id/textView_environment_header_title" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- ================================================================
@@ -123,7 +123,7 @@
              ================================================================ -->
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutKitchenMonitoring"
+                android:id="@+id/constraintLayout_environment_kitchen_monitoring"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -131,7 +131,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layoutEnvironmentHeader">
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout_environment_header">
 
                 <!-- ============================================================
                  03-1. 區塊標題
@@ -139,7 +139,7 @@
                  ============================================================ -->
 
                 <ImageView
-                    android:id="@+id/ivKitchenCameraIcon"
+                    android:id="@+id/imageView_environment_kitchen_camera_icon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:contentDescription="@null"
@@ -149,7 +149,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvKitchenSafetyTitle"
+                    android:id="@+id/textView_environment_kitchen_safety_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -158,9 +158,9 @@
                     android:textColor="@color/title_blue"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/layoutLiveStatus"
-                    app:layout_constraintStart_toEndOf="@id/ivKitchenCameraIcon"
-                    app:layout_constraintTop_toTopOf="@id/ivKitchenCameraIcon" />
+                    app:layout_constraintEnd_toStartOf="@id/linearLayout_environment_live_status"
+                    app:layout_constraintStart_toEndOf="@id/imageView_environment_kitchen_camera_icon"
+                    app:layout_constraintTop_toTopOf="@id/imageView_environment_kitchen_camera_icon" />
 
 
                 <!-- ============================================================
@@ -169,13 +169,13 @@
                  ============================================================ -->
 
                 <LinearLayout
-                    android:id="@+id/layoutLiveStatus"
+                    android:id="@+id/linearLayout_environment_live_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ivKitchenCameraIcon">
+                    app:layout_constraintTop_toTopOf="@id/imageView_environment_kitchen_camera_icon">
 
                     <View
                         android:layout_width="10dp"
@@ -183,7 +183,7 @@
                         android:background="@drawable/bg_status_online" />
 
                     <TextView
-                        android:id="@+id/tvLiveMonitoring"
+                        android:id="@+id/textView_environment_live_monitoring"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
@@ -201,7 +201,7 @@
                  ============================================================ -->
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardLiveCamera"
+                    android:id="@+id/cardView_environment_live_camera"
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     app:cardBackgroundColor="@color/white"
@@ -209,7 +209,7 @@
                     app:cardElevation="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivKitchenCameraIcon"
+                    app:layout_constraintTop_toBottomOf="@id/imageView_environment_kitchen_camera_icon"
                     app:strokeColor="#D8E3F0"
                     app:strokeWidth="1dp">
 
@@ -223,13 +223,13 @@
                     -->
 
                         <FrameLayout
-                            android:id="@+id/layoutCameraPreview"
+                            android:id="@+id/frameLayout_environment_camera_preview"
                             android:layout_width="253dp"
                             android:layout_height="105dp"
                             android:layout_margin="8dp"
                             android:background="#E8F5FF"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/layoutCameraInfo"
+                            app:layout_constraintEnd_toStartOf="@id/linearLayout_environment_camera_info"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -260,7 +260,7 @@
                             <!-- 時間戳記 / Timestamp -->
 
                             <TextView
-                                android:id="@+id/tvCameraTimestamp"
+                                android:id="@+id/textView_environment_camera_timestamp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start|top"
@@ -281,7 +281,7 @@
                          ==================================================== -->
 
                         <LinearLayout
-                            android:id="@+id/layoutCameraInfo"
+                            android:id="@+id/linearLayout_environment_camera_info"
                             android:layout_width="118dp"
                             android:layout_height="0dp"
                             android:gravity="center_vertical"
@@ -293,7 +293,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
-                                android:id="@+id/tvCameraLocation"
+                                android:id="@+id/textView_environment_camera_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/environment_location_kitchen"
@@ -315,7 +315,7 @@
                                     android:background="@drawable/bg_status_online" />
 
                                 <TextView
-                                    android:id="@+id/tvCameraOnlineStatus"
+                                    android:id="@+id/textView_environment_camera_online_status"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="6dp"
@@ -337,7 +337,7 @@
      ================================================================ -->
 
                 <LinearLayout
-                    android:id="@+id/layoutSensorStatus"
+                    android:id="@+id/linearLayout_environment_sensor_status"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -346,7 +346,7 @@
                     android:weightSum="3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cardLiveCamera">
+                    app:layout_constraintTop_toBottomOf="@id/cardView_environment_live_camera">
 
 
                     <!-- ============================================================
@@ -355,7 +355,7 @@
                      ============================================================ -->
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardGasStatus"
+                        android:id="@+id/cardView_environment_gas_status"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginEnd="5dp"
@@ -385,7 +385,7 @@
                                 android:orientation="horizontal">
 
                                 <ImageView
-                                    android:id="@+id/ivGasStatus"
+                                    android:id="@+id/imageView_environment_gas_status"
                                     android:layout_width="34dp"
                                     android:layout_height="34dp"
                                     android:contentDescription="@null"
@@ -393,7 +393,7 @@
                                     android:src="@drawable/ic_gas" />
 
                                 <TextView
-                                    android:id="@+id/tvGasStatusTitle"
+                                    android:id="@+id/textView_environment_gas_status_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="5dp"
@@ -411,7 +411,7 @@
                             <!-- Current Status -->
 
                             <TextView
-                                android:id="@+id/tvGasValue"
+                                android:id="@+id/textView_environment_gas_value"
                                 android:layout_width="72dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
@@ -435,7 +435,7 @@
                      ============================================================ -->
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardFlameStatus"
+                        android:id="@+id/cardView_environment_flame_status"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="5dp"
@@ -466,7 +466,7 @@
                                 android:orientation="horizontal">
 
                                 <ImageView
-                                    android:id="@+id/ivFlameStatus"
+                                    android:id="@+id/imageView_environment_flame_status"
                                     android:layout_width="34dp"
                                     android:layout_height="34dp"
                                     android:contentDescription="@null"
@@ -474,7 +474,7 @@
                                     android:src="@drawable/ic_flame" />
 
                                 <TextView
-                                    android:id="@+id/tvFlameStatusTitle"
+                                    android:id="@+id/textView_environment_flame_status_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="5dp"
@@ -492,7 +492,7 @@
                             <!-- Current Status -->
 
                             <TextView
-                                android:id="@+id/tvFlameValue"
+                                android:id="@+id/textView_environment_flame_value"
                                 android:layout_width="72dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
@@ -516,7 +516,7 @@
                      ============================================================ -->
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardPersonStatus"
+                        android:id="@+id/cardView_environment_person_status"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="5dp"
@@ -546,7 +546,7 @@
                                 android:orientation="horizontal">
 
                                 <ImageView
-                                    android:id="@+id/ivPersonStatus"
+                                    android:id="@+id/imageView_environment_person_status"
                                     android:layout_width="34dp"
                                     android:layout_height="34dp"
                                     android:contentDescription="@null"
@@ -554,7 +554,7 @@
                                     android:src="@drawable/ic_person" />
 
                                 <TextView
-                                    android:id="@+id/tvPersonStatusTitle"
+                                    android:id="@+id/textView_environment_person_status_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="5dp"
@@ -572,7 +572,7 @@
                             <!-- Current Status -->
 
                             <TextView
-                                android:id="@+id/tvPersonValue"
+                                android:id="@+id/textView_environment_person_value"
                                 android:layout_width="72dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
@@ -596,7 +596,7 @@
              ================================================================ -->
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardSafetyCountdown"
+                    android:id="@+id/cardView_environment_safety_countdown"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -605,7 +605,7 @@
                     app:cardElevation="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layoutSensorStatus"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_environment_sensor_status"
                     app:strokeColor="#B9DFFF"
                     app:strokeWidth="1dp">
 
@@ -624,7 +624,7 @@
                          ======================================================== -->
 
                         <ImageView
-                            android:id="@+id/ivSafetyCountdown"
+                            android:id="@+id/imageView_environment_safety_countdown"
                             android:layout_width="38dp"
                             android:layout_height="38dp"
                             android:contentDescription="@null"
@@ -640,7 +640,7 @@
                          ======================================================== -->
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCountdownSetting"
+                            android:id="@+id/button_environment_countdown_setting"
                             android:layout_width="wrap_content"
                             android:layout_height="44dp"
                             android:minWidth="0dp"
@@ -667,7 +667,7 @@
                          ======================================================== -->
 
                         <TextView
-                            android:id="@+id/tvCountdownDefault"
+                            android:id="@+id/textView_environment_countdown_default"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
@@ -675,9 +675,9 @@
                             android:text="@string/environment_countdown_default"
                             android:textColor="@color/secondary_text"
                             android:textSize="10sp"
-                            app:layout_constraintEnd_toStartOf="@id/btnCountdownSetting"
-                            app:layout_constraintStart_toEndOf="@id/ivSafetyCountdown"
-                            app:layout_constraintTop_toTopOf="@id/ivSafetyCountdown" />
+                            app:layout_constraintEnd_toStartOf="@id/button_environment_countdown_setting"
+                            app:layout_constraintStart_toEndOf="@id/imageView_environment_safety_countdown"
+                            app:layout_constraintTop_toTopOf="@id/imageView_environment_safety_countdown" />
 
                         <!-- ================================================================
                      Safety Countdown - Timer Display
@@ -686,7 +686,7 @@
 
                         <!-- 01. 倒數狀態 / Countdown Status -->
                         <TextView
-                            android:id="@+id/tvCountdownStatus"
+                            android:id="@+id/textView_environment_countdown_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
@@ -696,12 +696,12 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvCountdownDefault" />
+                            app:layout_constraintTop_toBottomOf="@id/textView_environment_countdown_default" />
 
 
                         <!-- 02. 剩餘時間 / Remaining Time -->
                         <TextView
-                            android:id="@+id/tvCountdownRemaining"
+                            android:id="@+id/textView_environment_countdown_remaining"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
@@ -712,12 +712,12 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvCountdownStatus" />
+                            app:layout_constraintTop_toBottomOf="@id/textView_environment_countdown_status" />
 
 
                         <!-- 03. 手動開始／取消按鈕 / Start or Cancel Timer -->
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCountdownStart"
+                            android:id="@+id/button_environment_countdown_start"
                             style="@style/Widget.Material3.Button"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
@@ -729,7 +729,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvCountdownRemaining" />
+                            app:layout_constraintTop_toBottomOf="@id/textView_environment_countdown_remaining" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -741,14 +741,14 @@
              ================================================================ -->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layoutEnvironmentData"
+                    android:id="@+id/constraintLayout_environment_data"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:paddingBottom="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cardSafetyCountdown">
+                    app:layout_constraintTop_toBottomOf="@id/cardView_environment_safety_countdown">
 
 
                     <!-- ============================================================
@@ -757,7 +757,7 @@
                      ============================================================ -->
 
                     <ImageView
-                        android:id="@+id/ivEnvironmentDataIcon"
+                        android:id="@+id/imageView_environment_data_icon"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:contentDescription="@null"
@@ -773,7 +773,7 @@
                      ============================================================ -->
 
                     <TextView
-                        android:id="@+id/tvEnvironmentDataTitle"
+                        android:id="@+id/textView_environment_data_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -782,9 +782,9 @@
                         android:textColor="@color/title_blue"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/btnEnvironmentLocation"
-                        app:layout_constraintStart_toEndOf="@id/ivEnvironmentDataIcon"
-                        app:layout_constraintTop_toTopOf="@id/ivEnvironmentDataIcon" />
+                        app:layout_constraintEnd_toStartOf="@id/button_environment_location"
+                        app:layout_constraintStart_toEndOf="@id/imageView_environment_data_icon"
+                        app:layout_constraintTop_toTopOf="@id/imageView_environment_data_icon" />
 
 
                     <!-- ============================================================
@@ -793,7 +793,7 @@
                      ============================================================ -->
 
                     <TextView
-                        android:id="@+id/tvEnvironmentDataSubtitle"
+                        android:id="@+id/textView_environment_data_subtitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -802,9 +802,9 @@
                         android:text="@string/environment_temperature_humidity"
                         android:textColor="@color/secondary_text"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toStartOf="@id/btnEnvironmentLocation"
-                        app:layout_constraintStart_toEndOf="@id/ivEnvironmentDataIcon"
-                        app:layout_constraintTop_toBottomOf="@id/tvEnvironmentDataTitle" />
+                        app:layout_constraintEnd_toStartOf="@id/button_environment_location"
+                        app:layout_constraintStart_toEndOf="@id/imageView_environment_data_icon"
+                        app:layout_constraintTop_toBottomOf="@id/textView_environment_data_title" />
 
 
                     <!-- ============================================================
@@ -813,7 +813,7 @@
                      ============================================================ -->
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnEnvironmentLocation"
+                        android:id="@+id/button_environment_location"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="44dp"
@@ -842,7 +842,7 @@
                      ============================================================ -->
 
                     <LinearLayout
-                        android:id="@+id/layoutTemperatureHumidity"
+                        android:id="@+id/linearLayout_environment_temperature_humidity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -851,7 +851,7 @@
                         android:weightSum="2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ivEnvironmentDataIcon">
+                        app:layout_constraintTop_toBottomOf="@id/imageView_environment_data_icon">
 
 
                         <!-- ========================================================
@@ -860,7 +860,7 @@
                          ======================================================== -->
 
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardTemperature"
+                            android:id="@+id/cardView_environment_temperature"
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_marginEnd="6dp"
@@ -883,7 +883,7 @@
                                 <!-- Temperature Icon / 溫度 Icon -->
 
                                 <ImageView
-                                    android:id="@+id/ivTemperature"
+                                    android:id="@+id/imageView_environment_temperature"
                                     android:layout_width="42dp"
                                     android:layout_height="42dp"
                                     android:contentDescription="@null"
@@ -901,7 +901,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/tvTemperatureLabel"
+                                        android:id="@+id/textView_environment_temperature_label"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/environment_temperature"
@@ -909,7 +909,7 @@
                                         android:textSize="12sp" />
 
                                     <TextView
-                                        android:id="@+id/tvTemperatureValue"
+                                        android:id="@+id/textView_environment_temperature_value"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="4dp"
@@ -931,7 +931,7 @@
                          ======================================================== -->
 
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardHumidity"
+                            android:id="@+id/cardView_environment_humidity"
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_marginStart="6dp"
@@ -954,7 +954,7 @@
                                 <!-- Humidity Icon / 濕度 Icon -->
 
                                 <ImageView
-                                    android:id="@+id/ivHumidity"
+                                    android:id="@+id/imageView_environment_humidity"
                                     android:layout_width="42dp"
                                     android:layout_height="42dp"
                                     android:contentDescription="@null"
@@ -972,7 +972,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/tvHumidityLabel"
+                                        android:id="@+id/textView_environment_humidity_label"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/environment_humidity"
@@ -980,7 +980,7 @@
                                         android:textSize="12sp" />
 
                                     <TextView
-                                        android:id="@+id/tvHumidityValue"
+                                        android:id="@+id/textView_environment_humidity_value"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="4dp"
@@ -1005,17 +1005,17 @@
          ================================================================ -->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layoutHistoricalTrend"
+                    android:id="@+id/constraintLayout_environment_historical_trend"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layoutEnvironmentData">
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayout_environment_data">
 
                     <!-- 歷史趨勢標題 / Historical Trend Title -->
                     <TextView
-                        android:id="@+id/tvHistoricalTrendTitle"
+                        android:id="@+id/textView_environment_historical_trend_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/environment_history_title"
@@ -1027,19 +1027,19 @@
 
                     <!-- 日 / 週 / 月切換 / Day Week Month Selector -->
                     <com.google.android.material.button.MaterialButtonToggleGroup
-                        android:id="@+id/toggleHistoryPeriod"
+                        android:id="@+id/materialButtonToggleGroup_environment_history_period"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        app:checkedButton="@id/btnHistoryDay"
+                        app:checkedButton="@id/button_environment_history_day"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvHistoricalTrendTitle"
+                        app:layout_constraintTop_toBottomOf="@id/textView_environment_historical_trend_title"
                         app:selectionRequired="true"
                         app:singleSelection="true">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnHistoryDay"
+                            android:id="@+id/button_environment_history_day"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
@@ -1047,7 +1047,7 @@
                             android:text="@string/environment_history_day" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnHistoryWeek"
+                            android:id="@+id/button_environment_history_week"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
@@ -1055,7 +1055,7 @@
                             android:text="@string/environment_history_week" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnHistoryMonth"
+                            android:id="@+id/button_environment_history_month"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
@@ -1066,7 +1066,7 @@
 
                     <!-- 歷史資料圖表卡片 / Historical Chart Card -->
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardHistoricalChart"
+                        android:id="@+id/cardView_environment_historical_chart"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_marginTop="4dp"
@@ -1075,7 +1075,7 @@
                         app:cardElevation="2dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/toggleHistoryPeriod">
+                        app:layout_constraintTop_toBottomOf="@id/materialButtonToggleGroup_environment_history_period">
 
                         <!-- ================================================================
              雙 Y 軸歷史曲線圖
@@ -1083,7 +1083,7 @@
              ================================================================ -->
 
                         <com.example.familysafety.environment.ui.HistoryChartView
-                            android:id="@+id/historyChartView"
+                            android:id="@+id/historyChartView_environment_history"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingStart="4dp"
