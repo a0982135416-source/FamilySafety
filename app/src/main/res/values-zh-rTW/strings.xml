@@ -112,7 +112,7 @@
     <string name="environment_title">環境監控</string>
     <string name="alert_title">警報中心</string>
     <string name="task_title">任務中心</string>
-    <string name="management_title">管理中心</string>
+    <string name="management_title">管理</string>
 
     <!--
     ========================================================================
@@ -354,4 +354,11 @@ Environment - Location Dialog
     <string name="task_action_start">開始任務</string>
     <string name="task_action_complete">完成任務</string>
     <string name="task_detail_close">關閉</string>
+    <!-- STEP 6-1：管理主畫面 -->
+    <string name="management_member_title">成員管理</string>
+    <string name="management_member_description">管理家庭成員</string>
+    <string name="management_task_title">任務管理</string>
+    <string name="management_task_description">建立與指派任務</string>
+    <string name="management_action_manage">管理</string>
+    <string name="management_in_development">此功能開發中。</string>
 </resources>

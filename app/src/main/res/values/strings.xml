@@ -372,4 +372,11 @@ Environment - Location Dialog
     <string name="task_action_start">Start Task</string>
     <string name="task_action_complete">Complete Task</string>
     <string name="task_detail_close">Close</string>
+    <!-- STEP 6-1: Management Dashboard -->
+    <string name="management_member_title">Member Management</string>
+    <string name="management_member_description">Manage family members</string>
+    <string name="management_task_title">Task Management</string>
+    <string name="management_task_description">Create and assign tasks</string>
+    <string name="management_action_manage">Manage</string>
+    <string name="management_in_development">This feature is in development.</string>
 </resources>

@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.example.familysafety.databinding.FragmentManagementBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * ========================================================================
@@ -60,7 +64,25 @@ class ManagementFragment : Fragment() {
 
 
     // ================================================================
-    // 03. 銷毀 ViewBinding
+    // 03. Dashboard：安全區域與暫時入口，不執行 CRUD
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val basePadding = binding.root.paddingTop
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { root, insets ->
+            root.updatePadding(top = basePadding + insets.getInsets(WindowInsetsCompat.Type.statusBars()).top)
+            insets
+        }
+        ViewCompat.requestApplyInsets(binding.root)
+        listOf(binding.buttonManagementMember, binding.buttonManagementTask).forEach { button ->
+            button.setOnClickListener {
+                Snackbar.make(binding.root, R.string.management_in_development, Snackbar.LENGTH_SHORT)
+                    .setAnchorView(R.id.bottomNavigationView_main_navigation)
+                    .show()
+            }
+        }
+    }
+
+    // 04. 銷毀 ViewBinding
     // Destroy ViewBinding
     // ================================================================
 
