@@ -20,7 +20,7 @@
     -->
 
     <TextView
-        android:id="@+id/tvManagementTitle"
+        android:id="@+id/textView_management_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/management_title"
