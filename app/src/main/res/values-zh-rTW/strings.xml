@@ -338,4 +338,14 @@ Environment - Location Dialog
     <string name="alert_task_mock_dishes">洗碗</string>
     <string name="alert_task_mock_dishes_description">清洗並擦乾用餐後的餐具。</string>
     <string name="alert_filter_scroll_hint">↔ 左右滑動可查看更多篩選</string>
+    <!-- STEP 5-1：任務中心 -->
+    <string name="task_filter_all">全部</string>
+    <string name="task_filter_overdue">逾期</string>
+    <string name="task_empty">目前沒有任務</string>
+    <string name="task_assignee">指派成員：%1$s</string>
+    <string name="task_due_date">截止時間：%1$s</string>
+    <string name="task_mock_tidy">整理客廳</string>
+    <string name="task_mock_tidy_description">收好玩具，清理客廳地板。</string>
+    <string name="task_mock_completed">檢查門戶</string>
+    <string name="task_mock_completed_description">確認家中門戶已關閉。</string>
 </resources>

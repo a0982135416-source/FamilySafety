@@ -356,4 +356,14 @@ Environment - Location Dialog
     <string name="alert_task_mock_dishes">Wash the dishes</string>
     <string name="alert_task_mock_dishes_description">Wash and dry the dishes after the meal.</string>
     <string name="alert_filter_scroll_hint">↔ Swipe sideways for more filters</string>
+    <!-- STEP 5-1: Task Center -->
+    <string name="task_filter_all">All</string>
+    <string name="task_filter_overdue">Overdue</string>
+    <string name="task_empty">No tasks found</string>
+    <string name="task_assignee">Assigned to: %1$s</string>
+    <string name="task_due_date">Due: %1$s</string>
+    <string name="task_mock_tidy">Tidy the living room</string>
+    <string name="task_mock_tidy_description">Put away toys and clear the living room floor.</string>
+    <string name="task_mock_completed">Check the doors</string>
+    <string name="task_mock_completed_description">Check that the doors are closed.</string>
 </resources>

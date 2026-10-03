@@ -1,0 +1,120 @@
+package com.example.familysafety
+
+import android.graphics.Rect
+import android.os.SystemClock
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.scrollTo
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.*
+import org.junit.Test
+import org.junit.runner.RunWith
+
+/** STEP 5-1：兩種語系驗證 Filter、Badge、Empty State、捲動與共用導覽。 */
+@RunWith(AndroidJUnit4::class)
+class TaskCenterIntegrationTest {
+    private val instrumentation = InstrumentationRegistry.getInstrumentation()
+
+    private fun waitForRows(scenario: ActivityScenario<MainActivity>, count: Int) {
+        val deadline = SystemClock.uptimeMillis() + 5_000
+        do {
+            instrumentation.waitForIdleSync()
+            var ready = false
+            scenario.onActivity { activity ->
+                val list = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list)
+                ready = list != null && list.adapter?.itemCount == count
+            }
+            if (ready) return
+            SystemClock.sleep(50)
+        } while (SystemClock.uptimeMillis() < deadline)
+        fail("Task list did not reach $count rows")
+    }
+
+    @Test fun english_filtersBadgesEmptyStateAndNavigation() = verifyFlow("en")
+    @Test fun traditionalChinese_filtersBadgesEmptyStateAndNavigation() = verifyFlow("zh-TW")
+
+    private fun verifyFlow(locale: String) {
+        val previous = AppCompatDelegate.getApplicationLocales()
+        // 設定語系後才 launch，避免切頁中途 Activity 重建。
+        instrumentation.runOnMainSync {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
+        }
+        try {
+            ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+                onView(withId(R.id.navTask)).perform(click())
+                waitForRows(scenario, 6)
+                scenario.onActivity { activity ->
+                    assertTrue(activity.findViewById<View>(R.id.button_task_all).isSelected)
+                    assertEquals(activity.getString(R.string.task_title),
+                        activity.findViewById<TextView>(R.id.textView_task_title).text.toString())
+                    val adapter = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list).adapter as TaskAdapter
+                    assertFalse(adapter.currentList.any { it.task.status == TaskStatus.COMPLETED })
+                }
+                fun select(id: Int, count: Int, status: TaskStatus?) {
+                    onView(withId(id)).perform(scrollTo(), click())
+                    waitForRows(scenario, count)
+                    scenario.onActivity { activity ->
+                        val adapter = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list).adapter as TaskAdapter
+                        if (status != null) assertTrue(adapter.currentList.all { it.task.status == status })
+                        assertTrue(activity.findViewById<View>(id).isSelected)
+                    }
+                }
+                select(R.id.button_task_pending, 3, TaskStatus.PENDING)
+                select(R.id.button_task_in_progress, 3, TaskStatus.IN_PROGRESS)
+                select(R.id.button_task_overdue, 2, null)
+                scenario.onActivity { activity ->
+                    val list = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list)
+                    val adapter = list.adapter as TaskAdapter
+                    assertTrue(adapter.currentList.all { it.overdue })
+                    assertEquals(setOf(TaskStatus.PENDING, TaskStatus.IN_PROGRESS), adapter.currentList.map { it.task.status }.toSet())
+                    val card = list.findViewHolderForAdapterPosition(0)!!.itemView
+                    assertEquals(View.VISIBLE, card.findViewById<View>(R.id.textView_task_item_overdue).visibility)
+                    assertEquals(activity.getString(R.string.task_status_pending),
+                        card.findViewById<TextView>(R.id.textView_task_item_status).text.toString())
+                }
+                select(R.id.button_task_all, 6, null)
+                scenario.onActivity {
+                    (it.findViewById<RecyclerView>(R.id.recyclerView_task_list).layoutManager as androidx.recyclerview.widget.LinearLayoutManager)
+                        .scrollToPositionWithOffset(5, 0)
+                }
+                instrumentation.waitForIdleSync()
+                scenario.onActivity { activity ->
+                    val list = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list)
+                    val card = list.findViewHolderForAdapterPosition(5)!!.itemView
+                    val bounds = Rect()
+                    val nav = Rect()
+                    assertTrue(card.getGlobalVisibleRect(bounds))
+                    activity.findViewById<View>(R.id.bottomNavigationView_main_navigation).getGlobalVisibleRect(nav)
+                    assertTrue(bounds.bottom <= nav.top)
+                    assertEquals(card.height, bounds.height())
+                    val fragment = activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content) as TaskFragment
+                    fragment.submitTasks(emptyList())
+                }
+                onView(withId(R.id.textView_task_empty)).check(matches(isDisplayed()))
+                scenario.onActivity { activity ->
+                    assertEquals(View.GONE, activity.findViewById<View>(R.id.recyclerView_task_list).visibility)
+                    assertEquals(activity.getString(R.string.task_empty), activity.findViewById<TextView>(R.id.textView_task_empty).text.toString())
+                    val fragment = activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content) as TaskFragment
+                    fragment.submitTasks(MockTaskDataSource.create({ activity.getString(it) }))
+                }
+                waitForRows(scenario, 6)
+                scenario.onActivity { assertEquals(View.GONE, it.findViewById<View>(R.id.textView_task_empty).visibility) }
+                onView(withId(R.id.navHome)).perform(click())
+                onView(withId(R.id.navTask)).perform(click())
+                waitForRows(scenario, 6)
+            }
+        } finally {
+            instrumentation.runOnMainSync { AppCompatDelegate.setApplicationLocales(previous) }
+        }
+    }
+}

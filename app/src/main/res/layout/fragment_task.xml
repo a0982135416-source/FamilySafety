@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--
-    ========================================================================
-    任務中心頁面－骨架
-    Task Center Screen - Skeleton
-    ========================================================================
--->
-
+<!-- STEP 5-1：Header、Filter、列表與 Empty State；共用導覽由 MainActivity 管理。 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,22 +7,104 @@
     android:layout_height="match_parent"
     android:background="@color/app_background">
 
-    <!--
-        STEP 2 暫時只顯示頁面名稱。
-        Only the screen title is displayed during STEP 2.
-    -->
-
+    <!-- 01. Header -->
     <TextView
         android:id="@+id/textView_task_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="20dp"
         android:text="@string/task_title"
-        android:textColor="#0B3D75"
+        android:textColor="@color/title_blue"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- 02. Filter Row -->
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView_task_filters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/textView_task_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_task_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/task_filter_all"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                app:cornerRadius="20dp"
+                app:strokeWidth="1dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_task_pending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/task_status_pending"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                app:cornerRadius="20dp"
+                app:strokeWidth="1dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_task_in_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/task_status_in_progress"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                app:cornerRadius="20dp"
+                app:strokeWidth="1dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_task_overdue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_filter_overdue"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                app:cornerRadius="20dp"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- 03. RecyclerView：容器底部已由 MainActivity 限制在導覽列上方 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_task_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView_task_filters"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 04. Empty State -->
+    <TextView
+        android:id="@+id/textView_task_empty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:gravity="center"
+        android:text="@string/task_empty"
+        android:textColor="@color/secondary_text"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView_task_filters"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
