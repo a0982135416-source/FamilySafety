@@ -366,4 +366,10 @@ Environment - Location Dialog
     <string name="task_mock_tidy_description">Put away toys and clear the living room floor.</string>
     <string name="task_mock_completed">Check the doors</string>
     <string name="task_mock_completed_description">Check that the doors are closed.</string>
+    <!-- STEP 5-2: Task Detail -->
+    <string name="task_detail_title">Task Details</string>
+    <string name="task_detail_status">Status: %1$s</string>
+    <string name="task_action_start">Start Task</string>
+    <string name="task_action_complete">Complete Task</string>
+    <string name="task_detail_close">Close</string>
 </resources>

@@ -5,6 +5,13 @@ data class Task(val id: Long, val title: String, val description: String,
                 val assignee: String, val dueDate: Long, val status: TaskStatus) {
     fun isOverdue(now: Long = System.currentTimeMillis()): Boolean =
         now > dueDate && status != TaskStatus.COMPLETED
+
+    /** 只允許向下一階段前進；拒絕跳階、倒退與重複操作。 */
+    fun transitionTo(next: TaskStatus): Task? = when {
+        status == TaskStatus.PENDING && next == TaskStatus.IN_PROGRESS -> copy(status = next)
+        status == TaskStatus.IN_PROGRESS && next == TaskStatus.COMPLETED -> copy(status = next)
+        else -> null
+    }
 }
 
 enum class TaskFilter { ALL, PENDING, IN_PROGRESS, OVERDUE }

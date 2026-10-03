@@ -2,6 +2,13 @@ package com.example.familysafety
 
 /** STEP 5-1：獨立 Mock 資料來源，截止時間相對於建立時刻。 */
 object MockTaskDataSource {
+    /** 狀態更新入口：以最新資料驗證，不修改傳入清單或其他任務。 */
+    fun updateStatus(tasks: List<Task>, id: Long, next: TaskStatus): List<Task> {
+        val current = tasks.find { it.id == id } ?: return tasks
+        val updated = current.transitionTo(next) ?: return tasks
+        return tasks.map { if (it.id == id) updated else it }
+    }
+
     fun create(getString: (Int) -> String, now: Long = System.currentTimeMillis()): List<Task> {
         val hour = 60L * 60_000L
         fun task(id: Long, title: Int, description: Int, member: Int,

@@ -14,6 +14,12 @@ import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.UiController
+import org.hamcrest.Matcher
+import java.text.DateFormat
+import java.util.Date
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.*
@@ -42,6 +48,132 @@ class TaskCenterIntegrationTest {
 
     @Test fun english_filtersBadgesEmptyStateAndNavigation() = verifyFlow("en")
     @Test fun traditionalChinese_filtersBadgesEmptyStateAndNavigation() = verifyFlow("zh-TW")
+
+    @Test fun english_detailsTransitionsAndLifecycle() = verifyDetails("en")
+    @Test fun traditionalChinese_detailsTransitionsAndLifecycle() = verifyDetails("zh-TW")
+
+    private fun verifyDetails(locale: String) {
+        val previous = AppCompatDelegate.getApplicationLocales()
+        instrumentation.runOnMainSync {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
+        }
+        try {
+            ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+                onView(withId(R.id.navTask)).perform(click())
+                waitForRows(scenario, 6)
+                fun openFirst(): Task {
+                    var task: Task? = null
+                    scenario.onActivity { activity ->
+                        val list = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list)
+                        task = (list.adapter as TaskAdapter).currentList.first().task
+                        list.scrollToPosition(0)
+                    }
+                    instrumentation.waitForIdleSync()
+                    onView(withId(R.id.recyclerView_task_list)).perform(object : ViewAction {
+                        override fun getConstraints(): Matcher<View> = isDisplayed()
+                        override fun getDescription() = "Click the first Task Card"
+                        override fun perform(controller: UiController, view: View) {
+                            controller.loopMainThreadUntilIdle()
+                            val card = (view as RecyclerView).findViewHolderForAdapterPosition(0)!!.itemView
+                            click().perform(controller, card)
+                            controller.loopMainThreadUntilIdle()
+                        }
+                    })
+                    onView(withText(R.string.task_detail_title)).check(matches(isDisplayed()))
+                    var expected = ""
+                    scenario.onActivity { activity ->
+                        val current = task!!
+                        val status = if (current.status == TaskStatus.PENDING)
+                            R.string.task_status_pending else R.string.task_status_in_progress
+                        val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT,
+                            activity.resources.configuration.locales[0]).format(Date(current.dueDate))
+                        expected = listOfNotNull(current.title, current.description,
+                            activity.getString(R.string.task_assignee, current.assignee),
+                            activity.getString(R.string.task_due_date, date),
+                            activity.getString(R.string.task_detail_status, activity.getString(status)),
+                            activity.getString(R.string.task_filter_overdue).takeIf { current.isOverdue() })
+                            .joinToString("\n\n")
+                    }
+                    onView(withId(android.R.id.message)).check(matches(withText(expected)))
+                    return task!!
+                }
+                fun action(label: Int) {
+                    onView(withText(label)).perform(click())
+                    instrumentation.waitForIdleSync()
+                    onView(withText(R.string.task_detail_title)).check(androidx.test.espresso.assertion.ViewAssertions.doesNotExist())
+                }
+                fun select(id: Int, count: Int) {
+                    onView(withId(id)).perform(scrollTo(), click())
+                    waitForRows(scenario, count)
+                }
+                // Close 保留原始資料，All 的開始操作只改 badge 不減少數量。
+                val pending = openFirst()
+                action(R.string.task_detail_close)
+                assertEquals(pending, openFirst())
+                action(R.string.task_action_start)
+                waitForRows(scenario, 6)
+                assertEquals(TaskStatus.IN_PROGRESS, openFirst().status)
+                action(R.string.task_detail_close)
+                select(R.id.button_task_pending, 2)
+                openFirst()
+                action(R.string.task_action_start)
+                waitForRows(scenario, 1)
+                openFirst()
+                action(R.string.task_action_start)
+                waitForRows(scenario, 0)
+                onView(withId(R.id.textView_task_empty)).check(matches(isDisplayed()))
+                select(R.id.button_task_overdue, 2)
+                assertEquals(TaskStatus.IN_PROGRESS, openFirst().status)
+                action(R.string.task_detail_close)
+                // 注入單筆逾期 Pending，直接驗證 Pending -> In Progress 保留 Overdue。
+                scenario.onActivity { activity ->
+                    val fragment = activity.supportFragmentManager
+                        .findFragmentById(R.id.fragmentContainerView_main_content) as TaskFragment
+                    fragment.submitTasks(MockTaskDataSource.create({ activity.getString(it) }).filter { it.id == 5L })
+                }
+                waitForRows(scenario, 1)
+                assertEquals(TaskStatus.PENDING, openFirst().status)
+                action(R.string.task_action_start)
+                waitForRows(scenario, 1)
+                assertEquals(TaskStatus.IN_PROGRESS, openFirst().status)
+                action(R.string.task_detail_close)
+                scenario.onActivity { activity ->
+                    val list = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list)
+                    val card = list.findViewHolderForAdapterPosition(0)!!.itemView
+                    assertEquals(View.VISIBLE, card.findViewById<View>(R.id.textView_task_item_overdue).visibility)
+                    assertEquals(activity.getString(R.string.task_status_in_progress),
+                        card.findViewById<TextView>(R.id.textView_task_item_status).text.toString())
+                }
+                openFirst()
+                action(R.string.task_action_complete)
+                waitForRows(scenario, 0)
+                onView(withId(R.id.textView_task_empty)).check(matches(isDisplayed()))
+                select(R.id.button_task_all, 0)
+                // In Progress 完成後立即清空，Dialog 隨 View 銷毀而關閉。
+                scenario.onActivity { activity ->
+                    (activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content) as TaskFragment)
+                        .submitTasks(MockTaskDataSource.create({ activity.getString(it) }).filter { it.id == 3L })
+                }
+                select(R.id.button_task_in_progress, 1)
+                openFirst()
+                action(R.string.task_action_complete)
+                waitForRows(scenario, 0)
+                onView(withId(R.id.textView_task_empty)).check(matches(isDisplayed()))
+                scenario.onActivity { activity ->
+                    (activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content) as TaskFragment)
+                        .submitTasks(MockTaskDataSource.create({ activity.getString(it) }))
+                }
+                waitForRows(scenario, 3)
+                openFirst()
+                scenario.onActivity { it.findViewById<View>(R.id.navHome).performClick() }
+                onView(withText(R.string.task_detail_title)).check(androidx.test.espresso.assertion.ViewAssertions.doesNotExist())
+                onView(withId(R.id.navTask)).perform(click())
+                waitForRows(scenario, 6)
+            }
+        } finally {
+            instrumentation.runOnMainSync { AppCompatDelegate.setApplicationLocales(previous) }
+        }
+    }
 
     private fun verifyFlow(locale: String) {
         val previous = AppCompatDelegate.getApplicationLocales()

@@ -12,7 +12,7 @@ import java.text.DateFormat
 import java.util.Date
 
 /** STEP 5-1：逾期 UI 快照可讓 DiffUtil 偵測時間跨越，不改 stored status。 */
-class TaskAdapter : ListAdapter<TaskAdapter.Item, TaskAdapter.TaskViewHolder>(DIFF) {
+class TaskAdapter(private val onTaskClick: (Task) -> Unit) : ListAdapter<TaskAdapter.Item, TaskAdapter.TaskViewHolder>(DIFF) {
     data class Item(val task: Task, val overdue: Boolean)
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<Item>() {
@@ -23,13 +23,16 @@ class TaskAdapter : ListAdapter<TaskAdapter.Item, TaskAdapter.TaskViewHolder>(DI
     fun submitTasks(tasks: List<Task>, now: Long) = submitList(tasks.map { Item(it, it.isOverdue(now)) })
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TaskViewHolder(
         ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        onTaskClick,
     )
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) = holder.bind(getItem(position))
 
-    class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
+    class TaskViewHolder(private val binding: ItemTaskBinding,
+                         private val onTaskClick: (Task) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) = with(binding) {
             val context = root.context
             val task = item.task
+            root.setOnClickListener { onTaskClick(task) }
             textViewTaskItemTitle.text = task.title
             textViewTaskItemDescription.text = task.description
             textViewTaskItemAssignee.text = context.getString(R.string.task_assignee, task.assignee)

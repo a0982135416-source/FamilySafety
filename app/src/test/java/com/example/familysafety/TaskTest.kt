@@ -8,6 +8,43 @@ class TaskTest {
     private val now = 1_000_000_000L
     private fun mock() = MockTaskDataSource.create({ it.toString() }, now)
 
+    @Test fun transitions_onlyAllowNextStage() {
+        val original = mock().first()
+        TaskStatus.entries.forEach { from ->
+            TaskStatus.entries.forEach { to ->
+                val result = original.copy(status = from).transitionTo(to)
+                val valid = (from == TaskStatus.PENDING && to == TaskStatus.IN_PROGRESS) ||
+                    (from == TaskStatus.IN_PROGRESS && to == TaskStatus.COMPLETED)
+                if (valid) assertEquals(original.copy(status = to), result) else assertNull(result)
+            }
+        }
+    }
+
+    @Test fun mockUpdates_preserveOtherFieldsAndRejectInvalidOrMissingIds() {
+        val tasks = mock()
+        assertSame(tasks, MockTaskDataSource.updateStatus(tasks, 99, TaskStatus.IN_PROGRESS))
+        assertSame(tasks, MockTaskDataSource.updateStatus(tasks, 1, TaskStatus.COMPLETED))
+        val started = MockTaskDataSource.updateStatus(tasks, 1, TaskStatus.IN_PROGRESS)
+        assertEquals(tasks.first().copy(status = TaskStatus.IN_PROGRESS), started.first())
+        assertEquals(tasks.drop(1), started.drop(1))
+        assertEquals(TaskStatus.PENDING, tasks.first().status)
+        assertSame(started, MockTaskDataSource.updateStatus(started, 1, TaskStatus.IN_PROGRESS))
+    }
+
+    @Test fun overdueTransitions_refreshAllFiltersAndEventuallyEmpty() {
+        var tasks = mock().filter { it.id == 5L }
+        tasks = MockTaskDataSource.updateStatus(tasks, 5, TaskStatus.IN_PROGRESS)
+        assertTrue(tasks.single().isOverdue(now))
+        assertTrue(tasks.filterTasks(TaskFilter.PENDING, now).isEmpty())
+        assertEquals(tasks, tasks.filterTasks(TaskFilter.ALL, now))
+        assertEquals(tasks, tasks.filterTasks(TaskFilter.IN_PROGRESS, now))
+        assertEquals(tasks, tasks.filterTasks(TaskFilter.OVERDUE, now))
+        tasks = MockTaskDataSource.updateStatus(tasks, 5, TaskStatus.COMPLETED)
+        assertFalse(tasks.single().isOverdue(now))
+        TaskFilter.entries.forEach { assertTrue(tasks.filterTasks(it, now).isEmpty()) }
+        assertSame(tasks, MockTaskDataSource.updateStatus(tasks, 5, TaskStatus.PENDING))
+    }
+
     @Test fun filters_includeOverdueInOriginalStatus_andExcludeCompleted() {
         val tasks = mock()
         assertEquals(listOf(1L, 2L, 3L, 4L, 5L, 6L), tasks.filterTasks(TaskFilter.ALL, now).map { it.id })
