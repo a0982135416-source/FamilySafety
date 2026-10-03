@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/constraintLayout_login_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8FCFF">
 
     <!-- 頂部裝飾背景 -->
     <ImageView
-        android:id="@+id/ImageView_backgroundTop"
+        android:id="@+id/imageView_login_background_top"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -21,7 +21,7 @@
 
     <!-- 底部裝飾背景 -->
     <ImageView
-        android:id="@+id/ImageView_backgroundBottom"
+        android:id="@+id/imageView_login_background_bottom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -47,7 +47,7 @@
 
             <!-- Logo -->
             <ImageView
-                android:id="@+id/ImageView_logo"
+                android:id="@+id/imageView_login_logo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="102dp"
@@ -58,7 +58,7 @@
 
             <!-- 標題 -->
             <TextView
-                android:id="@+id/TextView_title"
+                android:id="@+id/textView_login_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -68,10 +68,10 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ImageView_logo" />
+                app:layout_constraintTop_toBottomOf="@id/imageView_login_logo" />
 
             <TextView
-                android:id="@+id/TextView_subtitle"
+                android:id="@+id/textView_login_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -80,11 +80,11 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/TextView_title" />
+                app:layout_constraintTop_toBottomOf="@id/textView_login_title" />
 
             <!-- 登入卡片區域 -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/CardView_login"
+                android:id="@+id/cardView_login_form"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
@@ -94,7 +94,7 @@
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/TextView_subtitle">
+                app:layout_constraintTop_toBottomOf="@id/textView_login_subtitle">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -103,16 +103,16 @@
 
                     <!-- 帳號欄位 -->
                     <ImageView
-                        android:id="@+id/ImageView_accountIcon"
+                        android:id="@+id/imageView_login_account_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/user"
-                        app:layout_constraintBottom_toBottomOf="@id/TextView_accountLabel"
+                        app:layout_constraintBottom_toBottomOf="@id/textView_login_account_label"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/TextView_accountLabel" />
+                        app:layout_constraintTop_toTopOf="@id/textView_login_account_label" />
 
                     <TextView
-                        android:id="@+id/TextView_accountLabel"
+                        android:id="@+id/textView_login_account_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -120,12 +120,12 @@
                         android:textColor="#1A4375"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/ImageView_accountIcon"
-                        app:layout_constraintStart_toEndOf="@id/ImageView_accountIcon"
+                        app:layout_constraintBottom_toBottomOf="@id/imageView_login_account_icon"
+                        app:layout_constraintStart_toEndOf="@id/imageView_login_account_icon"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/TextInputLayout_account"
+                        android:id="@+id/textInputLayout_login_account"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -138,10 +138,10 @@
                         app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/TextView_accountLabel">
+                        app:layout_constraintTop_toBottomOf="@id/textView_login_account_label">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/TextInputEditText_account"
+                            android:id="@+id/editText_login_account"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="family-safe2024"
@@ -152,16 +152,16 @@
 
                     <!-- 密碼欄位 -->
                     <ImageView
-                        android:id="@+id/ImageView_passwordIcon"
+                        android:id="@+id/imageView_login_password_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/lock"
-                        app:layout_constraintBottom_toBottomOf="@id/TextView_passwordLabel"
+                        app:layout_constraintBottom_toBottomOf="@id/textView_login_password_label"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/TextView_passwordLabel" />
+                        app:layout_constraintTop_toTopOf="@id/textView_login_password_label" />
 
                     <TextView
-                        android:id="@+id/TextView_passwordLabel"
+                        android:id="@+id/textView_login_password_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -170,11 +170,11 @@
                         android:textColor="#1A4375"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@id/ImageView_passwordIcon"
-                        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_account" />
+                        app:layout_constraintStart_toEndOf="@id/imageView_login_password_icon"
+                        app:layout_constraintTop_toBottomOf="@id/textInputLayout_login_account" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/TextInputLayout_password"
+                        android:id="@+id/textInputLayout_login_password"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -187,12 +187,12 @@
                         app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/TextView_passwordLabel"
+                        app:layout_constraintTop_toBottomOf="@id/textView_login_password_label"
                         app:passwordToggleEnabled="true"
                         app:passwordToggleTint="#5A7D9A">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/TextInputEditText_password"
+                            android:id="@+id/editText_login_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
@@ -201,7 +201,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
-                        android:id="@+id/TextView_passwordHint"
+                        android:id="@+id/textView_login_password_hint"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -210,11 +210,11 @@
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_password" />
+                        app:layout_constraintTop_toBottomOf="@id/textInputLayout_login_password" />
 
                     <!-- 記住登入 -->
                     <CheckBox
-                        android:id="@+id/CheckBox_rememberMe"
+                        android:id="@+id/checkBox_login_remember_me"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -222,13 +222,13 @@
                         android:text="記住登入資訊"
                         android:textColor="#1A4375"
                         android:textSize="15sp"
-                        app:layout_constraintBottom_toTopOf="@id/MaterialButton_login"
+                        app:layout_constraintBottom_toTopOf="@id/button_login_sign_in"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/TextView_passwordHint" />
+                        app:layout_constraintTop_toBottomOf="@id/textView_login_password_hint" />
 
                     <!-- 登入按鈕 -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/MaterialButton_login"
+                        android:id="@+id/button_login_sign_in"
                         android:layout_width="0dp"
                         android:layout_height="56dp"
                         android:layout_marginTop="24dp"
@@ -241,11 +241,11 @@
                         app:cornerRadius="28dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/CheckBox_rememberMe" />
+                        app:layout_constraintTop_toBottomOf="@id/checkBox_login_remember_me" />
 
                     <!-- 忘記密碼 -->
                     <TextView
-                        android:id="@+id/TextView_forgotPassword"
+                        android:id="@+id/textView_login_forgot_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -255,7 +255,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/MaterialButton_login" />
+                        app:layout_constraintTop_toBottomOf="@id/button_login_sign_in" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>

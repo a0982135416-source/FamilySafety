@@ -222,7 +222,7 @@ class AlertCenterIntegrationTest {
             val cardBounds = android.graphics.Rect()
             val navBounds = android.graphics.Rect()
             assertTrue(lastCard.getGlobalVisibleRect(cardBounds))
-            activity.findViewById<View>(R.id.bottomNavigation).getGlobalVisibleRect(navBounds)
+            activity.findViewById<View>(R.id.bottomNavigationView_main_navigation).getGlobalVisibleRect(navBounds)
             assertTrue(cardBounds.bottom <= navBounds.top)
             assertEquals(lastCard.height, cardBounds.height())
         }

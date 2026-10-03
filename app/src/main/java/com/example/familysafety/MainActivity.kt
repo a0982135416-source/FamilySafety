@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         // 預設選擇首頁
         // Select Home by default
-        binding.bottomNavigation.selectedItemId =
+        binding.bottomNavigationViewMainNavigation.selectedItemId =
             R.id.navHome
 
 
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBottomNavigation() {
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
+        binding.bottomNavigationViewMainNavigation.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
 
@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(
-                R.id.fragmentContainer,
+                R.id.fragmentContainerView_main_content,
                 fragment
             )
             .commit()
