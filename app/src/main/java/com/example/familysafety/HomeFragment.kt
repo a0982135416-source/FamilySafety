@@ -1,12 +1,15 @@
 package com.example.familysafety
 
 import android.os.Bundle
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.familysafety.databinding.FragmentHomeBinding
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * ========================================================================
@@ -28,6 +31,7 @@ class HomeFragment : Fragment() {
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
     private var _binding: FragmentHomeBinding? = null
+    private var profileDialog: AlertDialog? = null
 
     private val binding: FragmentHomeBinding
         get() = _binding!!
@@ -67,6 +71,7 @@ class HomeFragment : Fragment() {
 
         setupTaskProgress()
         setupTodayTaskList()
+        binding.frameLayoutHomeProfile.setOnClickListener { showProfile() }
     }
 
 
@@ -162,11 +167,38 @@ class HomeFragment : Fragment() {
 
 
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-    // 06. 清除 ViewBinding
+    // 06. Profile / Logout：只使用目前登入的 process-memory session
+    private fun showProfile() {
+        if (_binding == null || profileDialog?.isShowing == true) return
+        val member = MockAuthDataSource.getCurrentMember() ?: return
+        val role = getString(if (member.role == MemberRole.ADMIN)
+            R.string.management_role_admin else R.string.management_role_member)
+        fun line(key: Int, value: String) = getString(R.string.management_label_value, getString(key), value)
+        val message = listOf(line(R.string.management_name, member.name),
+            line(R.string.management_account, member.account), line(R.string.management_email, member.email),
+            line(R.string.management_role, role)).joinToString("\n")
+        val dialog = MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.management_account)
+            .setMessage(message).setNegativeButton(R.string.task_detail_close, null)
+            .setPositiveButton(R.string.auth_logout) { _, _ ->
+                MockAuthDataSource.logout()
+                val activity = requireActivity()
+                startActivity(Intent(activity, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
+                activity.finish()
+            }.create()
+        profileDialog = dialog
+        dialog.setOnDismissListener { if (profileDialog === dialog) profileDialog = null }
+        dialog.show()
+    }
+
+    // 07. 清除 ViewBinding / Dialog
     // Clear ViewBinding
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
     override fun onDestroyView() {
+        profileDialog?.dismiss()
+        profileDialog = null
         super.onDestroyView()
 
         _binding = null

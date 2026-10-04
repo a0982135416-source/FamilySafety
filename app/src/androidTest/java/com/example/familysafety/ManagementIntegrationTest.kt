@@ -26,7 +26,7 @@ import org.junit.runner.RunWith
 /** STEP 6-1：雙語 Dashboard、入口提示及既有五頁導覽。 */
 @RunWith(AndroidJUnit4::class)
 class ManagementIntegrationTest {
-    @Before fun resetMocks() { MockTaskItemDataSource.resetForTests(); MockMemberDataSource.resetForTests(); MockTaskDataSource.resetForTests() }
+    @Before fun resetMocks() { MockAuthDataSource.resetForTests(); MockTaskItemDataSource.resetForTests(); MockMemberDataSource.resetForTests(); MockTaskDataSource.resetForTests() }
     @Test fun english_dashboardAndNavigation() = verifyDashboard("en", "Management")
     @Test fun traditionalChinese_dashboardAndNavigation() = verifyDashboard("zh-TW", "管理")
 

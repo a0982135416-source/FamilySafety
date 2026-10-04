@@ -6,7 +6,7 @@ import org.junit.Test
 
 class ManagementDataTest {
     private val text: (Int) -> String = { it.toString() }
-    @Before fun reset() { MockTaskItemDataSource.resetForTests(); MockMemberDataSource.resetForTests(); MockTaskDataSource.resetForTests() }
+    @Before fun reset() { MockAuthDataSource.resetForTests(); MockTaskItemDataSource.resetForTests(); MockMemberDataSource.resetForTests(); MockTaskDataSource.resetForTests(); assertNotNull(MockAuthDataSource.login("alex", MockAuthDataSource.INITIAL_PASSWORD)) }
 
     @Test fun initialMembersHaveExpectedRoles_andUniqueIds() {
         val members = MockMemberDataSource.getMembers()
@@ -84,10 +84,10 @@ class ManagementDataTest {
         assertNull(completed.transitionTo(TaskStatus.PENDING))
         assertFalse(MockTaskDataSource.getTasks(text).filterTasks(TaskFilter.ALL, expired).contains(completed))
     }
-    @Test fun taskItemsHaveThreeLocalizedSeedsAndUniqueSequentialIds() {
+    @Test fun taskItemsHaveEightLocalizedSeedsAndUniqueSequentialIds() {
         val initial = MockTaskItemDataSource.getItems(text)
-        assertEquals(3, initial.size)
-        assertEquals(3, initial.map { it.id }.toSet().size)
+        assertEquals(8, initial.size)
+        assertEquals(8, initial.map { it.id }.toSet().size)
         val added = MockTaskItemDataSource.addItem(" Custom item ", "", text)!!
         val next = MockTaskItemDataSource.addItem("Second item", " Details ", text)!!
         assertEquals(initial.maxOf { it.id } + 1, added.id)
@@ -96,11 +96,11 @@ class ManagementDataTest {
         assertEquals("", added.description)
         assertEquals("Details", next.description)
         val localized = MockTaskItemDataSource.getItems { "localized:$it" }
-        assertEquals(5, localized.size)
-        assertEquals(5, localized.map { it.id }.toSet().size)
+        assertEquals(10, localized.size)
+        assertEquals(10, localized.map { it.id }.toSet().size)
         assertTrue(localized.first().title.startsWith("localized:"))
-        assertEquals(added, localized[3])
-        assertEquals(next, localized[4])
+        assertEquals(added, localized[8])
+        assertEquals(next, localized[9])
     }
 
     @Test fun blankItemTitleDoesNotMutateList() {
@@ -109,7 +109,7 @@ class ManagementDataTest {
         assertEquals(initial, MockTaskItemDataSource.getItems(text))
     }
 
-    @Test fun taskWithOptionalItemDescriptionIsValid_andLegacyTasksRemainCompatible() {
+    @Test fun taskWithOptionalItemDescriptionIsValid_andInitialTasksHaveItemReferences() {
         val item = MockTaskItemDataSource.addItem("Optional description", "", text)!!
         val now = System.currentTimeMillis()
         val task = MockTaskDataSource.addTask(item.id, 2, now + 1_000, text, now)!!
@@ -117,6 +117,6 @@ class ManagementDataTest {
         assertEquals("", task.description)
         assertEquals(TaskStatus.PENDING, task.status)
         assertEquals(setOf(TaskStatus.PENDING, TaskStatus.IN_PROGRESS, TaskStatus.COMPLETED), TaskStatus.entries.toSet())
-        assertTrue(MockTaskDataSource.create(text).all { it.taskItemId == null })
+        assertTrue(MockTaskDataSource.create(text).all { it.taskItemId != null })
     }
 }

@@ -51,6 +51,7 @@
                 <!-- 選單按鈕 -->
                 <ImageButton
                     android:id="@+id/imageButton_home_menu"
+                    android:visibility="gone"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_marginStart="16dp"
@@ -66,6 +67,9 @@
                 <!-- 使用者頭像 -->
                 <FrameLayout
                     android:id="@+id/frameLayout_home_profile"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="@string/auth_profile"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="44dp"

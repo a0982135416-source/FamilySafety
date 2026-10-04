@@ -73,41 +73,52 @@ class ManagementFragment : Fragment() {
     })
 
     // 02. Member / Task 列表：簡單 RecyclerView，不重做 Task Center Card
-    private fun showList(title: Int, add: Int, id: Int, rows: List<String>, onAdd: () -> Unit) {
+    private fun showList(title: Int, add: Int, id: Int, rows: List<ManagementRow>, onAdd: () -> Unit) {
         if (_binding == null || !isAdded || dialogs.any { it.isShowing }) return
+        lateinit var listDialog: AlertDialog
         val list = RecyclerView(requireContext()).apply {
             this.id = id
             layoutManager = LinearLayoutManager(context)
             setPadding(dp(24), dp(8), dp(24), dp(8))
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 minOf(dp(320), resources.displayMetrics.heightPixels / 2))
-            adapter = ManagementRowsAdapter(rows)
+            adapter = ManagementRowsAdapter(rows) { action ->
+                if (MockAuthDataSource.canManage() && _binding != null) {
+                    listDialog.dismiss()
+                    action()
+                }
+            }
         }
-        show(MaterialAlertDialogBuilder(requireContext()).setTitle(title).setView(list)
+        val builder = MaterialAlertDialogBuilder(requireContext()).setTitle(title).setView(list)
             .setNegativeButton(R.string.task_detail_close, null)
-            .setPositiveButton(add) { dialog, _ ->
-                dialog.dismiss()
-                if (_binding != null) onAdd()
-            }.create())
+        // STEP 7-C：清單仍可查看；只有目前 ADMIN session 才顯示 Add。
+        if (MockAuthDataSource.canManage()) builder.setPositiveButton(add) { dialog, _ ->
+            if (!MockAuthDataSource.canManage()) return@setPositiveButton
+            dialog.dismiss()
+            if (_binding != null) onAdd()
+        }
+        listDialog = builder.create()
+        show(listDialog)
     }
 
     private fun showMembers() = showList(R.string.management_member_title, R.string.management_add_member,
         R.id.recyclerView_management_member, MockMemberDataSource.getMembers().map {
-            listOf(it.name, label(R.string.management_account, it.account),
+            ManagementRow("member:${it.id}", listOf(it.name, label(R.string.management_account, it.account),
                 label(R.string.management_email, it.email), label(R.string.management_role, role(it.role)))
-                .joinToString("\n")
+                .joinToString("\n"), { editMember(it.id) }, { deleteMember(it.id) })
         }, ::addMember)
 
     private fun showTasks() = showList(R.string.management_task_title, R.string.management_add_task,
         R.id.recyclerView_management_task, MockTaskDataSource.getTasks { getString(it) }.map {
-            listOf(it.title, getString(R.string.task_assignee, it.assignee),
+            ManagementRow("task:${it.id}", listOf(it.title, getString(R.string.task_assignee, it.assignee),
                 getString(R.string.task_due_date, date(it.dueDate)),
-                getString(R.string.task_detail_status, status(it.status))).joinToString("\n")
+                getString(R.string.task_detail_status, status(it.status))).joinToString("\n"), { editTask(it.id) }, { deleteTask(it.id) })
         }, ::addTask)
 
     private fun showTaskItems() = showList(R.string.management_task_item_title, R.string.management_add_task_item,
         R.id.recyclerView_management_task_item, MockTaskItemDataSource.getItems { getString(it) }.map {
-            listOf(it.title, it.description).joinToString("\n")
+            ManagementRow("item:${it.id}", listOf(it.title, it.description).joinToString("\n"),
+                { editTaskItem(it.id) }, { deleteTaskItem(it.id) })
         }, ::addTaskItem)
 
     // 03. 表單共用元件：資源文字、必填驗證及可捲動內容
@@ -143,14 +154,21 @@ class ManagementFragment : Fragment() {
         }
         return valid
     }
-    private fun formDialog(title: Int, content: LinearLayout): AlertDialog =
+    private fun formDialog(title: Int, content: LinearLayout, action: Int = title): AlertDialog =
         MaterialAlertDialogBuilder(requireContext()).setTitle(title)
             .setView(ScrollView(requireContext()).apply { addView(content) })
             .setNegativeButton(R.string.alert_resolve_dialog_cancel, null)
-            .setPositiveButton(title, null).create()
+            .setPositiveButton(action, null).create()
 
-    // 04. 新增 Member：不設定密碼、不做 Edit / Delete
-    private fun addMember() {
+    // 04. Member Create / Update：保留 stable ID 與 credential 關聯。
+    private fun addMember() = memberForm(null)
+    private fun editMember(id: Int) {
+        if (!MockAuthDataSource.canManage()) return
+        val member = MockMemberDataSource.getMembers().find { it.id == id } ?: return
+        memberForm(member)
+    }
+    private fun memberForm(existing: Member?) {
+        if (!MockAuthDataSource.canManage() || _binding == null || !isAdded) return
         val content = form()
         val name = content.field(R.id.editText_management_member_name, R.string.management_name)
         val account = content.field(R.id.editText_management_member_account, R.string.management_account)
@@ -158,42 +176,72 @@ class ManagementFragment : Fragment() {
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
         val roles = MemberRole.entries
         val selection = content.selection(R.id.spinner_management_member_role, R.string.management_role,
-            roles.map(::role), roles.indexOf(MemberRole.MEMBER))
-        val dialog = formDialog(R.string.management_add_member, content)
+            roles.map(::role), roles.indexOf(existing?.role ?: MemberRole.MEMBER))
+        name.setText(existing?.name.orEmpty())
+        account.setText(existing?.account.orEmpty())
+        email.setText(existing?.email.orEmpty())
+        val dialog = formDialog(if (existing == null) R.string.management_add_member else R.string.management_edit_member,
+            content, if (existing == null) R.string.management_add_member else R.string.management_save)
         show(dialog)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            if (_binding == null || !required(name, account, email)) return@setOnClickListener
-            val member = MockMemberDataSource.addMember(name.text.toString(), account.text.toString(),
+            if (!MockAuthDataSource.canManage() || _binding == null || !required(name, account, email)) return@setOnClickListener
+            val member = if (existing == null) MockMemberDataSource.addMember(name.text.toString(), account.text.toString(),
+                email.text.toString(), roles[selection.selectedItemPosition])
+            else MockMemberDataSource.updateMember(existing.id, name.text.toString(), account.text.toString(),
                 email.text.toString(), roles[selection.selectedItemPosition])
             if (member != null) { dialog.dismiss(); showMembers() }
         }
     }
 
-    // 05. 工作項目：標題必填，說明可空白，不做 Edit / Delete
-    private fun addTaskItem() {
+    // 05. TaskItem Create / Update：同步引用它的共享 Task。
+    private fun addTaskItem() = itemForm(null)
+    private fun editTaskItem(id: Int) {
+        if (!MockAuthDataSource.canManage()) return
+        val item = MockTaskItemDataSource.getItems { getString(it) }.find { it.id == id } ?: return
+        itemForm(item)
+    }
+    private fun itemForm(existing: TaskItem?) {
+        if (!MockAuthDataSource.canManage() || _binding == null || !isAdded) return
         val content = form()
         val title = content.field(R.id.editText_management_task_item_title, R.string.management_task_name)
         val description = content.field(R.id.editText_management_task_item_description,
             R.string.management_task_description_label,
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE).apply { minLines = 2 }
-        val dialog = formDialog(R.string.management_add_task_item, content)
+        title.setText(existing?.title.orEmpty())
+        description.setText(existing?.description.orEmpty())
+        val dialog = formDialog(if (existing == null) R.string.management_add_task_item else R.string.management_edit_item,
+            content, if (existing == null) R.string.management_add_task_item else R.string.management_save)
         show(dialog)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            if (_binding == null || !required(title)) return@setOnClickListener
-            val item = MockTaskItemDataSource.addItem(title.text.toString(), description.text.toString()) { getString(it) }
+            if (!MockAuthDataSource.canManage() || _binding == null || !required(title)) return@setOnClickListener
+            val item = if (existing == null) MockTaskItemDataSource.addItem(title.text.toString(), description.text.toString()) { getString(it) }
+            else MockTaskItemDataSource.updateItem(existing.id, title.text.toString(), description.text.toString()) { getString(it) }
             if (item != null) { dialog.dismiss(); showTaskItems() }
         }
     }
 
-    // 06. 新增 Task：選擇既有工作項目與成員，未來日期，唯讀 PENDING
-    private fun addTask() {
+    // 06. Task Create / Update：唯讀 Status，不改變 Task Center lifecycle。
+    private fun addTask() = taskForm(null)
+    private fun editTask(id: Long) {
+        if (!MockAuthDataSource.canManage()) return
+        val task = MockTaskDataSource.getTasks { getString(it) }.find { it.id == id } ?: return
+        taskForm(task)
+    }
+    private fun taskForm(existing: Task?) {
+        if (!MockAuthDataSource.canManage() || _binding == null || !isAdded) return
         val content = form()
         val items = MockTaskItemDataSource.getItems { getString(it) }
+        if (existing == null && items.isEmpty()) {
+            notice(R.string.management_add_task, R.string.management_task_choices_required, ::showTasks)
+            return
+        }
+        // Legacy tasks have no taskItemId; preserve their current text unless an item is selected.
+        val choices: List<TaskItem?> = if (existing != null && existing.taskItemId == null) listOf(null) + items else items
         val taskItem = content.selection(R.id.spinner_management_task_item, R.string.management_task_item,
-            items.map { it.title })
+            choices.map { it?.title ?: existing!!.title }, choices.indexOfFirst { it?.id == existing?.taskItemId }.coerceAtLeast(0))
         val members = MockMemberDataSource.getMembers()
-        val assignee = content.selection(R.id.spinner_management_task_assignee, R.string.management_assignee, members.map { it.name })
-        var dueDate = Calendar.getInstance().apply {
+        val assignee = content.selection(R.id.spinner_management_task_assignee, R.string.management_assignee, members.map { it.name }, members.indexOfFirst { it.id == existing?.assigneeId }.coerceAtLeast(0))
+        var dueDate = existing?.dueDate ?: Calendar.getInstance().apply {
             add(Calendar.DAY_OF_MONTH, 1); set(Calendar.HOUR_OF_DAY, 23); set(Calendar.MINUTE, 59)
             set(Calendar.SECOND, 59); set(Calendar.MILLISECOND, 0)
         }.timeInMillis
@@ -219,22 +267,71 @@ class ManagementFragment : Fragment() {
         }
         content.addView(TextView(requireContext()).apply {
             id = R.id.textView_management_task_status
-            text = getString(R.string.task_detail_status, getString(R.string.task_status_pending))
+            text = getString(R.string.task_detail_status, status(existing?.status ?: TaskStatus.PENDING))
             setPadding(0, dp(12), 0, dp(12))
             setTextColor(ContextCompat.getColor(context, R.color.title_blue))
         })
-        val dialog = formDialog(R.string.management_add_task, content)
+        val dialog = formDialog(if (existing == null) R.string.management_add_task else R.string.management_edit_task,
+            content, if (existing == null) R.string.management_add_task else R.string.management_save)
         show(dialog)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            if (_binding == null) return@setOnClickListener
-            if (dueDate <= System.currentTimeMillis()) {
+            if (!MockAuthDataSource.canManage() || _binding == null) return@setOnClickListener
+            if (dueDate <= System.currentTimeMillis() && dueDate != existing?.dueDate) {
                 due.error = getString(R.string.management_future_due); return@setOnClickListener
             }
             val member = members.getOrNull(assignee.selectedItemPosition) ?: return@setOnClickListener
-            val item = items.getOrNull(taskItem.selectedItemPosition) ?: return@setOnClickListener
-            val task = MockTaskDataSource.addTask(item.id, member.id,
-                dueDate, { getString(it) })
+            val item = choices.getOrNull(taskItem.selectedItemPosition)
+            val task = if (existing == null) {
+                if (item == null) return@setOnClickListener
+                MockTaskDataSource.addTask(item.id, member.id, dueDate, { getString(it) })
+            } else MockTaskDataSource.updateTask(existing.id, item?.id, member.id, dueDate, { getString(it) })
             if (task != null) { dialog.dismiss(); showTasks() }
+        }
+    }
+
+    // 07. Delete confirmation + fresh permission/reference checks at submission.
+    private fun confirmDelete(name: String, action: () -> Unit) {
+        if (!MockAuthDataSource.canManage() || _binding == null || !isAdded) return
+        show(MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.management_delete)
+            .setMessage(name + "\n\n" + getString(R.string.management_delete_confirm))
+            .setNegativeButton(R.string.alert_resolve_dialog_cancel, null)
+            .setPositiveButton(R.string.management_delete) { dialog, _ ->
+                dialog.dismiss()
+                if (MockAuthDataSource.canManage() && _binding != null) action()
+            }.create())
+    }
+    private fun notice(title: Int, message: Int, after: () -> Unit) {
+        if (_binding == null || !isAdded) return
+        show(MaterialAlertDialogBuilder(requireContext()).setTitle(title).setMessage(message)
+            .setPositiveButton(R.string.auth_ok) { dialog, _ -> dialog.dismiss(); if (_binding != null) after() }.create())
+    }
+    private fun deleteMember(id: Int) {
+        if (!MockAuthDataSource.canManage()) return
+        val member = MockMemberDataSource.getMembers().find { it.id == id } ?: return
+        confirmDelete(member.name) {
+            when {
+                MockAuthDataSource.getCurrentMember()?.id == id -> notice(R.string.management_cannot_delete_member,
+                    R.string.management_delete_self, ::showMembers)
+                MockTaskDataSource.referencesMember(id) { getString(it) } -> notice(R.string.management_cannot_delete_member,
+                    R.string.management_member_referenced, ::showMembers)
+                MockMemberDataSource.deleteMember(id) { getString(it) } -> showMembers()
+            }
+        }
+    }
+    private fun deleteTaskItem(id: Int) {
+        if (!MockAuthDataSource.canManage()) return
+        val item = MockTaskItemDataSource.getItems { getString(it) }.find { it.id == id } ?: return
+        confirmDelete(item.title) {
+            if (MockTaskDataSource.referencesItem(id) { getString(it) }) notice(R.string.management_cannot_delete_item,
+                R.string.management_item_referenced, ::showTaskItems)
+            else if (MockTaskItemDataSource.deleteItem(id) { getString(it) }) showTaskItems()
+        }
+    }
+    private fun deleteTask(id: Long) {
+        if (!MockAuthDataSource.canManage()) return
+        val task = MockTaskDataSource.getTasks { getString(it) }.find { it.id == id } ?: return
+        confirmDelete(task.title) {
+            if (MockTaskDataSource.deleteTask(id) { getString(it) }) showTasks()
         }
     }
 
@@ -246,16 +343,37 @@ class ManagementFragment : Fragment() {
     }
 }
 
-/** 只顯示管理用文字清單，不操作資料來源或導航。 */
-private class ManagementRowsAdapter(private val rows: List<String>) : RecyclerView.Adapter<ManagementRowsAdapter.Holder>() {
-    class Holder(val text: TextView) : RecyclerView.ViewHolder(text)
+/** Stable ID tags identify records; positions only render rows. */
+private data class ManagementRow(val key: String, val text: String, val edit: () -> Unit, val delete: () -> Unit)
+
+private class ManagementRowsAdapter(private val rows: List<ManagementRow>,
+                                    private val onAction: (() -> Unit) -> Unit) : RecyclerView.Adapter<ManagementRowsAdapter.Holder>() {
+    init { setHasStableIds(true) }
+    override fun getItemId(position: Int) = rows[position].key.substringAfter(':').toLong()
+    class Holder(val root: LinearLayout, val text: TextView, val actions: LinearLayout,
+                 val edit: MaterialButton, val delete: MaterialButton) : RecyclerView.ViewHolder(root)
     override fun getItemCount() = rows.size
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(TextView(parent.context).apply {
-        setTextColor(ContextCompat.getColor(context, R.color.title_blue))
-        textSize = 16f
-        val padding = (12 * resources.displayMetrics.density).toInt()
-        setPadding(0, padding, 0, padding)
-        layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-    })
-    override fun onBindViewHolder(holder: Holder, position: Int) { holder.text.text = rows[position] }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val context = parent.context
+        val padding = (12 * context.resources.displayMetrics.density).toInt()
+        val root = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, padding, 0, padding)
+            layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
+        val text = TextView(context).apply { setTextColor(ContextCompat.getColor(context, R.color.title_blue)); textSize = 16f }
+        val actions = LinearLayout(context).apply { orientation = LinearLayout.HORIZONTAL }
+        val edit = MaterialButton(context).apply { setText(R.string.management_edit) }
+        val delete = MaterialButton(context).apply { setText(R.string.management_delete) }
+        root.addView(text); root.addView(actions); actions.addView(edit); actions.addView(delete)
+        return Holder(root, text, actions, edit, delete)
+    }
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        val row = rows[position]
+        holder.root.tag = row.key
+        holder.text.text = row.text
+        holder.actions.visibility = if (MockAuthDataSource.canManage()) View.VISIBLE else View.GONE
+        holder.edit.setOnClickListener { onAction(row.edit) }
+        holder.delete.setOnClickListener { onAction(row.delete) }
+    }
 }

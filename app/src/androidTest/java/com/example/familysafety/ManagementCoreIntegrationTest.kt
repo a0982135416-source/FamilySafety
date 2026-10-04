@@ -34,7 +34,7 @@ import java.util.Calendar
 @RunWith(AndroidJUnit4::class)
 class ManagementCoreIntegrationTest {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
-    @Before fun reset() { MockTaskItemDataSource.resetForTests(); MockMemberDataSource.resetForTests(); MockTaskDataSource.resetForTests() }
+    @Before fun reset() { MockAuthDataSource.resetForTests(); MockTaskItemDataSource.resetForTests(); MockMemberDataSource.resetForTests(); MockTaskDataSource.resetForTests(); assertNotNull(MockAuthDataSource.login("alex", MockAuthDataSource.INITIAL_PASSWORD)) }
     @Test fun english_addMemberAssignTaskAndComplete() = verify("en")
     @Test fun traditionalChinese_addMemberAssignTaskAndComplete() = verify("zh-TW")
 

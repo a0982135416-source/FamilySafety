@@ -403,4 +403,60 @@ Environment - Location Dialog
     <string name="management_task_item">Task Item</string>
     <string name="management_item_mock_gas">Check Gas</string>
     <string name="management_item_mock_gas_description">Check that the gas valve is closed.</string>
+
+    <!-- STEP 7: Auth Mock MVP -->
+    <string name="auth_tagline">Keeping your family safe every day</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_password_length">6–12 characters; include an English letter and a digit</string>
+    <string name="auth_login">Login</string>
+    <string name="auth_forgot_action">Forgot Password?</string>
+    <string name="auth_forgot_title">Forgot Password</string>
+    <string name="auth_forgot_prompt">Reset your password</string>
+    <string name="auth_forgot_description">Enter the email address registered to your account.</string>
+    <string name="auth_email_hint">Enter your email address</string>
+    <string name="auth_email_example">Example: alex@example.test</string>
+    <string name="auth_mock_email_notice">Mock flow only. No email will be sent.</string>
+    <string name="auth_back_login">Back to Login</string>
+    <string name="auth_back">Back</string>
+    <string name="auth_back_chevron">‹</string>
+    <string name="auth_back_arrow">←</string>
+    <string name="auth_info_symbol">ⓘ</string>
+    <string name="auth_verify_title">Verify Email</string>
+    <string name="auth_code_prompt">Enter verification code</string>
+    <string name="auth_verify_description">Enter the 6-digit mock reset code for this email:</string>
+    <string name="auth_verify">Verify</string>
+    <string name="auth_code_digit">Code digit %1$d</string>
+    <string name="auth_reset_title">Reset Password</string>
+    <string name="auth_reset_prompt">Create your new password</string>
+    <string name="auth_reset_description">Keep your new password private.</string>
+    <string name="auth_new_password">New Password</string>
+    <string name="auth_confirm_password">Confirm Password</string>
+    <string name="auth_password_rules">Use 6–12 characters including at least one English letter and one digit.</string>
+    <string name="auth_login_failed">Incorrect account or password.</string>
+    <string name="auth_email_invalid">Enter a valid email address.</string>
+    <string name="auth_email_unknown">No member uses this email address.</string>
+    <string name="auth_code_invalid">Enter all 6 digits.</string>
+    <string name="auth_code_wrong">Incorrect verification code.</string>
+    <string name="auth_password_mismatch">Passwords do not match.</string>
+    <string name="auth_reset_success">Password reset successfully. Log in with your new password.</string>
+    <string name="auth_profile">Account profile</string>
+    <string name="auth_logout">Logout</string>
+
+    <!-- STEP 7-D: Verify recovery and Management CRUD -->
+    <string name="auth_code_error_title">Verification Code Error</string>
+    <string name="auth_code_error_message">The verification code is incorrect. Please try again.</string>
+    <string name="auth_ok">OK</string>
+    <string name="management_edit">Edit</string>
+    <string name="management_delete">Delete</string>
+    <string name="management_save">Save</string>
+    <string name="management_edit_member">Edit Member</string>
+    <string name="management_edit_item">Edit Task Item</string>
+    <string name="management_edit_task">Edit Task</string>
+    <string name="management_delete_confirm">Delete this record? This cannot be undone.</string>
+    <string name="management_cannot_delete_member">Cannot delete member</string>
+    <string name="management_member_referenced">This member is assigned to one or more tasks. Reassign or delete those tasks first.</string>
+    <string name="management_delete_self">You cannot delete your own signed-in account.</string>
+    <string name="management_cannot_delete_item">Cannot delete task item</string>
+    <string name="management_item_referenced">This task item is used by one or more tasks. Reassign or delete those tasks first.</string>
+    <string name="management_task_choices_required">Create a task item before assigning a task.</string>
 </resources>

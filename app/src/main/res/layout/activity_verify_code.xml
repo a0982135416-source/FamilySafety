@@ -22,14 +22,15 @@
 
         <!-- 返回箭頭 -->
         <TextView
-            android:id="@+id/textView_verify_back_arrow"
+            android:contentDescription="@string/auth_back"
+        android:id="@+id/textView_verify_back_arrow"
             android:layout_width="44dp"
             android:layout_height="56dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="24dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:gravity="center"
-            android:text="←"
+            android:text="@string/auth_back_arrow"
             android:textColor="@android:color/white"
             android:textSize="28sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="驗證電子信箱"
+            android:text="@string/auth_verify_title"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -90,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="輸入驗證碼"
+                android:text="@string/auth_code_prompt"
                 android:textColor="#1A4375"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -104,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="我們已將 6 位數驗證碼寄送至"
+                android:text="@string/auth_verify_description"
                 android:textColor="#5A7D9A"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +121,6 @@
                 android:background="#E3F2FD"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
-                android:text="l***@gmail.com"
                 android:textColor="#1E88E5"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -215,11 +215,11 @@
 
             <!-- 驗證碼將於 10 分鐘後失效 -->
             <TextView
-                android:id="@+id/textView_verify_expiry_hint"
+                android:visibility="gone"
+        android:id="@+id/textView_verify_expiry_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="驗證碼將於 10 分鐘後失效"
                 android:textColor="#5A7D9A"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +228,8 @@
 
             <!-- 倒數計時 -->
             <LinearLayout
-                android:id="@+id/linearLayout_verify_timer"
+                android:visibility="gone"
+        android:id="@+id/linearLayout_verify_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -242,7 +243,6 @@
                     android:id="@+id/textView_verify_timer_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⏱"
                     android:textSize="18sp" />
 
                 <TextView
@@ -250,7 +250,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="09 : 42"
                     android:textColor="#1E88E5"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -266,21 +265,21 @@
                 android:backgroundTint="#1E88E5"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="驗證"
+                android:text="@string/auth_verify"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:cornerRadius="28dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linearLayout_verify_timer" />
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_verify_otp" />
 
             <!-- 沒收到驗證碼？ -->
             <TextView
-                android:id="@+id/textView_verify_no_code"
+                android:visibility="gone"
+        android:id="@+id/textView_verify_no_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="沒收到驗證碼？"
                 android:textColor="#5A7D9A"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -289,11 +288,11 @@
 
             <!-- 重新傳送驗證碼 -->
             <TextView
-                android:id="@+id/textView_verify_resend_code"
+                android:visibility="gone"
+        android:id="@+id/textView_verify_resend_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="重新傳送驗證碼 (52s)"
                 android:textColor="#1E88E5"
                 android:textSize="15sp"
                 android:textStyle="bold"
