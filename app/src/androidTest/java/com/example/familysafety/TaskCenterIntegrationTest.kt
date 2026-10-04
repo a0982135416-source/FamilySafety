@@ -24,11 +24,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.*
 import org.junit.Test
+import org.junit.Before
 import org.junit.runner.RunWith
 
 /** STEP 5-1：兩種語系驗證 Filter、Badge、Empty State、捲動與共用導覽。 */
 @RunWith(AndroidJUnit4::class)
 class TaskCenterIntegrationTest {
+    // 每個案例獨立初始化 process Mock；不改動既有高度斷言。
+    @Before fun resetMockTasks() { MockTaskDataSource.resetForTests() }
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
 
     private fun waitForRows(scenario: ActivityScenario<MainActivity>, count: Int) {

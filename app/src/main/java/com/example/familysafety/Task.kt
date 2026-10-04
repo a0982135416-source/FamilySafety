@@ -2,7 +2,8 @@ package com.example.familysafety
 
 /** STEP 5-1：獨立 Task Center 模型，沿用共用狀態 enum。 */
 data class Task(val id: Long, val title: String, val description: String,
-                val assignee: String, val dueDate: Long, val status: TaskStatus) {
+                val assignee: String, val dueDate: Long, val status: TaskStatus,
+                val assigneeId: Int? = null, val taskItemId: Int? = null) {
     fun isOverdue(now: Long = System.currentTimeMillis()): Boolean =
         now > dueDate && status != TaskStatus.COMPLETED
 

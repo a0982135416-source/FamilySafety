@@ -379,4 +379,28 @@ Environment - Location Dialog
     <string name="management_task_description">Create and assign tasks</string>
     <string name="management_action_manage">Manage</string>
     <string name="management_in_development">This feature is in development.</string>
+    <!-- STEP 6-2: Management Core -->
+    <string name="management_add_member">Add Member</string>
+    <string name="management_add_task">Add Task</string>
+    <string name="management_name">Name</string>
+    <string name="management_account">Account</string>
+    <string name="management_email">Email</string>
+    <string name="management_role">Role</string>
+    <string name="management_role_admin">Administrator</string>
+    <string name="management_role_member">Member</string>
+    <string name="management_task_name">Title</string>
+    <string name="management_task_description_label">Description</string>
+    <string name="management_assignee">Assigned To</string>
+    <string name="management_due_date">Due Date</string>
+    <string name="management_required">This field is required.</string>
+    <string name="management_future_due">Choose a future due date.</string>
+    <string name="management_label_value">%1$s: %2$s</string>
+
+    <!-- STEP 6-2B: Task Item Management -->
+    <string name="management_task_item_title">Task Item Management</string>
+    <string name="management_task_item_description">Create household work items</string>
+    <string name="management_add_task_item">Add Task Item</string>
+    <string name="management_task_item">Task Item</string>
+    <string name="management_item_mock_gas">Check Gas</string>
+    <string name="management_item_mock_gas_description">Check that the gas valve is closed.</string>
 </resources>

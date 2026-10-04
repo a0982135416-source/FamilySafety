@@ -60,12 +60,13 @@ class TaskFragment : Fragment() {
             }
         }
         updateFilterStyles()
-        submitTasks(MockTaskDataSource.create({ getString(it) }))
+        submitTasks(MockTaskDataSource.getTasks { getString(it) })
     }
 
     // 03. 資料入口、Empty State 與衍生逾期刷新
     internal fun submitTasks(newTasks: List<Task>) {
         tasks = newTasks.toList()
+        MockTaskDataSource.replaceTasks(tasks)
         if (_binding != null) renderTasks()
     }
 

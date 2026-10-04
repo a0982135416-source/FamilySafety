@@ -20,11 +20,13 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.junit.Assert.*
 import org.junit.Test
+import org.junit.Before
 import org.junit.runner.RunWith
 
 /** STEP 6-1：雙語 Dashboard、入口提示及既有五頁導覽。 */
 @RunWith(AndroidJUnit4::class)
 class ManagementIntegrationTest {
+    @Before fun resetMocks() { MockTaskItemDataSource.resetForTests(); MockMemberDataSource.resetForTests(); MockTaskDataSource.resetForTests() }
     @Test fun english_dashboardAndNavigation() = verifyDashboard("en", "Management")
     @Test fun traditionalChinese_dashboardAndNavigation() = verifyDashboard("zh-TW", "管理")
 
@@ -57,6 +59,9 @@ class ManagementIntegrationTest {
                 val labels = listOf(
                     R.id.textView_management_member_title to R.string.management_member_title,
                     R.id.textView_management_member_description to R.string.management_member_description,
+                    R.id.textView_management_task_item_title to R.string.management_task_item_title,
+                    R.id.textView_management_task_item_description to R.string.management_task_item_description,
+                    R.id.button_management_task_item to R.string.management_action_manage,
                     R.id.textView_management_task_title to R.string.management_task_title,
                     R.id.textView_management_task_description to R.string.management_task_description,
                     R.id.button_management_member to R.string.management_action_manage,
@@ -64,7 +69,8 @@ class ManagementIntegrationTest {
                 )
                 labels.forEach { (id, string) -> onView(withId(id)).check(matches(withText(string))) }
                 onView(withId(R.id.cardView_management_member)).check(matches(isDisplayed()))
-                onView(withId(R.id.cardView_management_task)).check(matches(isDisplayed()))
+                onView(withId(R.id.cardView_management_task_item)).perform(scrollTo()).check(matches(isDisplayed()))
+                onView(withId(R.id.cardView_management_task)).perform(scrollTo()).check(matches(isDisplayed()))
                 scenario.onActivity { activity ->
                     val fragment = activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content)
                     assertTrue(fragment is ManagementFragment)
@@ -84,10 +90,15 @@ class ManagementIntegrationTest {
                     assertEquals(5, navigation.menu.size())
                     assertEquals(R.id.navManagement, navigation.menu.getItem(4).itemId)
                 }
-                listOf(R.id.button_management_member, R.id.button_management_task).forEach { id ->
+                listOf(R.id.button_management_member, R.id.button_management_task_item, R.id.button_management_task).forEach { id ->
                     onView(withId(id)).perform(scrollTo(), click())
-                    onView(withId(com.google.android.material.R.id.snackbar_text))
-                        .check(matches(withText(R.string.management_in_development)))
+                    val listId = when (id) {
+                        R.id.button_management_member -> R.id.recyclerView_management_member
+                        R.id.button_management_task_item -> R.id.recyclerView_management_task_item
+                        else -> R.id.recyclerView_management_task
+                    }
+                    onView(withId(listId)).check(matches(isDisplayed()))
+                    onView(withId(android.R.id.button2)).perform(click())
                     scenario.onActivity { activity ->
                         assertTrue(activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content) is ManagementFragment)
                     }

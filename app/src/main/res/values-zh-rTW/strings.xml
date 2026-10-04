@@ -361,4 +361,28 @@ Environment - Location Dialog
     <string name="management_task_description">建立與指派任務</string>
     <string name="management_action_manage">管理</string>
     <string name="management_in_development">此功能開發中。</string>
+    <!-- STEP 6-2：管理核心功能 -->
+    <string name="management_add_member">新增成員</string>
+    <string name="management_add_task">新增任務</string>
+    <string name="management_name">姓名</string>
+    <string name="management_account">帳號</string>
+    <string name="management_email">電子郵件</string>
+    <string name="management_role">角色</string>
+    <string name="management_role_admin">管理員</string>
+    <string name="management_role_member">成員</string>
+    <string name="management_task_name">任務名稱</string>
+    <string name="management_task_description_label">任務說明</string>
+    <string name="management_assignee">指派給</string>
+    <string name="management_due_date">到期日</string>
+    <string name="management_required">此欄位必填。</string>
+    <string name="management_future_due">請選擇未來的到期日。</string>
+    <string name="management_label_value">%1$s：%2$s</string>
+
+    <!-- STEP 6-2B: Task Item Management -->
+    <string name="management_task_item_title">工作項目管理</string>
+    <string name="management_task_item_description">建立家庭工作項目</string>
+    <string name="management_add_task_item">新增工作項目</string>
+    <string name="management_task_item">工作項目</string>
+    <string name="management_item_mock_gas">檢查瓦斯</string>
+    <string name="management_item_mock_gas_description">檢查瓦斯閥是否已關閉。</string>
 </resources>

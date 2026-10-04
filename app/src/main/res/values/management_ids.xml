@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- STEP 6-2：動態表單與列表的可操作元件。 -->
+    <item name="recyclerView_management_member" type="id" />
+    <item name="recyclerView_management_task" type="id" />
+    <item name="editText_management_member_name" type="id" />
+    <item name="editText_management_member_account" type="id" />
+    <item name="editText_management_member_email" type="id" />
+    <item name="spinner_management_member_role" type="id" />
+    <item name="editText_management_task_title" type="id" />
+    <item name="editText_management_task_description" type="id" />
+    <item name="spinner_management_task_assignee" type="id" />
+    <item name="button_management_task_due" type="id" />
+    <item name="recyclerView_management_task_item" type="id" />
+    <item name="editText_management_task_item_title" type="id" />
+    <item name="editText_management_task_item_description" type="id" />
+    <item name="spinner_management_task_item" type="id" />
+    <item name="textView_management_task_status" type="id" />
+</resources>
