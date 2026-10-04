@@ -11,10 +11,8 @@ import com.example.familysafety.databinding.ItemEnvironmentAlertBinding
 import java.text.DateFormat
 import java.util.Date
 
-/** STEP 4-2: environment cards; Resolve is a mock-record action only. */
-class EnvironmentAlertAdapter(
-    private val onResolve: (EnvironmentAlert) -> Unit
-) : ListAdapter<EnvironmentAlert, EnvironmentAlertAdapter.AlertViewHolder>(DIFF) {
+/** Environment history only; safety status is automatically determined by sensors. */
+class EnvironmentAlertAdapter : ListAdapter<EnvironmentAlert, EnvironmentAlertAdapter.AlertViewHolder>(DIFF) {
 
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<EnvironmentAlert>() {
@@ -67,10 +65,8 @@ class EnvironmentAlertAdapter(
                 ContextCompat.getColor(context,
                     if (pending) R.color.primary_blue else R.color.title_blue)
             )
-            binding.buttonAlertItemResolve.visibility = if (pending) View.VISIBLE else View.GONE
-            binding.buttonAlertItemResolve.setOnClickListener {
-                if (pending) onResolve(item)
-            }
+            binding.buttonAlertItemResolve.visibility = View.GONE
+            binding.buttonAlertItemResolve.setOnClickListener(null)
         }
     }
 }

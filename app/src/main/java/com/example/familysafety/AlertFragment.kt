@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
@@ -17,7 +16,6 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.familysafety.databinding.FragmentAlertBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * ========================================================================
@@ -53,21 +51,20 @@ class AlertFragment : Fragment() {
     private var currentEnvFilter: EnvironmentFilter = EnvironmentFilter.ALL
     private var currentTaskAlertFilter: TaskAlertFilter = TaskAlertFilter.ALL
 
-    // Mock records live only for this Fragment instance (STEP 4-2).
-    private val environmentAlerts = MockEnvironmentAlertDataSource.create()
+    // STEP 8-1: read/resolve the same process-memory source as Environment safety.
+    private var environmentAlerts = MockEnvironmentAlertDataSource.getAlerts()
     private lateinit var environmentAlertAdapter: EnvironmentAlertAdapter
 
     // STEP 4-4：任務資料獨立保存，不改動環境警報紀錄。
     private var taskAlerts: List<TaskAlert> = emptyList()
     private lateinit var taskAlertAdapter: TaskAlertAdapter
     private var taskSnapshotTime = 0L
-    private var resolveDialog: AlertDialog? = null
 
     // 畫面可見時更新逾期條件；離開畫面即移除，避免持有已銷毀的 View。
     private val refreshTaskAlerts = object : Runnable {
         override fun run() {
             val currentBinding = _binding ?: return
-            if (currentCategory == AlertCategory.TASK) updateUI()
+            updateUI()
             currentBinding.root.postDelayed(this, 1_000L)
         }
     }
@@ -127,8 +124,6 @@ class AlertFragment : Fragment() {
 
     override fun onDestroyView() {
         // STEP 4-5：Dialog 與畫面一起清理，避免離開後仍能操作舊紀錄。
-        resolveDialog?.dismiss()
-        resolveDialog = null
         _binding?.root?.removeCallbacks(refreshTaskAlerts)
         _binding?.recyclerViewAlertList?.adapter = null
         super.onDestroyView()
@@ -171,53 +166,10 @@ class AlertFragment : Fragment() {
 
     private fun setupRecyclerView() {
         taskAlertAdapter = TaskAlertAdapter()
-        environmentAlertAdapter = EnvironmentAlertAdapter { alert ->
-            showResolveConfirmation(alert)
-        }
+        environmentAlertAdapter = EnvironmentAlertAdapter()
         binding.recyclerViewAlertList.layoutManager =
             LinearLayoutManager(requireContext())
         binding.recyclerViewAlertList.adapter = environmentAlertAdapter
-    }
-
-    // ================================================================
-    // STEP 4-3: Resolve confirmation (mock data only)
-    // 確認後才更新測試警報紀錄；不代表實際感測器已恢復安全。
-    // ================================================================
-    private fun showResolveConfirmation(alert: EnvironmentAlert) {
-        if (_binding == null || alert.status != EnvironmentAlertStatus.PENDING ||
-            resolveDialog?.isShowing == true) return
-
-        val typeName = getString(
-            if (alert.type == EnvironmentAlertType.GAS_LEAK_RISK) {
-                R.string.alert_type_gas_leak
-            } else {
-                R.string.alert_type_unattended
-            }
-        )
-
-        resolveDialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.alert_resolve_dialog_title)
-            .setMessage(getString(R.string.alert_resolve_dialog_message, typeName))
-            .setNegativeButton(R.string.alert_resolve_dialog_cancel, null)
-            .setPositiveButton(R.string.alert_resolve_dialog_confirm) { _, _ ->
-                if (_binding == null) return@setPositiveButton
-                // Re-check the record at confirmation time, not at dialog creation.
-                val index = environmentAlerts.indexOfFirst { it.id == alert.id }
-                if (index >= 0 &&
-                    environmentAlerts[index].status == EnvironmentAlertStatus.PENDING
-                ) {
-                    environmentAlerts[index] = environmentAlerts[index].copy(
-                        status = EnvironmentAlertStatus.RESOLVED
-                    )
-                    if (_binding != null) updateUI()
-                }
-            }
-            .create().also { dialog ->
-                dialog.setOnDismissListener {
-                    if (resolveDialog === dialog) resolveDialog = null
-                }
-                dialog.show()
-            }
     }
 
     private fun setupCategoryClickListeners() {
@@ -329,6 +281,8 @@ class AlertFragment : Fragment() {
     // ================================================================
 
     private fun updateUI() {
+        MockEnvironmentDataSource.refresh()
+        environmentAlerts = MockEnvironmentAlertDataSource.getAlerts()
         taskSnapshotTime = System.currentTimeMillis()
         updateTaskCounts()
         updateEnvironmentCounts()

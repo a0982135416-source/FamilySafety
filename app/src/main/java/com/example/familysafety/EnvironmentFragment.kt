@@ -1,8 +1,6 @@
 package com.example.familysafety
 
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.SystemClock
 import android.text.InputType
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -10,6 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import android.widget.TextView
+import android.content.res.ColorStateList
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.familysafety.databinding.FragmentEnvironmentBinding
 import com.example.familysafety.environment.data.MockHistoryDataSource
@@ -48,23 +50,18 @@ class EnvironmentFragment : Fragment() {
     // Safety Countdown Setting
     // =========================================================================
 
-    // 安全倒數時間，預設為 10 分鐘
-    // Safety countdown time, default is 10 minutes
-    private var selectedCountdownMinutes = 10
-    // =========================================================================
-    // Safety Countdown State / 安全倒數狀態
-    // =========================================================================
-
-    // 本機倒數計時器 / Local countdown timer
-    private var safetyCountDownTimer: CountDownTimer? = null
-
-    // 是否正在倒數 / Whether the timer is running
-    private var isCountdownRunning = false
-
-    // 預計結束時間（本機單調時鐘）
-// Expected end time using a monotonic clock
-    private var countdownEndElapsedTime = 0L
-
+    // STEP 8-1: process-memory safety state; this ticker only renders the current View.
+    private val selectedCountdownMinutes get() = MockEnvironmentDataSource.getCountdown().configuredMinutes
+    private val isCountdownRunning get() = MockEnvironmentDataSource.getCountdown().phase == EnvironmentCountdownPhase.RUNNING
+    private val dialogs = mutableSetOf<AlertDialog>()
+    private var warningController: EnvironmentWarningController? = null
+    private val refreshSafety = object : Runnable {
+        override fun run() {
+            val current = _binding ?: return
+            renderSafety()
+            current.root.postDelayed(this, 250L)
+        }
+    }
 
     // =========================================================================
     // 03. 環境監控地點
@@ -143,9 +140,17 @@ class EnvironmentFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
+        warningController = EnvironmentWarningController(requireContext(),
+            { _binding != null && isAdded && isResumed && !parentFragmentManager.isStateSaved },
+            {
+                requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.bottomNavigationView_main_navigation).selectedItemId = R.id.navAlert
+            })
+
         // 01. 初始化安全倒數
         // Initialize safety countdown
         setupSafetyCountdown()
+        setupSensorControls()
 
         // 02. 初始化地點選擇
         // Initialize location selector
@@ -170,9 +175,7 @@ class EnvironmentFragment : Fragment() {
 
         // 預設狀態：待命
         // Default status: Standby
-        binding.textViewEnvironmentCountdownStatus.setText(
-            R.string.countdown_status_standby
-        )
+        renderSafety()
 
         // 設定倒數分鐘數
         // Open duration setting dialog
@@ -258,6 +261,7 @@ class EnvironmentFragment : Fragment() {
                 android.content.DialogInterface.BUTTON_POSITIVE
             ).setOnClickListener {
 
+                if (_binding == null || !isAdded) return@setOnClickListener
                 // 取得使用者輸入的分鐘數
                 // Read the entered duration
                 val minutes = input.text
@@ -277,7 +281,7 @@ class EnvironmentFragment : Fragment() {
 
                 // 儲存使用者設定
                 // Save selected duration
-                selectedCountdownMinutes = minutes
+                if (!MockEnvironmentDataSource.configureMinutes(minutes)) return@setOnClickListener
 
                 // 更新畫面
                 // Refresh countdown display
@@ -287,7 +291,7 @@ class EnvironmentFragment : Fragment() {
             }
         }
 
-        dialog.show()
+        showTrackedDialog(dialog)
     }
 
 
@@ -301,25 +305,7 @@ class EnvironmentFragment : Fragment() {
     // Update Countdown Duration Display
     // =========================================================================
 
-    private fun updateCountdownDisplay() {
-
-        // 顯示目前設定的分鐘數
-        // Display selected duration
-        binding.textViewEnvironmentCountdownDefault.text = getString(
-            R.string.countdown_duration_display,
-            selectedCountdownMinutes
-        )
-
-        // 尚未開始倒數時，顯示完整設定時間
-        // Show full duration when the timer is not running
-        if (!isCountdownRunning) {
-
-            updateRemainingTime(
-                selectedCountdownMinutes * 60_000L
-            )
-        }
-    }
-
+    private fun updateCountdownDisplay() = renderSafety()
 
     // =========================================================================
     // 11. 設定環境地點選擇功能
@@ -374,7 +360,7 @@ class EnvironmentFragment : Fragment() {
 
         // 建立地點選擇 Dialog
         // Create location selection dialog
-        MaterialAlertDialogBuilder(requireContext())
+        val locationDialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.location_dialog_title)
 
             // 單選地點
@@ -383,6 +369,7 @@ class EnvironmentFragment : Fragment() {
                 locationLabels,
                 selectedIndex
             ) { dialog, which ->
+                if (_binding == null || !isAdded) return@setSingleChoiceItems
 
                 // 儲存選擇的地點
                 // Save the selected location
@@ -419,7 +406,8 @@ class EnvironmentFragment : Fragment() {
                 dialog.dismiss()
             }
 
-            .show()
+            .create()
+        showTrackedDialog(locationDialog)
     }
 
 
@@ -582,116 +570,90 @@ class EnvironmentFragment : Fragment() {
 // =========================================================================
 
     private fun startSafetyCountdown() {
-
-        // 避免重複啟動
-        // Prevent duplicate timers
-        if (isCountdownRunning) {
-            return
-        }
-
-        val durationMillis = selectedCountdownMinutes * 60_000L
-
-        isCountdownRunning = true
-
-        // 使用單調時鐘記錄預計結束時間，避免系統時間調整影響倒數
-        // Use a monotonic clock to calculate the countdown deadline
-        countdownEndElapsedTime =
-            SystemClock.elapsedRealtime() + durationMillis
-
-        // 更新畫面狀態
-        // Update UI state
-        binding.textViewEnvironmentCountdownStatus.setText(
-            R.string.countdown_status_running
-        )
-
-        binding.buttonEnvironmentCountdownStart.setText(
-            R.string.countdown_cancel_button
-        )
-
-        updateRemainingTime(durationMillis)
-
-        // 建立本機倒數計時器
-        // Create a local countdown timer
-        safetyCountDownTimer = object : CountDownTimer(
-            durationMillis,
-            250L
-        ) {
-
-            override fun onTick(millisUntilFinished: Long) {
-
-                // 依照實際截止時間計算剩餘時間
-                // Calculate remaining time from the deadline
-                val remainingMillis = (
-                        countdownEndElapsedTime -
-                                SystemClock.elapsedRealtime()
-                        ).coerceAtLeast(0L)
-
-                updateRemainingTime(remainingMillis)
-            }
-
-            override fun onFinish() {
-
-                safetyCountDownTimer = null
-                isCountdownRunning = false
-
-                updateRemainingTime(0L)
-
-                binding.textViewEnvironmentCountdownStatus.setText(
-                    R.string.countdown_status_finished
-                )
-
-                binding.buttonEnvironmentCountdownStart.setText(
-                    R.string.countdown_start_button
-                )
-
-                // 目前僅提示倒數完成，不直接建立正式安全警報
-                // Show completion only; do not create a server alert yet
-                Toast.makeText(
-                    requireContext(),
-                    R.string.countdown_finished_message,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-        }.start()
+        MockEnvironmentDataSource.startManualCountdown()
+        renderSafety()
     }
-
-
-// =========================================================================
-// 05. 取消並重置安全倒數
-// Cancel and Reset Safety Countdown
-// =========================================================================
 
     private fun cancelSafetyCountdown() {
-
-        // 停止原本的計時器
-        // Stop the existing timer
-        safetyCountDownTimer?.cancel()
-
-        safetyCountDownTimer = null
-        isCountdownRunning = false
-        countdownEndElapsedTime = 0L
-
-        // 恢復待命狀態
-        // Restore standby state
-        binding.textViewEnvironmentCountdownStatus.setText(
-            R.string.countdown_status_standby
-        )
-
-        binding.buttonEnvironmentCountdownStart.setText(
-            R.string.countdown_start_button
-        )
-
-        // 重置為使用者設定的完整分鐘數
-        // Reset to the selected duration
-        updateCountdownDisplay()
+        MockEnvironmentDataSource.cancelCountdown()
+        renderSafety()
     }
 
+    // Sensor cards remain the existing controls, with explicit localized interaction hints.
+    private fun setupSensorControls() {
+        binding.cardViewEnvironmentGasStatus.setOnClickListener {
+            MockEnvironmentDataSource.toggleMockGas()
+            renderSafety()
+        }
+        binding.cardViewEnvironmentFlameStatus.setOnClickListener {
+            if (!MockEnvironmentDataSource.toggleMockFlame()) {
+                Toast.makeText(requireContext(), R.string.environment_turn_on_gas_first, Toast.LENGTH_SHORT).show()
+            }
+            renderSafety()
+        }
+        binding.cardViewEnvironmentPersonStatus.setOnClickListener {
+            MockEnvironmentDataSource.toggleMockPerson()
+            renderSafety()
+        }
+        renderSafety()
+    }
 
-// =========================================================================
-// 06. 更新剩餘時間
-// Update Remaining Time
-// =========================================================================
+    private fun renderSafety() {
+        val current = _binding ?: return
+        val countdown = MockEnvironmentDataSource.getCountdown()
+        val sensor = MockEnvironmentDataSource.sensorState
+        fun stateText(view: TextView, key: Int, color: Int) {
+            view.setText(key)
+            view.setBackgroundResource(R.drawable.bg_sensor_neutral)
+            view.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), color))
+            view.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+        stateText(current.textViewEnvironmentGasValue,
+            if (sensor.gasOn) R.string.environment_status_on else R.string.environment_status_off,
+            if (EnvironmentSafetyEvaluator.gasLeakRisk(sensor)) R.color.warning_red else R.color.safe_green)
+        stateText(current.textViewEnvironmentFlameValue,
+            if (sensor.flameDetected) R.string.environment_status_detected else R.string.environment_status_not_detected,
+            if (sensor.flameDetected) R.color.warning_red else R.color.secondary_text)
+        stateText(current.textViewEnvironmentPersonValue,
+            if (sensor.personDetected) R.string.environment_status_detected else R.string.environment_status_not_detected,
+            if (sensor.personDetected) R.color.safe_green else R.color.secondary_text)
+        listOf(current.cardViewEnvironmentGasStatus to R.string.environment_gas_status,
+            current.cardViewEnvironmentFlameStatus to R.string.environment_flame_detection,
+            current.cardViewEnvironmentPersonStatus to R.string.environment_person_detection).forEach { (card, key) ->
+            card.contentDescription = getString(key)
+        }
+        current.textViewEnvironmentCountdownDefault.text = getString(R.string.countdown_duration_display, countdown.configuredMinutes)
+        updateRemainingTime(countdown.remainingMillis)
+        current.textViewEnvironmentCountdownStatus.setText(when (countdown.phase) {
+            EnvironmentCountdownPhase.IDLE -> R.string.countdown_status_standby
+            EnvironmentCountdownPhase.CANCELLED -> R.string.countdown_status_cancelled
+            EnvironmentCountdownPhase.RUNNING -> R.string.countdown_status_running
+            EnvironmentCountdownPhase.FINISHED -> R.string.countdown_status_finished
+        })
+        current.buttonEnvironmentCountdownStart.setText(if (countdown.phase == EnvironmentCountdownPhase.RUNNING)
+            R.string.countdown_cancel_button else R.string.countdown_start_button)
+        warningController?.update(MockEnvironmentDataSource.getActiveWarning())
+    }
+
+    private fun showTrackedDialog(dialog: AlertDialog) {
+        if (_binding == null || !isAdded) return
+        dialogs.add(dialog)
+        dialog.setOnDismissListener { dialogs.remove(dialog) }
+        dialog.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        warningController?.resume()
+        binding.root.removeCallbacks(refreshSafety)
+        binding.root.post(refreshSafety)
+    }
+
+    override fun onPause() {
+        _binding?.root?.removeCallbacks(refreshSafety)
+        warningController?.stop()
+        super.onPause()
+    }
 
     private fun updateRemainingTime(remainingMillis: Long) {
 
@@ -720,13 +682,12 @@ class EnvironmentFragment : Fragment() {
 
     override fun onDestroyView() {
 
-        // 目前本機測試版本：View 銷毀時停止計時器
-        // Local test version: stop the timer when the View is destroyed
-        safetyCountDownTimer?.cancel()
-        safetyCountDownTimer = null
-
-        isCountdownRunning = false
-        countdownEndElapsedTime = 0L
+        // Detach View callbacks only; shared countdown deadline remains authoritative.
+        _binding?.root?.removeCallbacks(refreshSafety)
+        warningController?.destroy()
+        warningController = null
+        dialogs.toList().forEach { it.setOnDismissListener(null); it.dismiss() }
+        dialogs.clear()
 
         super.onDestroyView()
         _binding = null

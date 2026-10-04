@@ -86,7 +86,7 @@ class ManagementCoreIntegrationTest {
                 val taskDescription = "Verify shared task state"
                 onView(withId(R.id.button_management_task_item)).perform(scrollTo(), click())
                 onView(withId(R.id.recyclerView_management_task_item)).check(matches(isDisplayed()))
-                assertEquals(3, MockTaskItemDataSource.getItems { instrumentation.targetContext.getString(it) }.size)
+                assertEquals(8, MockTaskItemDataSource.getItems { instrumentation.targetContext.getString(it) }.size)
                 onView(withId(android.R.id.button1)).check(matches(withText(R.string.management_add_task_item))).perform(click())
                 onView(withId(android.R.id.button1)).perform(click())
                 onView(withId(R.id.editText_management_task_item_title)).check { view, error ->
@@ -99,7 +99,7 @@ class ManagementCoreIntegrationTest {
                 onView(withId(R.id.recyclerView_management_task_item)).perform(scrollLast())
                 onView(withText(startsWith(taskName))).check(matches(isDisplayed()))
                 val addedItem = MockTaskItemDataSource.getItems { instrumentation.targetContext.getString(it) }.last()
-                assertEquals(4, addedItem.id)
+                assertEquals(9, addedItem.id)
                 assertEquals(taskDescription, addedItem.description)
                 onView(withId(android.R.id.button2)).perform(click())
                 onView(withId(R.id.button_management_task)).perform(scrollTo(), click())
@@ -121,7 +121,7 @@ class ManagementCoreIntegrationTest {
                 // 只有工作項目與成員兩個 Spinner；沒有可選的 Status。
                 onView(withId(R.id.spinner_management_task_item)).check { view, error ->
                     if (error != null) throw error
-                    assertEquals(4, (view as Spinner).count)
+                    assertEquals(9, (view as Spinner).count)
                 }.perform(scrollTo(), click())
                 onData(equalTo(taskName)).inRoot(isPlatformPopup()).perform(click())
                 onView(withId(R.id.spinner_management_task_assignee)).perform(scrollTo(), click())

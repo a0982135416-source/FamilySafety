@@ -151,8 +151,8 @@
     -->
 
     <string name="environment_gas_status">瓦斯狀態</string>
-    <string name="environment_flame_detection">火焰偵測</string>
-    <string name="environment_person_detection">人員偵測</string>
+    <string name="environment_flame_detection">火焰</string>
+    <string name="environment_person_detection">人員</string>
 
     <string name="environment_gas">瓦斯</string>
     <string name="environment_flame">火焰</string>
@@ -441,4 +441,17 @@ Environment - Location Dialog
     <string name="management_cannot_delete_item">無法刪除工作項目</string>
     <string name="management_item_referenced">此工作項目仍被一項或多項任務使用。請先變更工作項目或刪除這些任務。</string>
     <string name="management_task_choices_required">請先建立工作項目，再指派任務。</string>
+
+    <!-- STEP 8-1: Mock sensor controls -->
+    <string name="countdown_dialog_confirm">確定</string>
+    <string name="environment_status_on">開啟</string>
+    <string name="environment_status_detected">已偵測</string>
+    <string name="environment_status_not_detected">未偵測</string>
+    <string name="environment_turn_on_gas_first">請先開啟瓦斯</string>
+    <string name="countdown_status_cancelled">已取消</string>
+    <!-- STEP 8-1C: immediate Environment warning -->
+    <string name="environment_warning_got_it">知道了</string>
+    <string name="environment_warning_view_alert">查看警報</string>
+    <string name="environment_warning_gas_message">偵測到瓦斯已開啟，但目前未偵測到火焰。請立即確認瓦斯設備狀態。</string>
+    <string name="environment_warning_unattended_message">安全倒數已結束，目前仍未偵測到人員。請立即確認現場狀況。</string>
 </resources>

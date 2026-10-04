@@ -32,6 +32,10 @@ class AlertCenterIntegrationTest {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
 
     private fun withLocale(tag: String, block: (ActivityScenario<MainActivity>) -> Unit) {
+        instrumentation.runOnMainSync {
+            MockEnvironmentDataSource.resetForTests()
+            MockEnvironmentAlertDataSource.resetForTests()
+        }
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->
             var previous = LocaleListCompat.getEmptyLocaleList()
             try {
@@ -49,11 +53,15 @@ class AlertCenterIntegrationTest {
                     SystemClock.sleep(50)
                 } while (SystemClock.uptimeMillis() < deadline)
                 assertEquals(Locale.forLanguageTag(tag).language, language)
-                onView(withId(R.id.navAlert)).perform(click())
+                navigateAlert(scenario)
                 waitForRows(scenario, 3)
                 block(scenario)
             } finally {
-                scenario.onActivity { AppCompatDelegate.setApplicationLocales(previous) }
+                scenario.onActivity {
+                    AppCompatDelegate.setApplicationLocales(previous)
+                    MockEnvironmentDataSource.resetForTests()
+                    MockEnvironmentAlertDataSource.resetForTests()
+                }
             }
         }
     }
@@ -66,8 +74,8 @@ class AlertCenterIntegrationTest {
             var count = -1
             var idsMatch = taskIds == null
             scenario.onActivity {
-                val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).adapter!!
-                count = adapter.itemCount
+                val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)?.adapter
+                count = adapter?.itemCount ?: -1
                 if (taskIds != null && adapter is TaskAlertAdapter) {
                     idsMatch = adapter.currentList.map { row -> row.alert.id }.toSet() == taskIds
                 }
@@ -76,6 +84,19 @@ class AlertCenterIntegrationTest {
             SystemClock.sleep(50)
         } while (SystemClock.uptimeMillis() < deadline)
         fail("ListAdapter did not reach $expected rows")
+    }
+
+    private fun navigateAlert(scenario: ActivityScenario<MainActivity>) {
+        val deadline = SystemClock.uptimeMillis() + 5_000L
+        do {
+            onView(withId(R.id.navAlert)).perform(click())
+            instrumentation.waitForIdleSync()
+            var ready = false
+            scenario.onActivity { ready = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list) != null }
+            if (ready) return
+            SystemClock.sleep(50)
+        } while (SystemClock.uptimeMillis() < deadline)
+        fail("Alert destination did not become ready")
     }
 
     private fun counts(scenario: ActivityScenario<MainActivity>, task: Boolean, all: Int, pending: Int, third: Int, overdue: Int = 0) {
@@ -100,9 +121,9 @@ class AlertCenterIntegrationTest {
         bitmap.recycle()
     }
 
-    @Test fun english_categoryFiltersResolveAndEmptyState() = verifyFlow("en")
+    @Test fun english_categoryFiltersAutoResolveAndEmptyState() = verifyFlow("en")
 
-    @Test fun traditionalChinese_categoryFiltersResolveAndEmptyState() = verifyFlow("zh-TW")
+    @Test fun traditionalChinese_categoryFiltersAutoResolveAndEmptyState() = verifyFlow("zh-TW")
 
     @Test fun english_selectedFilterScrollsFullyIntoView() = verifyFilterAutoScroll("en")
 
@@ -176,7 +197,7 @@ class AlertCenterIntegrationTest {
         selectAndCheck(R.id.button_alert_all)
         selectAndCheck(R.id.button_alert_pending)
         selectAndCheck(R.id.button_alert_resolved)
-        counts(scenario, false, 3, 2, 1)
+        counts(scenario, false, 3, 0, 3)
         onView(withId(R.id.button_alert_task)).perform(click())
         waitForRows(scenario, 4)
         selectAndCheck(R.id.button_alert_overdue)
@@ -193,7 +214,7 @@ class AlertCenterIntegrationTest {
             assertTrue(header.height >= header.paddingTop + (60 * activity.resources.displayMetrics.density).toInt())
             assertEquals(activity.getString(R.string.alert_header_title), title.text.toString())
         }
-        counts(scenario, false, 3, 2, 1)
+        counts(scenario, false, 3, 0, 3)
         screenshot("${tag}_environment")
 
         // Environmental → Task → Environmental → Task；同一 RecyclerView、不累加資料。
@@ -245,38 +266,21 @@ class AlertCenterIntegrationTest {
 
         onView(withId(R.id.button_alert_environment)).perform(click())
         waitForRows(scenario, 3)
-        counts(scenario, false, 3, 2, 1)
-        onView(withId(R.id.button_alert_pending)).perform(scrollTo(), click())
-        waitForRows(scenario, 2)
-
-        fun openFirstResolve() {
-            scenario.onActivity { activity ->
-                val recycler = activity.findViewById<RecyclerView>(R.id.recyclerView_alert_list)
-                recycler.findViewHolderForAdapterPosition(0)!!.itemView
-                    .findViewById<View>(R.id.button_alert_item_resolve).performClick()
-            }
-            onView(withId(android.R.id.button1)).inRoot(isDialog()).check(matches(isDisplayed()))
-            onView(withId(android.R.id.message)).inRoot(isDialog()).check { view, error ->
-                if (error != null) throw error
-                val message = (view as TextView).text.toString()
-                assertTrue(message.contains("\n\n"))
-                assertFalse(message.contains("\\n"))
-            }
-        }
-
-        openFirstResolve()
-        screenshot("${tag}_resolve_dialog")
-        onView(withId(android.R.id.button2)).inRoot(isDialog()).perform(click())
-        counts(scenario, false, 3, 2, 1)
-        waitForRows(scenario, 2)
-        openFirstResolve()
-        onView(withId(android.R.id.button1)).inRoot(isDialog()).perform(click())
-        waitForRows(scenario, 1)
-        counts(scenario, false, 3, 1, 2)
-        openFirstResolve()
-        onView(withId(android.R.id.button1)).inRoot(isDialog()).perform(click())
-        waitForRows(scenario, 0)
         counts(scenario, false, 3, 0, 3)
+        // Sensor input creates and resolves the record; the history UI has no manual safety declaration.
+        scenario.onActivity { MockEnvironmentDataSource.updateSensors(EnvironmentSensorState(gasOn = true)) }
+        waitForRows(scenario, 4)
+        counts(scenario, false, 4, 1, 3)
+        onView(withId(R.id.button_alert_pending)).perform(scrollTo(), click())
+        waitForRows(scenario, 1)
+        scenario.onActivity {
+            val recycler = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)
+            assertEquals(View.GONE, recycler.findViewHolderForAdapterPosition(0)!!.itemView
+                .findViewById<View>(R.id.button_alert_item_resolve).visibility)
+            MockEnvironmentDataSource.updateSensors(EnvironmentSensorState())
+        }
+        waitForRows(scenario, 0)
+        counts(scenario, false, 4, 0, 4)
         onView(withId(R.id.linearLayout_alert_empty)).check(matches(isDisplayed()))
         scenario.onActivity {
             assertEquals(View.GONE, it.findViewById<View>(R.id.recyclerView_alert_list).visibility)
@@ -284,7 +288,7 @@ class AlertCenterIntegrationTest {
         }
         screenshot("${tag}_environment_empty")
         onView(withId(R.id.button_alert_resolved)).perform(scrollTo(), click())
-        waitForRows(scenario, 3)
+        waitForRows(scenario, 4)
         scenario.onActivity {
             val recycler = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)
             val adapter = recycler.adapter as EnvironmentAlertAdapter
@@ -293,23 +297,33 @@ class AlertCenterIntegrationTest {
         }
     }
 
-    @Test fun leavingWithDialogOpen_dismissesDialog_andReentryResetsMocks() = withLocale("en") { scenario ->
-        onView(withId(R.id.button_alert_pending)).perform(click())
-        waitForRows(scenario, 2)
-        scenario.onActivity {
-            it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).findViewHolderForAdapterPosition(0)!!
-                .itemView.findViewById<View>(R.id.button_alert_item_resolve).performClick()
-        }
-        onView(withId(android.R.id.button1)).inRoot(isDialog()).check(matches(isDisplayed()))
-        // 模擬 View 在 Dialog 顯示期間被導覽銷毀；點擊背景導覽以程式方式觸發。
-        scenario.onActivity { it.findViewById<View>(R.id.navTask).performClick() }
+    @Test fun reentryAndRecreationPreserveAutoResolvedHistory() = withLocale("en") { scenario ->
+        scenario.onActivity { MockEnvironmentDataSource.updateSensors(EnvironmentSensorState(gasOn = true)) }
+        waitForRows(scenario, 4)
+        onView(withId(R.id.navTask)).perform(click())
         instrumentation.waitForIdleSync()
         onView(withId(R.id.textView_task_title)).check(matches(isDisplayed()))
-        onView(withId(R.id.navAlert)).perform(click())
-        waitForRows(scenario, 3)
-        counts(scenario, false, 3, 2, 1)
+        navigateAlert(scenario)
+        waitForRows(scenario, 4)
+        counts(scenario, false, 4, 1, 3)
+        scenario.onActivity { MockEnvironmentDataSource.updateSensors(EnvironmentSensorState()) }
+        waitForRows(scenario, 4)
+        // The adapter contents, not just the unchanged total count, must reflect reconciliation.
+        val deadline = SystemClock.uptimeMillis() + 5_000L
+        var resolved = false
+        do {
+            instrumentation.waitForIdleSync()
+            scenario.onActivity {
+                val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).adapter as EnvironmentAlertAdapter
+                resolved = adapter.currentList.all { row -> row.status == EnvironmentAlertStatus.RESOLVED }
+            }
+            if (resolved) break
+            SystemClock.sleep(50)
+        } while (SystemClock.uptimeMillis() < deadline)
+        assertTrue(resolved)
         scenario.recreate()
-        waitForRows(scenario, 3)
-        counts(scenario, false, 3, 2, 1)
+        navigateAlert(scenario)
+        waitForRows(scenario, 4)
+        counts(scenario, false, 4, 0, 4)
     }
 }

@@ -459,4 +459,16 @@ Environment - Location Dialog
     <string name="management_cannot_delete_item">Cannot delete task item</string>
     <string name="management_item_referenced">This task item is used by one or more tasks. Reassign or delete those tasks first.</string>
     <string name="management_task_choices_required">Create a task item before assigning a task.</string>
+
+    <!-- STEP 8-1: Mock sensor controls -->
+    <string name="environment_status_on">ON</string>
+    <string name="environment_status_detected">Detected</string>
+    <string name="environment_status_not_detected">Not detected</string>
+    <string name="environment_turn_on_gas_first">Turn on the gas first.</string>
+    <string name="countdown_status_cancelled">Cancelled</string>
+    <!-- STEP 8-1C: immediate Environment warning -->
+    <string name="environment_warning_got_it">Got it</string>
+    <string name="environment_warning_view_alert">View Alert</string>
+    <string name="environment_warning_gas_message">Gas is on, but no flame is detected. Please check the gas appliance immediately.</string>
+    <string name="environment_warning_unattended_message">The safety countdown has ended and no person is detected. Please check the area immediately.</string>
 </resources>
