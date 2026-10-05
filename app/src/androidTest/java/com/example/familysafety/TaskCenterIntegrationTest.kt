@@ -88,7 +88,7 @@ class TaskCenterIntegrationTest {
                         val current = task!!
                         val status = if (current.status == TaskStatus.PENDING)
                             R.string.task_status_pending else R.string.task_status_in_progress
-                        val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT,
+                        val date = DateFormat.getDateInstance(DateFormat.MEDIUM,
                             activity.resources.configuration.locales[0]).format(Date(current.dueDate))
                         expected = listOfNotNull(current.title, current.description,
                             activity.getString(R.string.task_assignee, current.assignee),

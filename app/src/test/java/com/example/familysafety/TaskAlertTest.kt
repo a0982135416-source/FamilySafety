@@ -6,7 +6,41 @@ import org.junit.Test
 /** STEP 4-4：用固定時間驗證規則，不依賴測試當天日期或 Android 畫面。 */
 class TaskAlertTest {
     private val now = 1_800_000_000_000L
-    private fun mock(at: Long = now) = MockTaskAlertDataSource.create({ "resource-$it" }, at)
+    private fun mock(at: Long = now): List<TaskAlert> {
+        val hour = 3_600_000L
+        return listOf(
+            TaskAlert(1, 1, "title", "description", "member", at + 2 * hour, TaskStatus.PENDING),
+            TaskAlert(2, 2, "title", "description", "member", at - hour, TaskStatus.PENDING),
+            TaskAlert(3, 3, "title", "description", "member", at + 4 * hour, TaskStatus.IN_PROGRESS),
+            TaskAlert(4, 4, "title", "description", "member", at - 2 * hour, TaskStatus.IN_PROGRESS),
+            TaskAlert(5, 5, "title", "description", "member", at - 3 * hour, TaskStatus.COMPLETED),
+        )
+    }
+
+    @Test fun sharedMappingReflectsStartCompleteEditAndDelete() {
+        val strings: (Int) -> String = { "resource-$it" }
+        try {
+            val original = MockTaskDataSource.create(strings, now)
+            MockTaskDataSource.replaceTasks(original)
+            var mapped = MockTaskAlertDataSource.create(strings)
+            assertEquals(original.map { it.id }, mapped.map { it.taskId })
+            assertEquals(original.map { it.dueDate }, mapped.map { it.dueDate })
+            var tasks = MockTaskDataSource.updateStatus(MockTaskDataSource.getTasks(strings), 1, TaskStatus.IN_PROGRESS)
+            MockTaskDataSource.replaceTasks(tasks)
+            assertEquals(TaskStatus.IN_PROGRESS, MockTaskAlertDataSource.create(strings).first().status)
+            tasks = MockTaskDataSource.updateStatus(tasks, 1, TaskStatus.COMPLETED)
+            MockTaskDataSource.replaceTasks(tasks)
+            assertFalse(MockTaskAlertDataSource.create(strings).filterTaskAlerts(TaskAlertFilter.ALL, now).any { it.taskId == 1L })
+            MockTaskDataSource.replaceTasks(tasks.filterNot { it.id == 2L } + Task(99, "new", "detail", "member", now + 1, TaskStatus.PENDING))
+            mapped = MockTaskAlertDataSource.create(strings)
+            assertFalse(mapped.any { it.taskId == 2L })
+            assertEquals("new", mapped.single { it.taskId == 99L }.title)
+            MockTaskDataSource.replaceTasks(MockTaskDataSource.getTasks(strings).map { if (it.id == 99L) it.copy(title = "edited", dueDate = now - 1) else it })
+            val edited = MockTaskAlertDataSource.create(strings).single { it.taskId == 99L }
+            assertEquals("edited", edited.title)
+            assertTrue(edited.isOverdue(now))
+        } finally { MockTaskDataSource.resetForTests() }
+    }
 
     @Test fun all_excludesCompleted_andSortsByDeadline() {
         val result = mock().filterTaskAlerts(TaskAlertFilter.ALL, now)

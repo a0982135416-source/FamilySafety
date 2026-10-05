@@ -75,6 +75,8 @@ class TodayTaskAdapter(
         with(holder.binding) {
 
             textViewHomeTaskItemName.text = task.name
+            // Native marquee runs only when rendered text exceeds the constrained width.
+            textViewHomeTaskItemName.isSelected = true
             textViewHomeTaskItemTime.text = task.time
 
 

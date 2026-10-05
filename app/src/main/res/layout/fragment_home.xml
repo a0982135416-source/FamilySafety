@@ -584,8 +584,8 @@
                                 android:id="@+id/circularProgressIndicator_home_task"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:max="5"
-                                android:progress="3"
+                                android:max="0"
+                                android:progress="0"
                                 app:indicatorColor="#19B394"
                                 app:indicatorSize="46dp"
                                 app:trackColor="#E0F2F1"
@@ -596,7 +596,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="3/5"
+                                android:text=""
                                 android:textColor="#0B3D75"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -617,7 +617,7 @@
                                 android:id="@+id/textView_home_task_done"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="已完成  3"
+                                android:text=""
                                 android:textColor="#8CA5BD"
                                 android:textSize="11sp" />
 
@@ -625,7 +625,7 @@
                                 android:id="@+id/textView_home_task_pending"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="待處理  2"
+                                android:text=""
                                 android:textColor="#8CA5BD"
                                 android:textSize="11sp" />
 
@@ -634,7 +634,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:text="完成率  60%"
+                                android:text=""
                                 android:textColor="#19B394"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -713,6 +713,19 @@
                             app:layout_constraintTop_toBottomOf="@id/frameLayout_home_list_icon_background"
                             tools:listitem="@layout/item_today_task" />
 
+                        <TextView
+                            android:id="@+id/textView_home_tasks_empty"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_tasks_empty"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="12sp"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout_home_list_icon_background"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
@@ -751,7 +764,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@string/home_alert_pending_preview"
+                        android:text=""
                         android:textColor="#F0525C"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -764,7 +777,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="@string/home_alert_message_preview"
+                        android:text="@string/home_alert_none"
                         android:textColor="#8CA5BD"
                         android:textSize="11sp"
                         app:layout_constraintEnd_toStartOf="@id/textView_home_alert_arrow"

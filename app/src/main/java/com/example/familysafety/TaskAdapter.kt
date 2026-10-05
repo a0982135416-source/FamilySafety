@@ -36,7 +36,7 @@ class TaskAdapter(private val onTaskClick: (Task) -> Unit) : ListAdapter<TaskAda
             textViewTaskItemTitle.text = task.title
             textViewTaskItemDescription.text = task.description
             textViewTaskItemAssignee.text = context.getString(R.string.task_assignee, task.assignee)
-            val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT,
+            val date = DateFormat.getDateInstance(DateFormat.MEDIUM,
                 context.resources.configuration.locales[0]).format(Date(task.dueDate))
             textViewTaskItemDueDate.text = context.getString(R.string.task_due_date, date)
             val (label, background, color) = when (task.status) {

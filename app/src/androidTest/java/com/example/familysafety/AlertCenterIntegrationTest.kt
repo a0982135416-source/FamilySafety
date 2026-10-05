@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -35,6 +36,7 @@ class AlertCenterIntegrationTest {
 
     private fun withLocale(tag: String, block: (ActivityScenario<MainActivity>) -> Unit) {
         instrumentation.runOnMainSync {
+            MockTaskDataSource.resetForTests()
             MockEnvironmentDataSource.resetForTests()
             MockEnvironmentAlertDataSource.resetForTests()
         }
@@ -61,6 +63,7 @@ class AlertCenterIntegrationTest {
             } finally {
                 scenario.onActivity {
                     AppCompatDelegate.setApplicationLocales(previous)
+                    MockTaskDataSource.resetForTests()
                     MockEnvironmentDataSource.resetForTests()
                     MockEnvironmentAlertDataSource.resetForTests()
                 }
@@ -134,7 +137,7 @@ class AlertCenterIntegrationTest {
     // 不使用 Espresso scrollTo()：直接觸發點選，確保捲動來自正式程式。
     private fun verifyFilterAutoScroll(tag: String) = withLocale(tag) { scenario ->
         onView(withId(R.id.button_alert_task)).perform(click())
-        waitForRows(scenario, 4)
+        waitForRows(scenario, 6)
         fun selectAndCheck(id: Int) {
             val visible = android.graphics.Rect()
             scenario.onActivity { activity ->
@@ -189,10 +192,10 @@ class AlertCenterIntegrationTest {
             }
         }
         selectAndCheck(R.id.button_alert_overdue)
-        waitForRows(scenario, 2, setOf(2L, 4L))
+        waitForRows(scenario, 2, setOf(5L, 6L))
         screenshot("${tag}_overdue_auto_scroll")
         selectAndCheck(R.id.button_alert_all)
-        waitForRows(scenario, 4)
+        waitForRows(scenario, 6)
         scenario.onActivity { assertEquals(0, it.findViewById<HorizontalScrollView>(R.id.horizontalScrollView_alert_filters).scrollX) }
         onView(withId(R.id.button_alert_environment)).perform(click())
         waitForRows(scenario, 3)
@@ -201,7 +204,7 @@ class AlertCenterIntegrationTest {
         selectAndCheck(R.id.button_alert_resolved)
         counts(scenario, false, 3, 0, 3)
         onView(withId(R.id.button_alert_task)).perform(click())
-        waitForRows(scenario, 4)
+        waitForRows(scenario, 6)
         selectAndCheck(R.id.button_alert_overdue)
     }
 
@@ -222,8 +225,8 @@ class AlertCenterIntegrationTest {
         // Environmental → Task → Environmental → Task；同一 RecyclerView、不累加資料。
         repeat(2) {
             onView(withId(R.id.button_alert_task)).perform(click())
-            waitForRows(scenario, 4)
-            counts(scenario, true, 4, 2, 2, 2)
+            waitForRows(scenario, 6)
+            counts(scenario, true, 6, 3, 3, 2)
             scenario.onActivity { activity ->
                 val recycler = activity.findViewById<RecyclerView>(R.id.recyclerView_alert_list)
                 assertSame(originalRecycler, recycler)
@@ -237,11 +240,15 @@ class AlertCenterIntegrationTest {
             }
         }
         screenshot("${tag}_task_all")
-        onView(withId(R.id.recyclerView_alert_list)).perform(swipeUp())
+        scenario.onActivity {
+            (it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).layoutManager as LinearLayoutManager)
+                .scrollToPositionWithOffset(5, 0)
+        }
+        instrumentation.waitForIdleSync()
         screenshot("${tag}_task_bottom")
         scenario.onActivity { activity ->
             val recycler = activity.findViewById<RecyclerView>(R.id.recyclerView_alert_list)
-            val lastCard = recycler.findViewHolderForAdapterPosition(3)!!.itemView
+            val lastCard = recycler.findViewHolderForAdapterPosition(5)!!.itemView
             val cardBounds = android.graphics.Rect()
             val navBounds = android.graphics.Rect()
             assertTrue(lastCard.getGlobalVisibleRect(cardBounds))
@@ -250,15 +257,15 @@ class AlertCenterIntegrationTest {
             assertEquals(lastCard.height, cardBounds.height())
         }
         onView(withId(R.id.button_alert_pending)).perform(scrollTo(), click())
-        waitForRows(scenario, 2, setOf(1L, 2L))
+        waitForRows(scenario, 3, setOf(1L, 2L, 5L))
         scenario.onActivity {
             val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).adapter as TaskAlertAdapter
             assertTrue(adapter.currentList.all { row -> row.alert.status == TaskStatus.PENDING })
         }
         onView(withId(R.id.button_alert_in_progress)).perform(scrollTo(), click())
-        waitForRows(scenario, 2, setOf(3L, 4L))
+        waitForRows(scenario, 3, setOf(3L, 4L, 6L))
         scenario.onActivity { it.findViewById<View>(R.id.button_alert_overdue).performClick() }
-        waitForRows(scenario, 2, setOf(2L, 4L))
+        waitForRows(scenario, 2, setOf(5L, 6L))
         scenario.onActivity {
             val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).adapter as TaskAlertAdapter
             assertTrue(adapter.currentList.all { row -> row.overdue })

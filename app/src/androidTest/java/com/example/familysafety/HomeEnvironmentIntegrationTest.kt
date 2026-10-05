@@ -74,6 +74,7 @@ class HomeEnvironmentIntegrationTest {
     }
     private fun withHome(tag: String, block: (ActivityScenario<MainActivity>) -> Unit) {
         instrumentation.runOnMainSync {
+            MockTaskDataSource.resetForTests()
             now = 1_000L
             MockEnvironmentDataSource.resetForTests { now }
             MockEnvironmentAlertDataSource.resetForTests()
@@ -91,6 +92,7 @@ class HomeEnvironmentIntegrationTest {
                 block(scenario)
             } finally {
                 scenario.onActivity {
+                    MockTaskDataSource.resetForTests()
                     MockEnvironmentDataSource.resetForTests()
                     MockEnvironmentAlertDataSource.resetForTests()
                     AppCompatDelegate.setApplicationLocales(previous)
@@ -108,10 +110,17 @@ class HomeEnvironmentIntegrationTest {
             assertEquals(it.getString(person), text(it, R.id.textView_home_person_status_value))
             assertEquals(ContextCompat.getColor(it, color), it.findViewById<TextView>(R.id.textView_home_status).currentTextColor)
             assertEquals(it.getString(R.string.home_location_kitchen), text(it, R.id.textView_home_safety_location))
-            // The linkage must not replace Home tasks or its still-static alert summary.
-            assertEquals(4, it.findViewById<RecyclerView>(R.id.recyclerView_home_tasks).adapter!!.itemCount)
-            assertEquals(it.getString(R.string.task_progress_fraction, 3, 5), text(it, R.id.textView_home_progress_center_text))
-            assertEquals(it.getString(R.string.home_alert_pending_preview), text(it, R.id.textView_home_alert_count))
+            val today = MockTaskDataSource.getTasks { key -> it.getString(key) }.dueToday()
+            val completed = today.count { row -> row.status == TaskStatus.COMPLETED }
+            assertEquals(today.size, it.findViewById<RecyclerView>(R.id.recyclerView_home_tasks).adapter!!.itemCount)
+            assertEquals(it.getString(R.string.task_progress_fraction, completed, today.size), text(it, R.id.textView_home_progress_center_text))
+            val pending = MockEnvironmentAlertDataSource.getAlerts().count { row -> row.status == EnvironmentAlertStatus.PENDING }
+            assertEquals(it.getString(R.string.home_alert_pending_count, pending), text(it, R.id.textView_home_alert_count))
+            assertEquals(it.getString(when (MockEnvironmentDataSource.getActiveWarning()?.type) {
+                EnvironmentAlertType.GAS_LEAK_RISK -> R.string.alert_message_gas_leak
+                EnvironmentAlertType.UNATTENDED_COOKING -> R.string.environment_warning_unattended_message
+                null -> R.string.home_alert_none
+            }), text(it, R.id.textView_home_alert_msg))
         }
     }
 
@@ -216,4 +225,111 @@ class HomeEnvironmentIntegrationTest {
             assertTrue(MockEnvironmentAlertDataSource.getAlerts().all { row -> row.status == EnvironmentAlertStatus.RESOLVED })
         }
     }
+    @Test fun englishSharedTasksAndAlertNavigation() = sharedTasksAndNavigation("en")
+    @Test fun traditionalChineseSharedTasksAndAlertNavigation() = sharedTasksAndNavigation("zh-TW")
+
+    private fun sharedTasksAndNavigation(tag: String) = withHome(tag) { scenario ->
+        val today = java.util.Calendar.getInstance().apply {
+            set(java.util.Calendar.HOUR_OF_DAY, 12); set(java.util.Calendar.MINUTE, 0)
+        }.timeInMillis
+        scenario.onActivity {
+            MockTaskDataSource.replaceTasks(listOf(
+                Task(90, "Today", "detail", "Alex", today, TaskStatus.PENDING),
+                Task(91, "Done", "detail", "Alex", today, TaskStatus.COMPLETED),
+                Task(92, "Tomorrow", "detail", "Alex", today + 86_400_000L, TaskStatus.PENDING)))
+        }
+        environment(scenario)
+        home(scenario)
+        fun checkHome(completed: Int, total: Int, status: Int?) {
+            scenario.onActivity {
+                val list = it.findViewById<RecyclerView>(R.id.recyclerView_home_tasks)
+                assertEquals(total, list.adapter!!.itemCount)
+                assertEquals(it.getString(R.string.task_progress_fraction, completed, total), text(it, R.id.textView_home_progress_center_text))
+                val progress = it.findViewById<com.google.android.material.progressindicator.CircularProgressIndicator>(R.id.circularProgressIndicator_home_task)
+                assertEquals(total, progress.max)
+                assertEquals(completed, progress.progress)
+                assertEquals(it.getString(R.string.task_completion_rate, if (total == 0) 0 else completed * 100 / total), text(it, R.id.textView_home_task_rate))
+                if (total == 0) assertEquals(View.VISIBLE, it.findViewById<View>(R.id.textView_home_tasks_empty).visibility)
+            }
+            if (status != null) {
+                await(scenario) { it.findViewById<RecyclerView>(R.id.recyclerView_home_tasks).findViewHolderForAdapterPosition(0) != null }
+                scenario.onActivity {
+                    val card = it.findViewById<RecyclerView>(R.id.recyclerView_home_tasks).findViewHolderForAdapterPosition(0)!!.itemView
+                    assertEquals(it.getString(status), card.findViewById<TextView>(R.id.textView_home_task_item_status_badge).text.toString())
+                    val date = java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT,
+                        it.resources.configuration.locales[0]).format(java.util.Date(today))
+                    assertEquals(date, card.findViewById<TextView>(R.id.textView_home_task_item_time).text.toString())
+                    val title = card.findViewById<TextView>(R.id.textView_home_task_item_name)
+                    assertTrue(title.isSelected)
+                    assertEquals(android.text.TextUtils.TruncateAt.MARQUEE, title.ellipsize)
+                    assertEquals(1, title.maxLines)
+                }
+            }
+        }
+        fun alertTasks(expected: Set<Long>, firstStatus: TaskStatus? = null) {
+            navigate(scenario, R.id.navAlert, R.id.button_alert_task)
+            onView(withId(R.id.button_alert_task)).perform(tap())
+            await(scenario) {
+                val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).adapter as? TaskAlertAdapter
+                adapter?.currentList?.map { row -> row.alert.taskId }?.toSet() == expected
+            }
+            scenario.onActivity {
+                val rows = (it.findViewById<RecyclerView>(R.id.recyclerView_alert_list).adapter as TaskAlertAdapter).currentList
+                if (firstStatus != null) assertEquals(firstStatus, rows.single { row -> row.alert.taskId == 90L }.alert.status)
+            }
+        }
+        fun taskAction(label: Int) {
+            navigate(scenario, R.id.navTask, R.id.recyclerView_task_list)
+            await(scenario) { it.findViewById<RecyclerView>(R.id.recyclerView_task_list).findViewHolderForAdapterPosition(0) != null }
+            scenario.onActivity { it.findViewById<RecyclerView>(R.id.recyclerView_task_list).findViewHolderForAdapterPosition(0)!!.itemView.performClick() }
+            onView(withText(label)).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(tap())
+        }
+        checkHome(1, 2, R.string.task_status_pending)
+        taskAction(R.string.task_action_start)
+        home(scenario)
+        checkHome(1, 2, R.string.task_status_in_progress)
+        alertTasks(setOf(90L, 92L), TaskStatus.IN_PROGRESS)
+        taskAction(R.string.task_action_complete)
+        home(scenario)
+        checkHome(2, 2, R.string.task_status_completed)
+        alertTasks(setOf(92L))
+        // Exercise existing Management CRUD APIs; the remaining form interaction is manual acceptance.
+        var createdId = 0L
+        try {
+            scenario.onActivity {
+                MockAuthDataSource.resetForTests()
+                val admin = MockMemberDataSource.getMembers().first { member -> member.role == MemberRole.ADMIN }
+                assertNotNull(MockAuthDataSource.login(admin.account, MockAuthDataSource.INITIAL_PASSWORD))
+                val due = java.util.Calendar.getInstance().apply {
+                    set(java.util.Calendar.HOUR_OF_DAY, 23); set(java.util.Calendar.MINUTE, 59); set(java.util.Calendar.SECOND, 59)
+                }.timeInMillis
+                createdId = MockTaskDataSource.addTask(1, admin.id, due, { key -> it.getString(key) })!!.id
+            }
+            home(scenario)
+            checkHome(2, 3, R.string.task_status_completed)
+            alertTasks(setOf(92L, createdId))
+            scenario.onActivity {
+                val task = MockTaskDataSource.getTasks { key -> it.getString(key) }.single { row -> row.id == createdId }
+                assertNotNull(MockTaskDataSource.updateTask(createdId, 2, task.assigneeId!!, task.dueDate, { key -> it.getString(key) }))
+            }
+            home(scenario)
+            scenario.onActivity {
+                val task = MockTaskDataSource.getTasks { key -> it.getString(key) }.single { row -> row.id == createdId }
+                assertEquals(task.title, MockTaskAlertDataSource.create { key -> it.getString(key) }.single { row -> row.taskId == createdId }.title)
+                assertTrue(MockTaskDataSource.deleteTask(createdId, { key -> it.getString(key) }))
+            }
+            alertTasks(setOf(92L))
+            home(scenario)
+            checkHome(2, 2, R.string.task_status_completed)
+            onView(withId(R.id.cardView_home_alert)).perform(scrollTo(), tap())
+            await(scenario) { it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)?.adapter is EnvironmentAlertAdapter }
+            scenario.onActivity {
+                assertEquals(R.id.navAlert, it.findViewById<BottomNavigationView>(R.id.bottomNavigationView_main_navigation).selectedItemId)
+                MockTaskDataSource.replaceTasks(emptyList())
+            }
+            home(scenario)
+            checkHome(0, 0, null)
+        } finally { scenario.onActivity { MockAuthDataSource.resetForTests() } }
+    }
+
 }

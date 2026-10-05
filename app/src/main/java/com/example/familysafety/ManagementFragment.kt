@@ -61,8 +61,7 @@ class ManagementFragment : Fragment() {
     }
 
     private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
-    private fun date(value: Long) = DateFormat.getDateTimeInstance(DateFormat.MEDIUM,
-        DateFormat.SHORT, resources.configuration.locales[0]).format(Date(value))
+    private fun date(value: Long) = DateFormat.getDateInstance(DateFormat.MEDIUM, resources.configuration.locales[0]).format(Date(value))
     private fun label(key: Int, value: String) = getString(R.string.management_label_value, getString(key), value)
     private fun role(role: MemberRole) = getString(if (role == MemberRole.ADMIN)
         R.string.management_role_admin else R.string.management_role_member)

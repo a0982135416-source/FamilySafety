@@ -46,7 +46,7 @@ class TaskAlertAdapter : ListAdapter<TaskAlertAdapter.Item, TaskAlertAdapter.Tas
             textViewAlertTaskDescription.text = alert.description
             textViewAlertTaskAssignee.text = context.getString(R.string.alert_task_assignee, alert.assigneeName)
             val locale = context.resources.configuration.locales[0]
-            val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, locale)
+            val date = DateFormat.getDateInstance(DateFormat.MEDIUM, locale)
                 .format(Date(alert.dueDate))
             textViewAlertTaskDueDate.text = context.getString(R.string.alert_task_due_date, date)
 

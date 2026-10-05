@@ -481,4 +481,7 @@ Environment - Location Dialog
     <string name="environment_warning_view_alert">View Alert</string>
     <string name="environment_warning_gas_message">Gas is on, but no flame is detected. Please check the gas appliance immediately.</string>
     <string name="environment_warning_unattended_message">The safety countdown has ended and no person is detected. Please check the area immediately.</string>
+    <string name="home_alert_pending_count">%1$d alerts pending</string>
+    <string name="home_alert_none">No pending environmental alerts.</string>
+    <string name="home_tasks_empty">No tasks due today.</string>
 </resources>

@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.familysafety.databinding.FragmentHomeBinding
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.text.DateFormat
+import java.util.Date
 
 /**
  * ========================================================================
@@ -83,10 +86,14 @@ class HomeFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupTaskProgress()
-        setupTodayTaskList()
+        binding.recyclerViewHomeTasks.layoutManager = LinearLayoutManager(requireContext())
+        binding.cardViewHomeAlert.setOnClickListener {
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView_main_navigation)
+                .selectedItemId = R.id.navAlert
+        }
         binding.frameLayoutHomeProfile.setOnClickListener { showProfile() }
         renderEnvironment()
+        refreshTodayTasks()
     }
 
     // Shared environment presentation only. MainActivity retains warning ownership.
@@ -94,6 +101,7 @@ class HomeFragment : Fragment() {
         super.onResume()
         environmentRefreshHandler.removeCallbacks(environmentRefresh)
         renderEnvironment()
+        refreshTodayTasks()
         environmentRefreshHandler.postDelayed(environmentRefresh, 250L)
     }
 
@@ -158,6 +166,15 @@ class HomeFragment : Fragment() {
         views.textViewHomeEnvironmentLocation.text = getString(R.string.home_environment_location_format, getString(locationLabel))
         views.textViewHomeTemperatureValue.text = getString(R.string.environment_temperature_value_format, reading.temperature)
         views.textViewHomeHumidityValue.text = getString(R.string.environment_humidity_value_format, reading.humidity)
+        val pending = MockEnvironmentAlertDataSource.getAlerts().filter { it.status == EnvironmentAlertStatus.PENDING }
+        views.textViewHomeAlertCount.text = getString(R.string.home_alert_pending_count, pending.size)
+        // Match existing warning priority; otherwise show the latest pending record.
+        val summary = activeAlert ?: pending.maxByOrNull { it.createdAt }
+        views.textViewHomeAlertMsg.setText(when (summary?.type) {
+            EnvironmentAlertType.GAS_LEAK_RISK -> R.string.alert_message_gas_leak
+            EnvironmentAlertType.UNATTENDED_COOKING -> R.string.environment_warning_unattended_message
+            null -> R.string.home_alert_none
+        })
     }
 
 
@@ -166,15 +183,14 @@ class HomeFragment : Fragment() {
     // Set Up Today's Task Progress
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
-    private fun setupTaskProgress() {
+    private fun setupTaskProgress(tasks: List<Task>) {
 
-        // 測試資料，之後改由 ViewModel / API 提供
-        // Mock data; this will later come from ViewModel / API
-        val totalTasks = 5
-        val completedTasks = 3
+        // Progress and list use the same current-day shared tasks, including completed tasks.
+        val totalTasks = tasks.size
+        val completedTasks = tasks.count { it.status == TaskStatus.COMPLETED }
         val pendingTasks = totalTasks - completedTasks
 
-        val completionRate = (completedTasks * 100) / totalTasks
+        val completionRate = if (totalTasks == 0) 0 else (completedTasks * 100) / totalTasks
 
         binding.circularProgressIndicatorHomeTask.max = totalTasks
         binding.circularProgressIndicatorHomeTask.progress = completedTasks
@@ -211,44 +227,14 @@ class HomeFragment : Fragment() {
     // Set Up Today's Task List
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
-    private fun setupTodayTaskList() {
-
-        /*
-         * 目前先使用 Mock Data。
-         * 任務名稱屬於動態資料，所以未來應由 Server / Database 提供。
-         *
-         * Mock data is used for now.
-         * Task names are dynamic data and will later come from
-         * the Server / Database.
-         */
-        val tasks = listOf(
-            TodayTask(
-                name = "Clean kitchen",
-                status = "IN_PROGRESS",
-                time = "09:00",
-            ),
-            TodayTask(
-                name = "Take out trash",
-                status = "PENDING",
-                time = "10:30",
-            ),
-            TodayTask(
-                name = "Clean bedroom",
-                status = "COMPLETED",
-                time = "14:00",
-            ),
-            TodayTask(
-                name = "Wash dishes",
-                status = "PENDING",
-                time = "16:00",
-            ),
-        )
-
-        binding.recyclerViewHomeTasks.layoutManager =
-            LinearLayoutManager(requireContext())
-
-        binding.recyclerViewHomeTasks.adapter =
-            TodayTaskAdapter(tasks)
+    private fun refreshTodayTasks() {
+        val tasks = MockTaskDataSource.getTasks { getString(it) }.dueToday()
+        setupTaskProgress(tasks)
+        val dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, resources.configuration.locales[0])
+        binding.recyclerViewHomeTasks.adapter = TodayTaskAdapter(tasks.map {
+            TodayTask(it.title, it.status.name, dateFormat.format(Date(it.dueDate)))
+        })
+        binding.textViewHomeTasksEmpty.visibility = if (tasks.isEmpty()) View.VISIBLE else View.GONE
     }
 
 

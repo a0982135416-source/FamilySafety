@@ -55,7 +55,7 @@ class AlertFragment : Fragment() {
     private var environmentAlerts = MockEnvironmentAlertDataSource.getAlerts()
     private lateinit var environmentAlertAdapter: EnvironmentAlertAdapter
 
-    // STEP 4-4：任務資料獨立保存，不改動環境警報紀錄。
+    // STEP 9-2: refreshed view data from the shared tasks, separate from environment history.
     private var taskAlerts: List<TaskAlert> = emptyList()
     private lateinit var taskAlertAdapter: TaskAlertAdapter
     private var taskSnapshotTime = 0L
@@ -103,7 +103,6 @@ class AlertFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupWindowInsets()
-        taskAlerts = MockTaskAlertDataSource.create({ getString(it) })
         setupRecyclerView()
         setupCategoryClickListeners()
         setupFilterClickListeners()
@@ -283,6 +282,7 @@ class AlertFragment : Fragment() {
     private fun updateUI() {
         MockEnvironmentDataSource.refresh()
         environmentAlerts = MockEnvironmentAlertDataSource.getAlerts()
+        taskAlerts = MockTaskAlertDataSource.create { getString(it) }
         taskSnapshotTime = System.currentTimeMillis()
         updateTaskCounts()
         updateEnvironmentCounts()

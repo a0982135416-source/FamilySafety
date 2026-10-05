@@ -334,7 +334,7 @@ Environment - Location Dialog
     <string name="alert_resolve_dialog_confirm">確認</string>
     <!-- STEP 4-4 / 任務警報卡片與多語系測試資料 -->
     <string name="alert_task_assignee">指派成員：%1$s</string>
-    <string name="alert_task_due_date">截止時間：%1$s</string>
+    <string name="alert_task_due_date">截止日期：%1$s</string>
     <string name="alert_task_overdue">逾期</string>
     <string name="alert_task_mock_member_alex">小安</string>
     <string name="alert_task_mock_member_jamie">小佳</string>
@@ -354,7 +354,7 @@ Environment - Location Dialog
     <string name="task_filter_overdue">逾期</string>
     <string name="task_empty">目前沒有任務</string>
     <string name="task_assignee">指派成員：%1$s</string>
-    <string name="task_due_date">截止時間：%1$s</string>
+    <string name="task_due_date">截止日期：%1$s</string>
     <string name="task_mock_tidy">整理客廳</string>
     <string name="task_mock_tidy_description">收好玩具，清理客廳地板。</string>
     <string name="task_mock_completed">檢查門戶</string>
@@ -464,4 +464,7 @@ Environment - Location Dialog
     <string name="environment_warning_view_alert">查看警報</string>
     <string name="environment_warning_gas_message">偵測到瓦斯已開啟，但目前未偵測到火焰。請立即確認瓦斯設備狀態。</string>
     <string name="environment_warning_unattended_message">安全倒數已結束，目前仍未偵測到人員。請立即確認現場狀況。</string>
+    <string name="home_alert_pending_count">%1$d 筆警報待處理</string>
+    <string name="home_alert_none">目前沒有待處理的環境警報。</string>
+    <string name="home_tasks_empty">今天沒有到期任務。</string>
 </resources>

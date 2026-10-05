@@ -35,8 +35,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:ellipsize="end"
-        android:maxLines="1"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:marqueeRepeatLimit="marquee_forever"
 
         android:text="@string/task_name_preview"
 

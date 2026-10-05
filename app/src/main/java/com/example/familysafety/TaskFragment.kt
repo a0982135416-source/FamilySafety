@@ -85,7 +85,7 @@ class TaskFragment : Fragment() {
         if (task.status == TaskStatus.COMPLETED) return
         val statusLabel = if (task.status == TaskStatus.PENDING)
             R.string.task_status_pending else R.string.task_status_in_progress
-        val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT,
+        val date = DateFormat.getDateInstance(DateFormat.MEDIUM,
             resources.configuration.locales[0]).format(Date(task.dueDate))
         val message = listOfNotNull(
             task.title, task.description,
