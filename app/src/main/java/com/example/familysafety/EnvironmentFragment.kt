@@ -331,6 +331,7 @@ class EnvironmentFragment : Fragment() {
                 // 更新該地點的溫度與濕度
                 // Update temperature and humidity
                 updateEnvironmentData()
+                updateHistoricalChart(selectedHistoryPeriod())
 
                 // 選擇完成後關閉 Dialog
                 // Close the dialog after selection
@@ -497,11 +498,17 @@ class EnvironmentFragment : Fragment() {
 
         // 從獨立 Mock DataSource 取得歷史資料
         // Get historical data from the independent Mock DataSource
-        val historyData = MockHistoryDataSource.getHistory(period)
+        val historyData = MockHistoryDataSource.getHistory(period, selectedLocation)
 
         // 將資料傳送給 HistoryChartView
         // Pass historical data to HistoryChartView
         binding.historyChartViewEnvironmentHistory.setHistoryData(historyData)
+    }
+
+    private fun selectedHistoryPeriod() = when (binding.materialButtonToggleGroupEnvironmentHistoryPeriod.checkedButtonId) {
+        R.id.button_environment_history_week -> MockHistoryDataSource.Period.WEEK
+        R.id.button_environment_history_month -> MockHistoryDataSource.Period.MONTH
+        else -> MockHistoryDataSource.Period.DAY
     }
 
     // =========================================================================

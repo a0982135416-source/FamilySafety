@@ -160,7 +160,15 @@
     <string name="environment_location_kitchen">Kitchen</string>
     <string name="environment_status_online">Online</string>
 
-    <string name="environment_camera_preview">Live Camera Preview</string>
+    <string name="environment_camera_preview">Mock camera preview</string>
+    <string name="environment_camera_mock_status">Mock</string>
+    <string name="environment_history_monday">Mon</string>
+    <string name="environment_history_tuesday">Tue</string>
+    <string name="environment_history_wednesday">Wed</string>
+    <string name="environment_history_thursday">Thu</string>
+    <string name="environment_history_friday">Fri</string>
+    <string name="environment_history_saturday">Sat</string>
+    <string name="environment_history_sunday">Sun</string>
 
     <string name="environment_camera_time_preview">
     2026-09-16 10:30:24

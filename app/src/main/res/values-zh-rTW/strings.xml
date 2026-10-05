@@ -144,7 +144,15 @@
     <string name="environment_location_kitchen">廚房</string>
     <string name="environment_status_online">線上</string>
 
-    <string name="environment_camera_preview">即時影像預覽</string>
+    <string name="environment_camera_preview">模擬影像預覽</string>
+    <string name="environment_camera_mock_status">模擬</string>
+    <string name="environment_history_monday">週一</string>
+    <string name="environment_history_tuesday">週二</string>
+    <string name="environment_history_wednesday">週三</string>
+    <string name="environment_history_thursday">週四</string>
+    <string name="environment_history_friday">週五</string>
+    <string name="environment_history_saturday">週六</string>
+    <string name="environment_history_sunday">週日</string>
 
     <string name="environment_camera_time_preview">
     2026-09-16 10:30:24

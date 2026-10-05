@@ -34,13 +34,50 @@ object MockHistoryDataSource {
     // Get Historical Data
     // =========================================================================
 
-    fun getHistory(period: Period): List<HistoryPoint> {
+    fun getHistory(period: Period, location: String): List<HistoryPoint> {
 
-        return when (period) {
+        val labels = when (period) {
             Period.DAY -> getDayData()
             Period.WEEK -> getWeekData()
             Period.MONTH -> getMonthData()
         }
+        val temperatures = when (location) {
+            "KITCHEN" -> when (period) {
+                Period.DAY -> listOf(26.2f, 26.0f, 26.5f, 27.2f, 27.0f, 26.8f, 26.4f)
+                Period.WEEK -> listOf(26.4f, 26.8f, 27.1f, 26.6f, 27.3f, 26.9f, 26.5f)
+                Period.MONTH -> listOf(26.1f, 26.5f, 26.9f, 27.2f, 27.0f, 26.7f, 26.3f)
+            }
+            "LIVING_ROOM" -> when (period) {
+                Period.DAY -> listOf(25.0f, 25.2f, 25.6f, 26.0f, 25.8f, 25.4f, 25.1f)
+                Period.WEEK -> listOf(25.3f, 25.7f, 25.5f, 26.1f, 25.9f, 25.4f, 25.2f)
+                Period.MONTH -> listOf(25.1f, 25.4f, 25.8f, 26.0f, 25.6f, 25.3f, 25.5f)
+            }
+            "BEDROOM" -> when (period) {
+                Period.DAY -> listOf(24.4f, 24.2f, 24.6f, 25.1f, 25.0f, 24.9f, 24.5f)
+                Period.WEEK -> listOf(24.6f, 24.9f, 24.7f, 25.2f, 25.0f, 24.8f, 24.3f)
+                Period.MONTH -> listOf(24.3f, 24.7f, 25.0f, 25.2f, 24.8f, 24.5f, 24.9f)
+            }
+            else -> error("Unknown environment location: $location")
+        }
+        val humidities = when (location) {
+            "KITCHEN" -> when (period) {
+                Period.DAY -> listOf(60f, 59f, 58f, 56f, 57f, 58f, 59f)
+                Period.WEEK -> listOf(59f, 58f, 56f, 60f, 57f, 58f, 59f)
+                Period.MONTH -> listOf(60f, 59f, 57f, 56f, 58f, 59f, 58f)
+            }
+            "LIVING_ROOM" -> when (period) {
+                Period.DAY -> listOf(63f, 62f, 61f, 59f, 60f, 61f, 62f)
+                Period.WEEK -> listOf(62f, 60f, 63f, 59f, 61f, 62f, 60f)
+                Period.MONTH -> listOf(63f, 61f, 60f, 59f, 62f, 61f, 60f)
+            }
+            else -> when (period) {
+                Period.DAY -> listOf(57f, 56f, 55f, 53f, 54f, 55f, 56f)
+                Period.WEEK -> listOf(56f, 55f, 57f, 53f, 54f, 56f, 55f)
+                Period.MONTH -> listOf(57f, 55f, 54f, 53f, 56f, 55f, 54f)
+            }
+        }
+        // Fixed period labels and point count retain the existing time semantics.
+        return labels.mapIndexed { index, label -> HistoryPoint(label, temperatures[index], humidities[index]) }
     }
 
 
@@ -49,16 +86,10 @@ object MockHistoryDataSource {
     // Daily Mock Data
     // =========================================================================
 
-    private fun getDayData(): List<HistoryPoint> {
+    private fun getDayData(): List<String> {
 
         return listOf(
-            HistoryPoint("00", 24.1f, 62f),
-            HistoryPoint("04", 23.8f, 65f),
-            HistoryPoint("08", 25.2f, 61f),
-            HistoryPoint("12", 28.1f, 55f),
-            HistoryPoint("16", 27.3f, 57f),
-            HistoryPoint("20", 25.4f, 60f),
-            HistoryPoint("24", 24.6f, 63f)
+            "00", "04", "08", "12", "16", "20", "24"
         )
     }
 
@@ -68,16 +99,10 @@ object MockHistoryDataSource {
     // Weekly Mock Data
     // =========================================================================
 
-    private fun getWeekData(): List<HistoryPoint> {
+    private fun getWeekData(): List<String> {
 
         return listOf(
-            HistoryPoint("Mon", 25.2f, 60f),
-            HistoryPoint("Tue", 26.1f, 58f),
-            HistoryPoint("Wed", 27.4f, 56f),
-            HistoryPoint("Thu", 26.8f, 59f),
-            HistoryPoint("Fri", 28.2f, 54f),
-            HistoryPoint("Sat", 27.1f, 57f),
-            HistoryPoint("Sun", 25.8f, 62f)
+            "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
         )
     }
 
@@ -87,16 +112,10 @@ object MockHistoryDataSource {
     // Monthly Mock Data
     // =========================================================================
 
-    private fun getMonthData(): List<HistoryPoint> {
+    private fun getMonthData(): List<String> {
 
         return listOf(
-            HistoryPoint("1", 24.5f, 63f),
-            HistoryPoint("5", 25.2f, 61f),
-            HistoryPoint("10", 26.4f, 59f),
-            HistoryPoint("15", 28.1f, 55f),
-            HistoryPoint("20", 27.3f, 57f),
-            HistoryPoint("25", 26.2f, 60f),
-            HistoryPoint("30", 25.1f, 62f)
+            "1", "5", "10", "15", "20", "25", "30"
         )
     }
 }

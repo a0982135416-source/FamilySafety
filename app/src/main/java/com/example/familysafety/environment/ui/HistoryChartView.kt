@@ -399,7 +399,7 @@ class HistoryChartView @JvmOverloads constructor(
             axisPaint.textAlign = Paint.Align.CENTER
 
             canvas.drawText(
-                point.label,
+                localizedLabel(point.label),
                 x,
                 bottom + dp(17f),
                 axisPaint
@@ -478,5 +478,20 @@ class HistoryChartView @JvmOverloads constructor(
                 pointPaint
             )
         }
+    }
+
+    // Keep the existing weekday axis meaning while rendering only the selected UI language.
+    private fun localizedLabel(label: String): String {
+        val key = when (label) {
+            "Mon" -> R.string.environment_history_monday
+            "Tue" -> R.string.environment_history_tuesday
+            "Wed" -> R.string.environment_history_wednesday
+            "Thu" -> R.string.environment_history_thursday
+            "Fri" -> R.string.environment_history_friday
+            "Sat" -> R.string.environment_history_saturday
+            "Sun" -> R.string.environment_history_sunday
+            else -> return label
+        }
+        return context.getString(key)
     }
 }

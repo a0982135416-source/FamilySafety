@@ -1,5 +1,7 @@
 package com.example.familysafety
 
+import com.example.familysafety.environment.data.MockHistoryDataSource
+import com.example.familysafety.environment.ui.HistoryChartView
 import android.os.SystemClock
 import android.util.Log
 import android.view.InputDevice
@@ -30,6 +32,62 @@ class EnvironmentIntegrationTest {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
     private var now = 1_000L
     private fun tap() = click(InputDevice.SOURCE_TOUCHSCREEN, 0)
+
+    @Test fun englishLocationHistoryAndCameraMock() = locationHistoryAndCameraMock("en")
+    @Test fun traditionalChineseLocationHistoryAndCameraMock() = locationHistoryAndCameraMock("zh-TW")
+
+    private fun locationHistoryAndCameraMock(tag: String) = withEnvironment(tag) { scenario ->
+        val periods = listOf(
+            R.id.button_environment_history_day to MockHistoryDataSource.Period.DAY,
+            R.id.button_environment_history_week to MockHistoryDataSource.Period.WEEK,
+            R.id.button_environment_history_month to MockHistoryDataSource.Period.MONTH
+        )
+        fun assertReadingsAndChart(location: String, period: MockHistoryDataSource.Period) {
+            scenario.onActivity {
+                assertEquals(location, MockEnvironmentDataSource.selectedLocation)
+                val reading = MockEnvironmentDataSource.getCurrentEnvironmentData()
+                assertEquals(it.getString(R.string.environment_temperature_value_format, reading.temperature),
+                    it.findViewById<TextView>(R.id.textView_environment_temperature_value).text.toString())
+                assertEquals(it.getString(R.string.environment_humidity_value_format, reading.humidity),
+                    it.findViewById<TextView>(R.id.textView_environment_humidity_value).text.toString())
+                val chart = it.findViewById<HistoryChartView>(R.id.historyChartView_environment_history)
+                val data = chart.javaClass.getDeclaredField("historyData").apply { isAccessible = true }.get(chart)
+                assertEquals(MockHistoryDataSource.getHistory(period, location), data)
+                if (period == MockHistoryDataSource.Period.WEEK) {
+                    val label = chart.javaClass.getDeclaredMethod("localizedLabel", String::class.java)
+                        .apply { isAccessible = true }.invoke(chart, "Mon")
+                    assertEquals(if (tag == "en") "Mon" else "週一", label)
+                }
+            }
+        }
+        var selectedPeriod = MockHistoryDataSource.Period.DAY
+        listOf("KITCHEN" to R.string.location_kitchen, "LIVING_ROOM" to R.string.location_living_room,
+            "BEDROOM" to R.string.location_bedroom).forEach { (location, label) ->
+            onView(withId(R.id.button_environment_location)).perform(scrollTo(), tap())
+            onView(withText(label)).inRoot(isDialog()).perform(tap())
+            // Verify the switch itself updates the graph before any period click.
+            assertReadingsAndChart(location, selectedPeriod)
+            periods.forEach { (button, period) ->
+                onView(withId(button)).perform(scrollTo(), tap())
+                selectedPeriod = period
+                assertReadingsAndChart(location, period)
+            }
+        }
+        onView(withId(R.id.navHome)).perform(tap())
+        await(scenario) { it.findViewById<View>(R.id.textView_home_status) != null }
+        navigateEnvironment(scenario)
+        assertReadingsAndChart("BEDROOM", MockHistoryDataSource.Period.DAY)
+        scenario.recreate()
+        navigateEnvironment(scenario)
+        assertReadingsAndChart("BEDROOM", MockHistoryDataSource.Period.DAY)
+        onView(withText(R.string.environment_camera_preview)).perform(scrollTo()).check(matches(isCompletelyDisplayed()))
+        onView(withId(R.id.textView_environment_camera_online_status)).check(matches(withText(R.string.environment_camera_mock_status)))
+        onView(withId(R.id.textView_environment_camera_timestamp)).check(matches(withEffectiveVisibility(Visibility.GONE)))
+        scenario.onActivity {
+            assertFalse(it.findViewById<View>(R.id.cardView_environment_live_camera).isClickable)
+            assertEquals(EnvironmentSensorState(), MockEnvironmentDataSource.sensorState)
+        }
+    }
 
     private fun withEnvironment(tag: String = "en", realClock: Boolean = false, block: (ActivityScenario<MainActivity>) -> Unit) {
         instrumentation.runOnMainSync {
