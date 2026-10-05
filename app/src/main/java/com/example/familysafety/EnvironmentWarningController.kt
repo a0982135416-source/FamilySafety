@@ -7,7 +7,7 @@ import android.os.SystemClock
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-/** One reminder schedule per visible Environment screen; acknowledgements never change alert records. */
+/** One Activity-owned reminder schedule; acknowledgements never change alert records. */
 internal class EnvironmentWarningReminder {
     var activeId: Long? = null
         private set
@@ -22,7 +22,7 @@ internal class EnvironmentWarningReminder {
     fun reset() { activeId = null; nextDueAt = 0L }
 }
 
-/** View-owned Dialog and one-shot platform sound. The Fragment's existing ticker drives the schedule. */
+/** Activity-owned Dialog and one-shot sound. MainActivity drives foreground updates. */
 internal class EnvironmentWarningController(
     private val context: Context,
     private val canShow: () -> Boolean,

@@ -1,5 +1,7 @@
 package com.example.familysafety
 
+import androidx.test.espresso.matcher.ViewMatchers.withText
+
 import android.graphics.Bitmap
 import android.os.SystemClock
 import android.view.View
@@ -270,6 +272,7 @@ class AlertCenterIntegrationTest {
         // Sensor input creates and resolves the record; the history UI has no manual safety declaration.
         scenario.onActivity { MockEnvironmentDataSource.updateSensors(EnvironmentSensorState(gasOn = true)) }
         waitForRows(scenario, 4)
+        acknowledgeActivityWarning(scenario)
         counts(scenario, false, 4, 1, 3)
         onView(withId(R.id.button_alert_pending)).perform(scrollTo(), click())
         waitForRows(scenario, 1)
@@ -300,6 +303,7 @@ class AlertCenterIntegrationTest {
     @Test fun reentryAndRecreationPreserveAutoResolvedHistory() = withLocale("en") { scenario ->
         scenario.onActivity { MockEnvironmentDataSource.updateSensors(EnvironmentSensorState(gasOn = true)) }
         waitForRows(scenario, 4)
+        acknowledgeActivityWarning(scenario)
         onView(withId(R.id.navTask)).perform(click())
         instrumentation.waitForIdleSync()
         onView(withId(R.id.textView_task_title)).check(matches(isDisplayed()))
@@ -325,5 +329,28 @@ class AlertCenterIntegrationTest {
         navigateAlert(scenario)
         waitForRows(scenario, 4)
         counts(scenario, false, 4, 0, 4)
+    }
+    // App-level warnings now also appear over Alert Center; acknowledgement keeps the record pending.
+    private fun acknowledgeActivityWarning(scenario: ActivityScenario<MainActivity>) {
+        val limit = SystemClock.uptimeMillis() + 5_000L
+        var showing = false
+        do {
+            instrumentation.waitForIdleSync()
+            scenario.onActivity {
+                val controller = MainActivity::class.java.getDeclaredField("warningController")
+                    .apply { isAccessible = true }.get(it)
+                val dialog = controller.javaClass.getDeclaredField("dialog")
+                    .apply { isAccessible = true }.get(controller) as? androidx.appcompat.app.AlertDialog
+                showing = dialog?.isShowing == true
+            }
+            if (showing) break
+            SystemClock.sleep(25L)
+        } while (SystemClock.uptimeMillis() < limit)
+        assertTrue("Foreground gas warning must appear over Alert Center", showing)
+        onView(withText(R.string.environment_warning_got_it))
+            .inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(click())
+        scenario.onActivity {
+            assertEquals(EnvironmentAlertStatus.PENDING, MockEnvironmentAlertDataSource.getAlerts().last().status)
+        }
     }
 }

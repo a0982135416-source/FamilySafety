@@ -1,6 +1,9 @@
 package com.example.familysafety
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import androidx.lifecycle.Lifecycle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.familysafety.databinding.ActivityMainBinding
@@ -31,6 +34,16 @@ class MainActivity : AppCompatActivity() {
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var warningController: EnvironmentWarningController
+    private val safetyHandler = Handler(Looper.getMainLooper())
+    private var safetyForeground = false
+    private val refreshSafety = object : Runnable {
+        override fun run() {
+            if (!safetyForeground) return
+            refreshEnvironmentWarning()
+            safetyHandler.postDelayed(this, 250L)
+        }
+    }
 
 
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -65,6 +78,42 @@ class MainActivity : AppCompatActivity() {
         // 設定 Bottom Navigation
         // Set up Bottom Navigation
         setupBottomNavigation()
+        warningController = EnvironmentWarningController(this,
+            { safetyForeground && lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED) &&
+                !isFinishing && !isDestroyed && !supportFragmentManager.isStateSaved },
+            {
+                // Re-entering Alert also resets its category to Environmental.
+                if (binding.bottomNavigationViewMainNavigation.selectedItemId == R.id.navAlert) {
+                    showFragment(AlertFragment())
+                } else binding.bottomNavigationViewMainNavigation.selectedItemId = R.id.navAlert
+            })
+    }
+
+    // Foreground safety reconciliation is shared by all five pages, never by Auth activities.
+    internal fun refreshEnvironmentWarning() {
+        MockEnvironmentDataSource.refresh()
+        if (safetyForeground) warningController.update(MockEnvironmentDataSource.getActiveWarning())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        safetyForeground = true
+        warningController.resume()
+        safetyHandler.removeCallbacks(refreshSafety)
+        safetyHandler.post(refreshSafety)
+    }
+
+    override fun onStop() {
+        safetyForeground = false
+        safetyHandler.removeCallbacks(refreshSafety)
+        warningController.stop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        safetyHandler.removeCallbacks(refreshSafety)
+        warningController.destroy()
+        super.onDestroy()
     }
 
 

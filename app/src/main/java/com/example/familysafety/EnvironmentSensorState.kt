@@ -7,7 +7,7 @@ data class EnvironmentSensorState(
     val personDetected: Boolean = false,
 )
 
-enum class EnvironmentCountdownPhase { IDLE, RUNNING, CANCELLED, FINISHED }
+enum class EnvironmentCountdownPhase { IDLE, RUNNING, FINISHED }
 
 data class EnvironmentCountdownState(
     val configuredMinutes: Int,

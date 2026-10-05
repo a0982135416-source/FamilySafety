@@ -287,9 +287,6 @@ Environment - Location Dialog
     <string name="countdown_duration_unit">minutes</string>
     <string name="countdown_remaining_title">Remaining Time</string>
 
-    <string name="countdown_start_button">Start Timer</string>
-    <string name="countdown_cancel_button">Cancel Timer</string>
-
     <string name="countdown_status_standby">Standby</string>
     <string name="countdown_status_running">Running</string>
     <string name="countdown_status_finished">Finished</string>
@@ -300,7 +297,6 @@ Environment - Location Dialog
     <string name="countdown_remaining_preview">10:00</string>
 
     <string name="countdown_input_invalid">Please enter a whole number between 1 and 180.</string>
-    <string name="countdown_running_message">Please cancel the current timer before changing its duration.</string>
     <string name="countdown_finished_message">Countdown finished.</string>
 
 
@@ -465,7 +461,6 @@ Environment - Location Dialog
     <string name="environment_status_detected">Detected</string>
     <string name="environment_status_not_detected">Not detected</string>
     <string name="environment_turn_on_gas_first">Turn on the gas first.</string>
-    <string name="countdown_status_cancelled">Cancelled</string>
     <!-- STEP 8-1C: immediate Environment warning -->
     <string name="environment_warning_got_it">Got it</string>
     <string name="environment_warning_view_alert">View Alert</string>

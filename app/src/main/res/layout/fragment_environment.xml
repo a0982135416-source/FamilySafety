@@ -711,6 +711,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
+                            android:layout_marginBottom="8dp"
                             android:fontFeatureSettings="tnum"
                             android:text="@string/countdown_remaining_preview"
                             android:textColor="@color/title_blue"
@@ -718,24 +719,10 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/textView_environment_countdown_status" />
+                            app:layout_constraintTop_toBottomOf="@id/textView_environment_countdown_status"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-                        <!-- 03. 手動開始／取消按鈕 / Start or Cancel Timer -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/button_environment_countdown_start"
-                            style="@style/Widget.Material3.Button"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/countdown_start_button"
-                            android:textAllCaps="false"
-                            app:cornerRadius="12dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/textView_environment_countdown_remaining" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

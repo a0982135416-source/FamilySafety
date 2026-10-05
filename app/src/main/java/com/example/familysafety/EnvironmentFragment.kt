@@ -52,9 +52,7 @@ class EnvironmentFragment : Fragment() {
 
     // STEP 8-1: process-memory safety state; this ticker only renders the current View.
     private val selectedCountdownMinutes get() = MockEnvironmentDataSource.getCountdown().configuredMinutes
-    private val isCountdownRunning get() = MockEnvironmentDataSource.getCountdown().phase == EnvironmentCountdownPhase.RUNNING
     private val dialogs = mutableSetOf<AlertDialog>()
-    private var warningController: EnvironmentWarningController? = null
     private val refreshSafety = object : Runnable {
         override fun run() {
             val current = _binding ?: return
@@ -140,12 +138,6 @@ class EnvironmentFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        warningController = EnvironmentWarningController(requireContext(),
-            { _binding != null && isAdded && isResumed && !parentFragmentManager.isStateSaved },
-            {
-                requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
-                    R.id.bottomNavigationView_main_navigation).selectedItemId = R.id.navAlert
-            })
 
         // 01. 初始化安全倒數
         // Initialize safety countdown
@@ -180,33 +172,7 @@ class EnvironmentFragment : Fragment() {
         // 設定倒數分鐘數
         // Open duration setting dialog
         binding.buttonEnvironmentCountdownSetting.setOnClickListener {
-
-            if (isCountdownRunning) {
-
-                Toast.makeText(
-                    requireContext(),
-                    R.string.countdown_running_message,
-                    Toast.LENGTH_SHORT
-                ).show()
-
-            } else {
-
-                showCountdownDialog()
-            }
-        }
-
-        // 手動開始或取消倒數
-        // Manually start or cancel countdown
-        binding.buttonEnvironmentCountdownStart.setOnClickListener {
-
-            if (isCountdownRunning) {
-
-                cancelSafetyCountdown()
-
-            } else {
-
-                startSafetyCountdown()
-            }
+            showCountdownDialog()
         }
     }
 
@@ -565,19 +531,9 @@ class EnvironmentFragment : Fragment() {
     }
 
     // =========================================================================
-// 04. 啟動安全倒數
-// Start Safety Countdown
+// 04. 感測器操作與安全倒數畫面
+// Sensor Controls and Safety Countdown Display
 // =========================================================================
-
-    private fun startSafetyCountdown() {
-        MockEnvironmentDataSource.startManualCountdown()
-        renderSafety()
-    }
-
-    private fun cancelSafetyCountdown() {
-        MockEnvironmentDataSource.cancelCountdown()
-        renderSafety()
-    }
 
     // Sensor cards remain the existing controls, with explicit localized interaction hints.
     private fun setupSensorControls() {
@@ -626,13 +582,10 @@ class EnvironmentFragment : Fragment() {
         updateRemainingTime(countdown.remainingMillis)
         current.textViewEnvironmentCountdownStatus.setText(when (countdown.phase) {
             EnvironmentCountdownPhase.IDLE -> R.string.countdown_status_standby
-            EnvironmentCountdownPhase.CANCELLED -> R.string.countdown_status_cancelled
             EnvironmentCountdownPhase.RUNNING -> R.string.countdown_status_running
             EnvironmentCountdownPhase.FINISHED -> R.string.countdown_status_finished
         })
-        current.buttonEnvironmentCountdownStart.setText(if (countdown.phase == EnvironmentCountdownPhase.RUNNING)
-            R.string.countdown_cancel_button else R.string.countdown_start_button)
-        warningController?.update(MockEnvironmentDataSource.getActiveWarning())
+        (activity as? MainActivity)?.refreshEnvironmentWarning()
     }
 
     private fun showTrackedDialog(dialog: AlertDialog) {
@@ -644,14 +597,12 @@ class EnvironmentFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        warningController?.resume()
         binding.root.removeCallbacks(refreshSafety)
         binding.root.post(refreshSafety)
     }
 
     override fun onPause() {
         _binding?.root?.removeCallbacks(refreshSafety)
-        warningController?.stop()
         super.onPause()
     }
 
@@ -684,8 +635,6 @@ class EnvironmentFragment : Fragment() {
 
         // Detach View callbacks only; shared countdown deadline remains authoritative.
         _binding?.root?.removeCallbacks(refreshSafety)
-        warningController?.destroy()
-        warningController = null
         dialogs.toList().forEach { it.setOnDismissListener(null); it.dismiss() }
         dialogs.clear()
 

@@ -79,10 +79,8 @@ class EnvironmentIntegrationTest {
     }
 
     private fun warningController(activity: MainActivity): Any? {
-        val fragment = activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content)
-        if (fragment !is EnvironmentFragment) return null
-        return EnvironmentFragment::class.java.getDeclaredField("warningController")
-            .apply { isAccessible = true }.get(fragment)
+        return MainActivity::class.java.getDeclaredField("warningController")
+            .apply { isAccessible = true }.get(activity)
     }
     private fun controllerField(controller: Any?, name: String): Any? = controller?.javaClass?.getDeclaredField(name)
         ?.apply { isAccessible = true }?.get(controller)
@@ -104,20 +102,27 @@ class EnvironmentIntegrationTest {
         if (acknowledge) acknowledgeWarningIfShown()
     }
     // A locale recreation can restore Home after the first navigation tap. Wait for the actual destination.
-    private fun navigateEnvironment(scenario: ActivityScenario<MainActivity>) {
+    private fun navigateEnvironment(scenario: ActivityScenario<MainActivity>) =
+        navigateDestination(scenario, R.id.navEnvironment, R.id.cardView_environment_gas_status)
+
+    private fun navigateAlert(scenario: ActivityScenario<MainActivity>) =
+        navigateDestination(scenario, R.id.navAlert, R.id.button_alert_resolved)
+
+    private fun navigateDestination(scenario: ActivityScenario<MainActivity>, destination: Int, readyView: Int) {
         val limit = SystemClock.uptimeMillis() + 5_000L
         do {
             var alreadyReady = false
-            scenario.onActivity { alreadyReady = it.findViewById<View>(R.id.cardView_environment_gas_status) != null }
+            scenario.onActivity { alreadyReady = it.findViewById<View>(readyView) != null }
             if (alreadyReady) return
-            onView(withId(R.id.navEnvironment)).perform(tap())
+            acknowledgeWarningIfShown()
+            onView(withId(destination)).perform(tap())
             instrumentation.waitForIdleSync()
             var ready = false
-            scenario.onActivity { ready = it.findViewById<View>(R.id.cardView_environment_gas_status) != null }
+            scenario.onActivity { ready = it.findViewById<View>(readyView) != null }
             if (ready) return
             SystemClock.sleep(25)
         } while (SystemClock.uptimeMillis() < limit)
-        fail("Environment destination did not become ready after locale/navigation")
+        fail("Requested destination $destination did not become ready after locale/navigation")
     }
     // Read-only runtime trace: do not reconcile through getCountdown while checking ticker settlement.
     private fun trace(scenario: ActivityScenario<MainActivity>, label: String) {
@@ -141,7 +146,7 @@ class EnvironmentIntegrationTest {
     }
     private fun showAlert(scenario: ActivityScenario<MainActivity>, type: EnvironmentAlertType, count: Int = 4) {
         acknowledgeWarningIfShown()
-        onView(withId(R.id.navAlert)).perform(tap())
+        navigateAlert(scenario)
         onView(withId(R.id.button_alert_environment)).perform(tap())
         onView(withId(R.id.button_alert_pending)).perform(tap())
         await(scenario) { activity ->
@@ -170,7 +175,7 @@ class EnvironmentIntegrationTest {
         showAlert(scenario, EnvironmentAlertType.GAS_LEAK_RISK)
     }
 
-    @Test fun runtimeFreshGasAndCancelledCycleTrace() = withEnvironment("zh-TW") { scenario ->
+    @Test fun runtimeFreshGasAndReconfiguredCycleTrace() = withEnvironment("zh-TW") { scenario ->
         trace(scenario, "fresh-before-gas")
         sensor(R.id.cardView_environment_gas_status)
         trace(scenario, "after-gas")
@@ -181,17 +186,17 @@ class EnvironmentIntegrationTest {
         }
         showAlert(scenario, EnvironmentAlertType.GAS_LEAK_RISK)
         trace(scenario, "gas-visible-pending")
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        navigateEnvironment(scenario)
         sensor(R.id.cardView_environment_flame_status)
         trace(scenario, "after-flame-no-person-click")
         onView(withId(R.id.textView_environment_countdown_status)).check(matches(withText(R.string.countdown_status_running)))
-        onView(withId(R.id.button_environment_countdown_start)).perform(scrollTo(), tap())
         sensor(R.id.cardView_environment_flame_status)
         sensor(R.id.cardView_environment_flame_status)
-        trace(scenario, "cancelled-after-flame-off-on")
-        onView(withId(R.id.textView_environment_countdown_status)).check(matches(withText(R.string.countdown_status_cancelled)))
+        trace(scenario, "automatic-restart-after-flame-off-on")
+        onView(withId(R.id.textView_environment_countdown_status)).check(matches(withText(R.string.countdown_status_running)))
+        scenario.onActivity { now += 78_000L }
         configure(18)
-        onView(withId(R.id.textView_environment_countdown_status)).check(matches(withText(R.string.countdown_status_cancelled)))
+        onView(withId(R.id.textView_environment_countdown_status)).check(matches(withText(R.string.countdown_status_running)))
         onView(withId(R.id.textView_environment_countdown_remaining)).check(matches(withText("18:00")))
         sensor(R.id.cardView_environment_person_status)
         sensor(R.id.cardView_environment_person_status)
@@ -253,7 +258,7 @@ class EnvironmentIntegrationTest {
             MockEnvironmentDataSource.setDeadlineForTests(now + 1)
             now += 2
         }
-        onView(withId(R.id.navAlert)).perform(tap())
+        navigateAlert(scenario)
         onView(withId(R.id.button_alert_resolved)).perform(tap())
         await(scenario) {
             val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)?.adapter as? EnvironmentAlertAdapter
@@ -269,20 +274,22 @@ class EnvironmentIntegrationTest {
         scenario.onActivity { deadline = MockEnvironmentDataSource.getCountdown().deadlineElapsed }
         onView(withId(R.id.navTask)).perform(tap())
         scenario.onActivity { now += 30_000L }
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        navigateEnvironment(scenario)
         onView(withId(R.id.textView_environment_countdown_remaining)).check(matches(withText("09:30")))
         scenario.recreate()
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        navigateEnvironment(scenario)
         scenario.onActivity { assertEquals(deadline, MockEnvironmentDataSource.getCountdown().deadlineElapsed) }
         onView(withId(R.id.navTask)).perform(tap())
         scenario.onActivity { now = deadline!! + 1L }
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        await(scenario) { warningShowing(it) }
+        acknowledgeWarningIfShown()
+        navigateEnvironment(scenario)
         acknowledgeWarningIfShown()
         onView(withId(R.id.textView_environment_countdown_remaining)).check(matches(withText("00:00")))
         repeat(2) {
             acknowledgeWarningIfShown()
             onView(withId(R.id.navTask)).perform(tap())
-            onView(withId(R.id.navEnvironment)).perform(tap())
+            navigateEnvironment(scenario)
         }
         scenario.onActivity { assertEquals(5, MockEnvironmentAlertDataSource.getAlerts().size) }
         showAlert(scenario, EnvironmentAlertType.UNATTENDED_COOKING, 5)
@@ -291,9 +298,9 @@ class EnvironmentIntegrationTest {
     @Test fun autoResolvePersistsAfterLeavingAlert() = withEnvironment { scenario ->
         sensor(R.id.cardView_environment_gas_status)
         showAlert(scenario, EnvironmentAlertType.GAS_LEAK_RISK)
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        navigateEnvironment(scenario)
         sensor(R.id.cardView_environment_gas_status)
-        onView(withId(R.id.navAlert)).perform(tap())
+        navigateAlert(scenario)
         onView(withId(R.id.button_alert_resolved)).perform(tap())
         await(scenario) {
             val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)?.adapter as? EnvironmentAlertAdapter
@@ -313,7 +320,7 @@ class EnvironmentIntegrationTest {
         onView(withId(android.R.id.button1)).check(matches(withText(R.string.countdown_dialog_confirm)))
         scenario.onActivity { it.findViewById<View>(R.id.navTask).performClick() }
         onView(withId(android.R.id.button1)).check(doesNotExist())
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        navigateEnvironment(scenario)
         onView(withId(R.id.button_environment_location)).perform(scrollTo(), tap())
         scenario.onActivity { it.findViewById<View>(R.id.navTask).performClick() }
         onView(withId(android.R.id.button2)).check(doesNotExist())
@@ -334,16 +341,15 @@ class EnvironmentIntegrationTest {
         onView(withId(R.id.textView_environment_flame_value)).check(matches(withText(R.string.environment_status_not_detected)))
     }
 
-    @Test fun cancelConfigureAndManualRestartPreserveEighteenMinutes() = withEnvironment { scenario ->
+    @Test fun activeConfigureImmediatelyRestartsAndPreservesEighteenMinutes() = withEnvironment { scenario ->
         configure(18)
         sensor(R.id.cardView_environment_gas_status)
         sensor(R.id.cardView_environment_flame_status)
         onView(withId(R.id.textView_environment_countdown_remaining)).check(matches(withText("18:00")))
-        onView(withId(R.id.button_environment_countdown_start)).perform(scrollTo(), tap())
+        scenario.onActivity { now += 78_000L }
         configure(18)
-        onView(withId(R.id.textView_environment_countdown_status)).check(matches(withText(R.string.countdown_status_cancelled)))
+        onView(withId(R.id.textView_environment_countdown_status)).check(matches(withText(R.string.countdown_status_running)))
         onView(withId(R.id.textView_environment_countdown_remaining)).check(matches(withText("18:00")))
-        onView(withId(R.id.button_environment_countdown_start)).perform(scrollTo(), tap())
         scenario.onActivity { now += 1_080_001L }
         await(scenario) { it.findViewById<TextView>(R.id.textView_environment_countdown_status).text.toString() ==
             it.getString(R.string.countdown_status_finished) }
@@ -356,11 +362,11 @@ class EnvironmentIntegrationTest {
         sensor(R.id.cardView_environment_person_status)
         onView(withId(R.id.textView_environment_countdown_remaining)).check(matches(withText("18:00")))
         onView(withId(R.id.navTask)).perform(tap())
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        navigateEnvironment(scenario)
         scenario.recreate()
-        onView(withId(R.id.navEnvironment)).perform(tap())
+        navigateEnvironment(scenario)
         onView(withId(R.id.textView_environment_countdown_remaining)).check(matches(withText("18:00")))
-        onView(withId(R.id.navAlert)).perform(tap())
+        navigateAlert(scenario)
         onView(withId(R.id.button_alert_resolved)).perform(tap())
         await(scenario) {
             val adapter = it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)?.adapter as? EnvironmentAlertAdapter
@@ -405,7 +411,7 @@ class EnvironmentIntegrationTest {
             assertEquals(4, MockEnvironmentAlertDataSource.getAlerts().size)
             assertEquals(EnvironmentAlertStatus.RESOLVED, MockEnvironmentAlertDataSource.getAlerts().last().status)
         }
-        onView(withId(R.id.navAlert)).perform(tap())
+        navigateAlert(scenario)
         onView(withId(R.id.button_alert_pending)).perform(tap())
         await(scenario) { (it.findViewById<RecyclerView>(R.id.recyclerView_alert_list)?.adapter as? EnvironmentAlertAdapter)
             ?.currentList?.isEmpty() == true }
@@ -453,16 +459,22 @@ class EnvironmentIntegrationTest {
         }
         await(scenario) { it.findViewById<View>(R.id.textView_task_title) != null }
         scenario.onActivity {
-            assertNull(controllerField(oldController, "dialog"))
-            assertNull(controllerField(oldController, "tone"))
+            assertSame(oldController, warningController(it))
+            assertTrue(warningShowing(it))
             assertEquals(EnvironmentAlertStatus.PENDING, MockEnvironmentAlertDataSource.getAlerts().last().status)
         }
-        navigateEnvironment(scenario)
-        await(scenario) { warningShowing(it) }
+        scenario.onActivity { it.findViewById<View>(R.id.navEnvironment).performClick() }
+        await(scenario) { it.findViewById<View>(R.id.cardView_environment_person_status) != null }
         scenario.recreate()
         await(scenario) { warningShowing(it) }
         scenario.onActivity {
+            assertNull(controllerField(oldController, "dialog"))
+            assertNull(controllerField(oldController, "tone"))
             assertEquals(5, MockEnvironmentAlertDataSource.getAlerts().size)
+            it.findViewById<View>(R.id.navEnvironment).performClick()
+        }
+        await(scenario) { it.findViewById<View>(R.id.cardView_environment_person_status) != null }
+        scenario.onActivity {
             it.findViewById<View>(R.id.cardView_environment_person_status).performClick()
         }
         await(scenario) { !warningShowing(it) }

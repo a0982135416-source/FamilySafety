@@ -269,9 +269,6 @@ Environment - Location Dialog
     <string name="countdown_duration_unit">分鐘</string>
     <string name="countdown_remaining_title">剩餘時間</string>
 
-    <string name="countdown_start_button">開始倒數</string>
-    <string name="countdown_cancel_button">取消倒數</string>
-
     <string name="countdown_status_standby">待命中</string>
     <string name="countdown_status_running">倒數中</string>
     <string name="countdown_status_finished">倒數結束</string>
@@ -282,7 +279,6 @@ Environment - Location Dialog
     <string name="countdown_remaining_preview">10:00</string>
 
     <string name="countdown_input_invalid">請輸入 1～180 之間的整數分鐘。</string>
-    <string name="countdown_running_message">請先取消目前的倒數，再修改分鐘數。</string>
     <string name="countdown_finished_message">倒數時間已結束。</string>
 
 
@@ -448,7 +444,6 @@ Environment - Location Dialog
     <string name="environment_status_detected">已偵測</string>
     <string name="environment_status_not_detected">未偵測</string>
     <string name="environment_turn_on_gas_first">請先開啟瓦斯</string>
-    <string name="countdown_status_cancelled">已取消</string>
     <!-- STEP 8-1C: immediate Environment warning -->
     <string name="environment_warning_got_it">知道了</string>
     <string name="environment_warning_view_alert">查看警報</string>

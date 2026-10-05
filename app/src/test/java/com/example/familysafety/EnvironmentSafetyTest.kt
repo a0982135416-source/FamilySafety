@@ -100,12 +100,14 @@ class EnvironmentSafetyTest {
         sensors(flame = true); sensors(); expire()
         assertEquals(1, added(EnvironmentAlertType.UNATTENDED_COOKING))
     }
-    @Test fun manualCountdownWithPersonPresentNeverCreatesUnattendedAlert() {
+    @Test fun settingWithPersonPresentDoesNotStartOrCreateAlert() {
         sensors(person = true)
-        assertTrue(source.startManualCountdown())
+        assertTrue(source.configureMinutes(18))
+        assertEquals(EnvironmentCountdownPhase.IDLE, source.getCountdown().phase)
         expire()
         assertEquals(0, added(EnvironmentAlertType.UNATTENDED_COOKING))
     }
+
     @Test fun repeatedExpiryEvaluationAndReentryDoNotDuplicateOrRestartCycle() {
         sensors(flame = true); expire()
         repeat(5) { source.refresh(); source.getCountdown(); sensors(flame = true) }
@@ -203,15 +205,18 @@ class EnvironmentSafetyTest {
         assertEquals(all.size, all.map { it.id }.toSet().size)
         assertTrue(all.drop(3).all { it.id > 3L })
     }
-    @Test fun arbitraryEighteenMinutesAndManualCancelReset() {
+    @Test fun configuringRunningCountdownImmediatelyRestartsAtEighteenMinutes() {
+        sensors(flame = true)
+        val previous = source.getCountdown().deadlineElapsed
+        now += 78_000L
         assertTrue(source.configureMinutes(18))
+        assertEquals(EnvironmentCountdownPhase.RUNNING, source.getCountdown().phase)
+        assertEquals(18, source.getCountdown().configuredMinutes)
         assertEquals(1_080_000L, source.getCountdown().remainingMillis)
-        assertTrue(source.startManualCountdown())
-        assertFalse(source.configureMinutes(10))
-        source.cancelCountdown()
-        assertEquals(EnvironmentCountdownPhase.CANCELLED, source.getCountdown().phase)
-        assertEquals(1_080_000L, source.getCountdown().remainingMillis)
+        assertEquals(now + 1_080_000L, source.getCountdown().deadlineElapsed)
+        assertNotEquals(previous, source.getCountdown().deadlineElapsed)
     }
+
     @Test fun defaultIsTenMinutes() {
         assertEquals(10, source.getCountdown().configuredMinutes)
         assertEquals(600_000L, source.getCountdown().remainingMillis)
@@ -228,10 +233,12 @@ class EnvironmentSafetyTest {
         source.getCountdown()
         assertEquals(1, added(EnvironmentAlertType.UNATTENDED_COOKING))
     }
-    @Test fun manualCancelDoesNotImmediatelyAutoRestart() {
-        sensors(flame = true); source.cancelCountdown(); source.refresh()
-        assertEquals(EnvironmentCountdownPhase.CANCELLED, source.getCountdown().phase)
-        assertEquals(600_000L, source.getCountdown().remainingMillis)
+    @Test fun invalidSettingCannotInterruptActiveSafetyCountdown() {
+        sensors(flame = true)
+        val deadline = source.getCountdown().deadlineElapsed
+        assertFalse(source.configureMinutes(0))
+        assertEquals(EnvironmentCountdownPhase.RUNNING, source.getCountdown().phase)
+        assertEquals(deadline, source.getCountdown().deadlineElapsed)
     }
 
     @Test fun mockStoveTransitionsKeepGasAndFlameConsistent() {
@@ -250,30 +257,26 @@ class EnvironmentSafetyTest {
         assertEquals(1, added(EnvironmentAlertType.UNATTENDED_COOKING))
     }
 
-    @Test fun cancelledCycleStaysCancelledUntilPersonReturns() {
-        sensors(flame = true); source.cancelCountdown()
-        sensors(); sensors(flame = true)
-        assertEquals(EnvironmentCountdownPhase.CANCELLED, source.getCountdown().phase)
+    @Test fun safeSettingIsSavedForNextAutomaticCycle() {
         sensors(flame = true, person = true)
+        assertTrue(source.configureMinutes(18))
         assertEquals(EnvironmentCountdownPhase.IDLE, source.getCountdown().phase)
+        assertNull(source.getCountdown().deadlineElapsed)
         sensors(flame = true)
         assertEquals(EnvironmentCountdownPhase.RUNNING, source.getCountdown().phase)
+        assertEquals(1_080_000L, source.getCountdown().remainingMillis)
     }
 
-    @Test fun cancelConfigureManualFinishAndNextAutoCycleKeepEighteenMinutes() {
-        assertTrue(source.configureMinutes(18))
+    @Test fun reconfigurationCannotDuplicateConsumedCycleAndNextCycleKeepsDuration() {
         sensors(flame = true)
-        source.cancelCountdown()
         assertTrue(source.configureMinutes(18))
-        assertEquals(EnvironmentCountdownPhase.CANCELLED, source.getCountdown().phase)
-        assertEquals(18, source.getCountdown().configuredMinutes)
-        assertTrue(source.startManualCountdown())
-        assertEquals(1_080_000L, source.getCountdown().remainingMillis)
         now += 1_080_001L
         source.refresh()
         assertEquals(EnvironmentCountdownPhase.FINISHED, source.getCountdown().phase)
-        assertEquals(18, source.getCountdown().configuredMinutes)
-        repeat(3) { source.refresh() }
+        assertEquals(1, added(EnvironmentAlertType.UNATTENDED_COOKING))
+        assertTrue(source.configureMinutes(18))
+        now += 1_080_001L
+        source.refresh()
         assertEquals(1, added(EnvironmentAlertType.UNATTENDED_COOKING))
         sensors(flame = true, person = true); sensors(flame = true)
         assertEquals(EnvironmentCountdownPhase.RUNNING, source.getCountdown().phase)

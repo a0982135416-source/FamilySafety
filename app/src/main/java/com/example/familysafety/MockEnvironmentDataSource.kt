@@ -36,24 +36,13 @@ object MockEnvironmentDataSource {
 
     fun configureMinutes(minutes: Int): Boolean {
         refresh()
-        if (minutes !in 1..180 || phase == EnvironmentCountdownPhase.RUNNING) return false
+        if (minutes !in 1..180) return false
         configuredMinutes = minutes
-        if (phase != EnvironmentCountdownPhase.CANCELLED) phase = EnvironmentCountdownPhase.IDLE
-        return true
-    }
-
-    fun startManualCountdown(): Boolean {
-        refresh()
-        if (phase == EnvironmentCountdownPhase.RUNNING) return false
-        start(clock())
-        return true
-    }
-
-    fun cancelCountdown() {
-        // Keep cancellation stable while the same unattended sensor condition persists.
-        unattendedCycleConsumed = true
+        // Changing duration never leaves active safety monitoring waiting for a manual Start.
         resetCountdown()
-        phase = EnvironmentCountdownPhase.CANCELLED
+        if (!EnvironmentSafetyEvaluator.gasLeakRisk(sensorState) &&
+            EnvironmentSafetyEvaluator.shouldStartCountdown(sensorState)) start(clock())
+        return true
     }
 
     private fun start(now: Long) {
@@ -84,17 +73,16 @@ object MockEnvironmentDataSource {
             unattendedCycleConsumed = false
             if (EnvironmentSafetyEvaluator.shouldCancelCountdown(sensorState,
                     phase == EnvironmentCountdownPhase.RUNNING) ||
-                phase == EnvironmentCountdownPhase.FINISHED ||
-                phase == EnvironmentCountdownPhase.CANCELLED) resetCountdown()
+                phase == EnvironmentCountdownPhase.FINISHED) resetCountdown()
         }
 
         if (phase == EnvironmentCountdownPhase.RUNNING && now >= deadline!!) {
             phase = EnvironmentCountdownPhase.FINISHED
             deadline = null
-            unattendedCycleConsumed = true
-            if (EnvironmentSafetyEvaluator.expiryEligible(sensorState)) {
+            if (!unattendedCycleConsumed && EnvironmentSafetyEvaluator.expiryEligible(sensorState)) {
                 MockEnvironmentAlertDataSource.addAlert(EnvironmentAlertType.UNATTENDED_COOKING)
             }
+            unattendedCycleConsumed = true
         }
 
         if (phase == EnvironmentCountdownPhase.IDLE && !unattendedCycleConsumed &&
@@ -112,7 +100,7 @@ object MockEnvironmentDataSource {
     fun getCountdown(): EnvironmentCountdownState {
         refresh()
         val remaining = when (phase) {
-            EnvironmentCountdownPhase.IDLE, EnvironmentCountdownPhase.CANCELLED -> configuredMinutes * 60_000L
+            EnvironmentCountdownPhase.IDLE -> configuredMinutes * 60_000L
             EnvironmentCountdownPhase.RUNNING -> (deadline!! - clock()).coerceAtLeast(0L)
             EnvironmentCountdownPhase.FINISHED -> 0L
         }
