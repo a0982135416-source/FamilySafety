@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import com.example.familysafety.databinding.FragmentEnvironmentBinding
 import com.example.familysafety.environment.data.MockHistoryDataSource
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.Locale
 
 /**
  * ============================================================================
@@ -66,44 +65,19 @@ class EnvironmentFragment : Fragment() {
     // Environment Monitoring Location
     // =========================================================================
 
-    // 預設監控地點為廚房
-    // Default monitoring location is Kitchen
-    private var selectedLocation = "KITCHEN"
+    // 地點與即時讀值共用 process-memory source；歷史趨勢資料維持原樣。
+    // Selection/current readings are shared with Home; history remains independent.
+    private val selectedLocation: String
+        get() = MockEnvironmentDataSource.selectedLocation
 
 
     // =========================================================================
-    // 04. 環境模擬資料格式
-    // Environment Mock Data Model
+    // 04. 共用環境模擬資料
+    // Shared Environment Mock Data
     // =========================================================================
 
-    private data class EnvironmentMockData(
-        val temperature: Double,
-        val humidity: Int,
-    )
-
-
-    // =========================================================================
-    // 05. 各地點環境模擬資料
-    // Environment Mock Data for Each Location
-    // =========================================================================
-
-    private val locationMockData = mapOf(
-
-        "KITCHEN" to EnvironmentMockData(
-            temperature = 26.8,
-            humidity = 58,
-        ),
-
-        "LIVING_ROOM" to EnvironmentMockData(
-            temperature = 25.4,
-            humidity = 61,
-        ),
-
-        "BEDROOM" to EnvironmentMockData(
-            temperature = 24.9,
-            humidity = 55,
-        ),
-    )
+    // EnvironmentMockData / locationMockData 已移至 MockEnvironmentDataSource。
+    // Existing location values now have one source of truth.
 
 
     // =========================================================================
@@ -339,7 +313,7 @@ class EnvironmentFragment : Fragment() {
 
                 // 儲存選擇的地點
                 // Save the selected location
-                selectedLocation = when (which) {
+                MockEnvironmentDataSource.selectLocation(when (which) {
 
                     0 -> "KITCHEN"
 
@@ -348,7 +322,7 @@ class EnvironmentFragment : Fragment() {
                     2 -> "BEDROOM"
 
                     else -> "KITCHEN"
-                }
+                })
 
                 // 更新地點文字與 Icon
                 // Update location text and icon
@@ -431,17 +405,17 @@ class EnvironmentFragment : Fragment() {
 
         // 根據 selectedLocation 取得對應的 Mock Data
         // Get mock data for the currently selected location
-        val data = locationMockData[selectedLocation] ?: return
+        val data = MockEnvironmentDataSource.getCurrentEnvironmentData()
 
         // 更新溫度
         // Update temperature
         binding.textViewEnvironmentTemperatureValue.text =
-            String.format(Locale.getDefault(), "%.1f °C", data.temperature)
+            getString(R.string.environment_temperature_value_format, data.temperature)
 
         // 更新濕度
         // Update humidity
         binding.textViewEnvironmentHumidityValue.text =
-            String.format(Locale.getDefault(), "%d %%", data.humidity)
+            getString(R.string.environment_humidity_value_format, data.humidity)
     }
 
 

@@ -23,5 +23,6 @@
     <color name="alert_task_purple">#6C35D5</color>
     <color name="safe_green">#19B394</color>
     <color name="warning_red">#F0525C</color>
+    <color name="warning_orange">#D98A16</color>
 
 </resources>

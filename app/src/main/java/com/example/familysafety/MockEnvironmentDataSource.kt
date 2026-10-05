@@ -4,6 +4,24 @@ import android.os.SystemClock
 
 /** Deadline is authoritative; screens only request reconciliation and render snapshots. */
 object MockEnvironmentDataSource {
+    // Current readings and selection are shared by Environment and Home, not history data.
+    data class EnvironmentMockData(val temperature: Double, val humidity: Int)
+    private val locationMockData = mapOf(
+        "KITCHEN" to EnvironmentMockData(26.8, 58),
+        "LIVING_ROOM" to EnvironmentMockData(25.4, 61),
+        "BEDROOM" to EnvironmentMockData(24.9, 55),
+    )
+    var selectedLocation = "KITCHEN"
+        private set
+
+    fun selectLocation(location: String): Boolean {
+        if (location !in locationMockData) return false
+        selectedLocation = location
+        return true
+    }
+
+    fun getCurrentEnvironmentData(): EnvironmentMockData = locationMockData.getValue(selectedLocation)
+
     var sensorState = EnvironmentSensorState()
         private set
     private var configuredMinutes = 10
@@ -107,8 +125,19 @@ object MockEnvironmentDataSource {
         return EnvironmentCountdownState(configuredMinutes, phase, deadline, remaining)
     }
 
+    /** Reuse the safety engine's reconciled state, with active danger taking priority. */
+    fun getSafetyStatus(): EnvironmentSafetyStatus {
+        val countdown = getCountdown()
+        return when {
+            getActiveWarning() != null -> EnvironmentSafetyStatus.DANGER
+            countdown.phase == EnvironmentCountdownPhase.RUNNING -> EnvironmentSafetyStatus.WARNING
+            else -> EnvironmentSafetyStatus.SAFE
+        }
+    }
+
     /** Test-only control; production settings remain integer minutes, 1..180. */
     internal fun resetForTests(testClock: () -> Long = { SystemClock.elapsedRealtime() }) {
+        selectedLocation = "KITCHEN"
         sensorState = EnvironmentSensorState()
         configuredMinutes = 10
         phase = EnvironmentCountdownPhase.IDLE

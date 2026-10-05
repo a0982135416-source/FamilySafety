@@ -1,11 +1,17 @@
 package com.example.familysafety
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.content.res.ColorStateList
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.familysafety.databinding.FragmentHomeBinding
 import androidx.appcompat.app.AlertDialog
@@ -32,6 +38,14 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private var profileDialog: AlertDialog? = null
+    private val environmentRefreshHandler = Handler(Looper.getMainLooper())
+    private val environmentRefresh = object : Runnable {
+        override fun run() {
+            if (_binding == null || !isResumed) return
+            renderEnvironment()
+            environmentRefreshHandler.postDelayed(this, 250L)
+        }
+    }
 
     private val binding: FragmentHomeBinding
         get() = _binding!!
@@ -72,6 +86,78 @@ class HomeFragment : Fragment() {
         setupTaskProgress()
         setupTodayTaskList()
         binding.frameLayoutHomeProfile.setOnClickListener { showProfile() }
+        renderEnvironment()
+    }
+
+    // Shared environment presentation only. MainActivity retains warning ownership.
+    override fun onResume() {
+        super.onResume()
+        environmentRefreshHandler.removeCallbacks(environmentRefresh)
+        renderEnvironment()
+        environmentRefreshHandler.postDelayed(environmentRefresh, 250L)
+    }
+
+    override fun onPause() {
+        environmentRefreshHandler.removeCallbacks(environmentRefresh)
+        super.onPause()
+    }
+
+    private fun renderEnvironment() {
+        val views = _binding ?: return
+        val source = MockEnvironmentDataSource
+        val status = source.getSafetyStatus()
+        val sensor = source.sensorState
+        val reading = source.getCurrentEnvironmentData()
+        val activeAlert = source.getActiveWarning()
+        val (title, label, colorResource) = when (status) {
+            EnvironmentSafetyStatus.SAFE -> Triple(R.string.home_status_safe,
+                R.string.home_status_safe_label, R.color.safe_green)
+            EnvironmentSafetyStatus.WARNING -> Triple(R.string.home_status_warning,
+                R.string.home_status_warning_label, R.color.warning_orange)
+            EnvironmentSafetyStatus.DANGER -> Triple(R.string.home_status_danger,
+                R.string.home_status_danger_label, R.color.warning_red)
+        }
+        val color = ContextCompat.getColor(requireContext(), colorResource)
+        val white = ContextCompat.getColor(requireContext(), R.color.white)
+        val surface = ColorUtils.blendARGB(color, white, 0.92f)
+        val stroke = ColorUtils.blendARGB(color, white, 0.72f)
+        views.textViewHomeStatus.setText(title)
+        views.textViewHomeStatus.setTextColor(color)
+        ImageViewCompat.setImageTintList(views.imageViewHomeStatusIcon, ColorStateList.valueOf(color))
+        views.cardViewHomeStatus.setCardBackgroundColor(surface)
+        views.cardViewHomeStatus.strokeColor = stroke
+        views.textViewHomeSafetyStatusLabel.setText(label)
+        views.textViewHomeSafetyStatusLabel.setTextColor(color)
+        views.textViewHomeSafetyStatusLabel.backgroundTintList = ColorStateList.valueOf(surface)
+        views.cardViewHomeSafety.setCardBackgroundColor(surface)
+        views.cardViewHomeSafety.strokeColor = stroke
+        views.frameLayoutHomeSafetyIconBackground.backgroundTintList = ColorStateList.valueOf(color)
+        // These safety sensors always represent Kitchen, independently of the current-reading location.
+        views.textViewHomeSafetyLocation.setTextColor(color)
+        views.textViewHomeSafetyLocation.backgroundTintList = ColorStateList.valueOf(surface)
+        views.textViewHomeGasStatusValue.setText(if (sensor.gasOn)
+            R.string.environment_status_on else R.string.environment_status_off)
+        views.textViewHomeFireStatusValue.setText(if (sensor.flameDetected)
+            R.string.environment_status_detected else R.string.environment_status_not_detected)
+        views.textViewHomePersonStatusValue.setText(if (sensor.personDetected)
+            R.string.environment_status_detected else R.string.environment_status_not_detected)
+        val normal = ContextCompat.getColor(requireContext(), R.color.primary_blue)
+        val inactive = ContextCompat.getColor(requireContext(), R.color.secondary_text)
+        val danger = ContextCompat.getColor(requireContext(), R.color.warning_red)
+        // Red follows an existing alert's semantics, never merely Gas ON / Flame detected.
+        val gasLeak = activeAlert?.type == EnvironmentAlertType.GAS_LEAK_RISK
+        views.textViewHomeGasStatusValue.setTextColor(if (gasLeak) danger else if (sensor.gasOn) normal else inactive)
+        views.textViewHomeFireStatusValue.setTextColor(if (gasLeak) danger else if (sensor.flameDetected) normal else inactive)
+        views.textViewHomePersonStatusValue.setTextColor(if (activeAlert?.type == EnvironmentAlertType.UNATTENDED_COOKING)
+            danger else if (sensor.personDetected) normal else inactive)
+        val locationLabel = when (source.selectedLocation) {
+            "LIVING_ROOM" -> R.string.location_living_room
+            "BEDROOM" -> R.string.location_bedroom
+            else -> R.string.location_kitchen
+        }
+        views.textViewHomeEnvironmentLocation.text = getString(R.string.home_environment_location_format, getString(locationLabel))
+        views.textViewHomeTemperatureValue.text = getString(R.string.environment_temperature_value_format, reading.temperature)
+        views.textViewHomeHumidityValue.text = getString(R.string.environment_humidity_value_format, reading.humidity)
     }
 
 
@@ -197,6 +283,7 @@ class HomeFragment : Fragment() {
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
     override fun onDestroyView() {
+        environmentRefreshHandler.removeCallbacks(environmentRefresh)
         profileDialog?.dismiss()
         profileDialog = null
         super.onDestroyView()

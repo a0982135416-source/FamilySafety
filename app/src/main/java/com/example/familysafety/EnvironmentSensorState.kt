@@ -9,6 +9,9 @@ data class EnvironmentSensorState(
 
 enum class EnvironmentCountdownPhase { IDLE, RUNNING, FINISHED }
 
+/** Presentation of existing active alerts/countdown; contains no sensor safety rules. */
+enum class EnvironmentSafetyStatus { SAFE, WARNING, DANGER }
+
 data class EnvironmentCountdownState(
     val configuredMinutes: Int,
     val phase: EnvironmentCountdownPhase,

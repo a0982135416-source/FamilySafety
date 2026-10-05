@@ -70,6 +70,13 @@
 
     <!-- Home Status / 家庭目前狀態 -->
     <string name="home_status_safe">家庭目前狀態：安全</string>
+    <string name="home_status_warning">家庭目前狀態：注意</string>
+    <string name="home_status_danger">家庭目前狀態：危險</string>
+    <string name="home_status_warning_label">注意</string>
+    <string name="home_status_danger_label">危險</string>
+    <string name="home_environment_location_format">%1$s 〉</string>
+    <string name="environment_temperature_value_format">%1$.1f °C</string>
+    <string name="environment_humidity_value_format">%1$d %%</string>
 
     <!-- Environment Safety / 環境安全 -->
     <string name="home_environment_safety">環境安全</string>
