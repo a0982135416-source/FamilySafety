@@ -17,6 +17,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.UiController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.hamcrest.Matcher
 import java.text.DateFormat
 import java.util.Date
@@ -170,8 +171,31 @@ class TaskCenterIntegrationTest {
                 openFirst()
                 scenario.onActivity { it.findViewById<View>(R.id.navHome).performClick() }
                 onView(withText(R.string.task_detail_title)).check(androidx.test.espresso.assertion.ViewAssertions.doesNotExist())
-                onView(withId(R.id.navTask)).perform(click())
+                // Avoid an emulator-delayed touch becoming a long press on the final return.
+                scenario.onActivity {
+                    it.findViewById<BottomNavigationView>(R.id.bottomNavigationView_main_navigation)
+                        .selectedItemId = R.id.navTask
+                }
+                val destinationDeadline = SystemClock.uptimeMillis() + 5_000
+                var destinationReady = false
+                do {
+                    instrumentation.waitForIdleSync()
+                    scenario.onActivity { activity ->
+                        destinationReady = activity.supportFragmentManager
+                            .findFragmentById(R.id.fragmentContainerView_main_content) is TaskFragment &&
+                            activity.findViewById<RecyclerView>(R.id.recyclerView_task_list)?.adapter is TaskAdapter &&
+                            activity.findViewById<View>(R.id.button_task_all)?.isSelected == true
+                    }
+                    if (destinationReady) break
+                    SystemClock.sleep(50)
+                } while (SystemClock.uptimeMillis() < destinationDeadline)
+                assertTrue("Task destination, RecyclerView and All filter did not become ready", destinationReady)
                 waitForRows(scenario, 6)
+                scenario.onActivity { activity ->
+                    val adapter = activity.findViewById<RecyclerView>(R.id.recyclerView_task_list).adapter as TaskAdapter
+                    assertEquals(setOf(1L, 2L, 3L, 4L, 5L, 6L), adapter.currentList.map { it.task.id }.toSet())
+                    assertFalse(adapter.currentList.any { it.task.status == TaskStatus.COMPLETED })
+                }
             }
         } finally {
             instrumentation.runOnMainSync { AppCompatDelegate.setApplicationLocales(previous) }

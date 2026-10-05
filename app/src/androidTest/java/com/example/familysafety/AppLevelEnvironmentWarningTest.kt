@@ -60,6 +60,7 @@ class AppLevelEnvironmentWarningTest {
         }
         await(scenario) { dialog(it)?.isShowing == true }
         var original: Any? = null
+        var acknowledgedWarning: AlertDialog? = null
         scenario.onActivity { original = controller(it) }
         listOf(R.id.navHome, R.id.navEnvironment, R.id.navAlert, R.id.navTask, R.id.navManagement).forEach { id ->
             scenario.onActivity {
@@ -68,28 +69,39 @@ class AppLevelEnvironmentWarningTest {
                 assertSame(original, controller(it))
                 assertSame(before, dialog(it))
                 assertTrue(dialog(it)!!.isShowing)
-                dialog(it)!!.getButton(AlertDialog.BUTTON_POSITIVE).performClick()
+                acknowledgedWarning = dialog(it)
+                acknowledgedWarning!!.getButton(AlertDialog.BUTTON_POSITIVE).performClick()
             }
-            await(scenario) { dialog(it)?.isShowing != true }
-            await(scenario) { dialog(it)?.isShowing == true }
+            // A new reminder may already be showing after idle sync; observe the acknowledged instance.
+            await(scenario) { acknowledgedWarning?.isShowing == false }
+            await(scenario) { dialog(it)?.isShowing == true && dialog(it) !== acknowledgedWarning }
             scenario.onActivity {
                 assertEquals(4, MockEnvironmentAlertDataSource.getAlerts().size)
                 assertEquals(EnvironmentAlertStatus.PENDING, MockEnvironmentAlertDataSource.getAlerts().last().status)
             }
         }
-        scenario.onActivity { dialog(it)!!.getButton(AlertDialog.BUTTON_NEGATIVE).performClick() }
-        await(scenario) { dialog(it)?.isShowing != true }
+        scenario.onActivity {
+            acknowledgedWarning = dialog(it)
+            acknowledgedWarning!!.getButton(AlertDialog.BUTTON_NEGATIVE).performClick()
+        }
+        // A new reminder may already be showing after idle sync; observe the acknowledged instance.
+        await(scenario) { acknowledgedWarning?.isShowing == false }
         await(scenario) { it.supportFragmentManager.findFragmentById(R.id.fragmentContainerView_main_content) is AlertFragment }
-        await(scenario) { dialog(it)?.isShowing == true }
+        await(scenario) { dialog(it)?.isShowing == true && dialog(it) !== acknowledgedWarning }
         scenario.onActivity {
             assertEquals(4, MockEnvironmentAlertDataSource.getAlerts().size)
             assertEquals(EnvironmentAlertStatus.PENDING, MockEnvironmentAlertDataSource.getAlerts().last().status)
-            dialog(it)!!.getButton(AlertDialog.BUTTON_POSITIVE).performClick()
+            acknowledgedWarning = dialog(it)
+            acknowledgedWarning!!.getButton(AlertDialog.BUTTON_POSITIVE).performClick()
             it.findViewById<android.view.View>(R.id.button_alert_task).performClick()
         }
-        await(scenario) { dialog(it)?.isShowing != true }
-        await(scenario) { dialog(it)?.isShowing == true }
-        scenario.onActivity { dialog(it)!!.getButton(AlertDialog.BUTTON_NEGATIVE).performClick() }
+        // A new reminder may already be showing after idle sync; observe the acknowledged instance.
+        await(scenario) { acknowledgedWarning?.isShowing == false }
+        await(scenario) { dialog(it)?.isShowing == true && dialog(it) !== acknowledgedWarning }
+        scenario.onActivity {
+            acknowledgedWarning = dialog(it)
+            acknowledgedWarning!!.getButton(AlertDialog.BUTTON_NEGATIVE).performClick()
+        }
         await(scenario) { it.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView_alert_list)
             ?.adapter is EnvironmentAlertAdapter }
     }
