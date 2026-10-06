@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <!-- 1. 新增這行：允許 App 使用網路 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 2. 在 application 標籤新增 開啟網路權限與明文傳輸 -->
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
