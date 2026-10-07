@@ -31,8 +31,9 @@ object MockTaskDataSource {
         if (dueDate <= now) return null
         val tasks = getTasks(getString)
         val task = Task(nextId++,
-            item.title, item.description, member.name, dueDate, TaskStatus.PENDING, member.id, item.id)
+            item.title, item.description ?: "", member.name, dueDate, TaskStatus.PENDING, member.id, item.id)
         sharedTasks = tasks + task
+        TaskRepository.sendTaskToRaspberryPi(task) { _, _ -> }
         return task
     }
 

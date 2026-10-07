@@ -29,6 +29,7 @@ object MockTaskItemDataSource {
         val current = getItems(getString)
         val item = TaskItem(nextId++, title.trim(), description.trim())
         items = current + item
+        TaskRepository.sendTaskItemToRaspberryPi(item) { _, _ -> }
         return item
     }
 

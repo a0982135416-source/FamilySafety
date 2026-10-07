@@ -117,7 +117,7 @@ class ManagementFragment : Fragment() {
     private fun showTaskItems() = showList(R.string.management_task_item_title, R.string.management_add_task_item,
         R.id.recyclerView_management_task_item, MockTaskItemDataSource.getItems { getString(it) }.map {
             ManagementRow("item:${it.id}", listOf(it.title, it.description).joinToString("\n"),
-                { editTaskItem(it.id) }, { deleteTaskItem(it.id) })
+                { editTaskItem(it.id ?: -1) }, delete = { deleteTaskItem(it.id ?: -1)})
         }, ::addTaskItem)
 
     // 03. 表單共用元件：資源文字、必填驗證及可捲動內容
@@ -214,7 +214,7 @@ class ManagementFragment : Fragment() {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             if (!MockAuthDataSource.canManage() || _binding == null || !required(title)) return@setOnClickListener
             val item = if (existing == null) MockTaskItemDataSource.addItem(title.text.toString(), description.text.toString()) { getString(it) }
-            else MockTaskItemDataSource.updateItem(existing.id, title.text.toString(), description.text.toString()) { getString(it) }
+            else MockTaskItemDataSource.updateItem(existing.id ?: -1, title.text.toString(), description.text.toString()) { getString(it) }
             if (item != null) { dialog.dismiss(); showTaskItems() }
         }
     }
@@ -282,7 +282,7 @@ class ManagementFragment : Fragment() {
             val item = choices.getOrNull(taskItem.selectedItemPosition)
             val task = if (existing == null) {
                 if (item == null) return@setOnClickListener
-                MockTaskDataSource.addTask(item.id, member.id, dueDate, { getString(it) })
+                MockTaskDataSource.addTask(taskItemId = item.id ?: -1, memberId = member.id, dueDate = dueDate, getString = { getString(it) })
             } else MockTaskDataSource.updateTask(existing.id, item?.id, member.id, dueDate, { getString(it) })
             if (task != null) { dialog.dismiss(); showTasks() }
         }
